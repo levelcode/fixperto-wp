@@ -4,7 +4,7 @@ define( 'WP_DEBUG', true );
 require_once (get_template_directory() . '/admin_db/index.php');
 
 function plugDB($consulta, $modo) {
-	$newdb = new wpdb(DB_USER, DB_PASS, DB_DB, DB_HOST);
+	$newdb = new wpdb(DB_FIX_USER, DB_FIX_PASS, DB_FIX_DB, DB_FIX_HOST);
 	$newdb -> show_errors();	
 	if ($modo == "var") {
 		$resultado = $newdb -> get_var($consulta);
