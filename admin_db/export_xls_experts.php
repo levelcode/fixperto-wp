@@ -97,7 +97,7 @@ function mysqli_field_name($result, $field_offset){
 function plan_activo($id_expert){
 	$ret = "";
 	
-	$mysqli = new mysqli('localhost', 'root', 'wololo', 'fixperto');
+	$mysqli = new mysqli(DB_FIX_HOST, DB_FIX_USER, DB_FIX_PASS, DB_FIX_DB);
 	$mysqli->set_charset("utf8");
 	
 	$select = "SELECT b.denomination as titulo FROM expert_plan a LEFT JOIN plans b ON a.plan = b.id WHERE a.expert = '".$id_expert."'";
@@ -110,7 +110,7 @@ function plan_activo($id_expert){
 function categorias($id_expert){
 	$ret = "";
 	
-	$mysqli = new mysqli('localhost', 'root', 'wololo', 'fixperto');
+	$mysqli = new mysqli(DB_FIX_HOST, DB_FIX_USER, DB_FIX_PASS, DB_FIX_DB);
 	$mysqli->set_charset("utf8");
 	
 	$sel_expert_cats = "SELECT * FROM experts_categories a WHERE a.expert = '".$id_expert."'";
@@ -130,7 +130,7 @@ function categorias($id_expert){
 function regiones($id_expert){
 	$ret = "";
 	
-	$mysqli = new mysqli('localhost', 'root', 'wololo', 'fixperto');
+	$mysqli = new mysqli(DB_FIX_HOST, DB_FIX_USER, DB_FIX_PASS, DB_FIX_DB);
 	$mysqli->set_charset("utf8");
 	
 	$sel_expert_cats = "SELECT * FROM experts_regions a WHERE a.expert = '".$id_expert."'";
@@ -150,7 +150,7 @@ function regiones($id_expert){
 function trabajos($id_expert){
 	$ret = "";
 	
-	$mysqli = new mysqli('localhost', 'root', 'wololo', 'fixperto');
+	$mysqli = new mysqli(DB_FIX_HOST, DB_FIX_USER, DB_FIX_PASS, DB_FIX_DB);
 	$mysqli->set_charset("utf8");
 	
 	$select = "SELECT description FROM expert_jobs WHERE expert = '".$id_expert."'";
@@ -164,7 +164,7 @@ function trabajos($id_expert){
 function numero_referidos($coupon){
 	$ret = "";
 	
-	$mysqli = new mysqli('localhost', 'root', 'wololo', 'fixperto');
+	$mysqli = new mysqli(DB_FIX_HOST, DB_FIX_USER, DB_FIX_PASS, DB_FIX_DB);
 	$mysqli->set_charset("utf8");
 	
 	$select = "SELECT COUNT(*) as numero FROM experts WHERE coupon = '".$coupon."'";
