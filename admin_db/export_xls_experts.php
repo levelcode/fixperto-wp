@@ -1,5 +1,7 @@
 <?php
-$mysqli = new mysqli('localhost', 'root', 'wololo', 'fixperto');
+require_once __DIR__.'/../configuracion.php';
+
+$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DB);
 $mysqli->set_charset("utf8");
 //$select = base64_decode($_POST["xhr"]);
 $select = "

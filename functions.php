@@ -1,9 +1,10 @@
 <?php
+require_once __DIR__.'/configuracion.php';
 define( 'WP_DEBUG', true );
 require_once (get_template_directory() . '/admin_db/index.php');
 
 function plugDB($consulta, $modo) {
-	$newdb = new wpdb("root", "wololo", "fixperto", "localhost");
+	$newdb = new wpdb(DB_USER, DB_PASS, DB_DB, DB_HOST);
 	$newdb -> show_errors();	
 	if ($modo == "var") {
 		$resultado = $newdb -> get_var($consulta);

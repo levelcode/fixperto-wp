@@ -1,11 +1,7 @@
 <?php
-//$link = mysql_connect("localhost", "ITMbackend", "Over9000!!!");
-//$db = mysql_select_db("ITMbackend");
-
-$mysqli = new mysqli('localhost', 'root', 'wololo', 'fixperto');
+require_once __DIR__.'/../configuracion.php';
+$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DB);
 $mysqli->set_charset("utf8");
-//$mysqli->query("SELECT * FROM personas");
-
 $select = base64_decode($_POST["xhr"]);
 //
 //mysql_query("SET SQL_BIG_SELECTS=1");

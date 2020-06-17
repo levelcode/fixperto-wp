@@ -1,14 +1,18 @@
 <?php
 //
+require_once __DIR__.'/../configuracion.php';
+//
 add_action('admin_menu' , 'function_enable_pages');
 function function_enable_pages(){
 	add_menu_page('Fixperto', 'Fixperto', 'read', 'admin_db', 'page_admin', '', 3);
 	add_submenu_page( 'admin_db', 'Clientes', 'Clientes', 'administrator', 'clientes', 'page_clientes');//	
+	add_submenu_page( 'admin_db', 'Reporte_Clientes', 'Reporte_Clientes', 'administrator', 'reporte_clientes', 'page_reporte_clientes');//	
 	add_submenu_page( 'admin_db', 'Profesionales', 'Profesionales', 'administrator', 'profesionales', 'page_profesionales');//	
 	add_submenu_page( 'admin_db', 'Servicios', 'Servicios', 'administrator', 'servicios', 'page_servicios');//	
 	add_submenu_page( 'admin_db', 'Transacciones_Planes', 'Transacciones_Planes', 'administrator', 'transacciones_planes', 'page_transacciones_planes');//	
 	add_submenu_page( 'admin_db', 'Transacciones_Fixcoins', 'Transacciones_Fixcoins', 'administrator', 'transacciones_fixcoins', 'page_transacciones_fixcoins');//	
 	add_submenu_page( 'admin_db', 'Atencion_Cliente', 'Atencion_Cliente', 'administrator', 'atencion_cliente', 'page_atencion_cliente');//	
+	add_submenu_page( 'admin_db', 'Cupones_Referidos', 'Cupones_Referidos', 'administrator', 'cupones_referidos', 'page_referidos');//	
 	add_submenu_page( 'admin_db', 'Categorias', 'Categorias', 'administrator', 'lista_servicios', 'page_lista_servicios');//	
 	remove_submenu_page( 'admin_db', 'admin_db' );
 }
@@ -165,7 +169,7 @@ function page_clientes_editar_cliente(){
 	?>
 	<div class="wrap">
 		
-		<img src="https://server.fixperto.creactive.com.co/uploads/registros/cliente/<?php echo $Query_Customer->avatar;?>" height="300">
+		<img src="<?php echo URL_BASE;?>/uploads/registros/cliente/<?php echo $Query_Customer->avatar;?>" height="300">
 
 		<h2>Estado</h2>
 		<table class="wp-list-table widefat" cellspacing="0">
@@ -321,7 +325,7 @@ function page_clientes_editar_cliente(){
 	function Do_Reestablecer_Clave(form){
 		if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
 			$.ajax({
-				url:"https://server.fixperto.creactive.com.co/backOffice/changePassword", 
+				url:"<?php echo URL_BASE;?>/backOffice/changePassword", 
 				method: "POST",
 				data: { id : form.id_user.value, email : form.correo.value }
 			}).done(function(html){
@@ -680,7 +684,7 @@ function page_profesionales_editar_experto(){
 	<link rel="stylesheet" href="https://harvesthq.github.io/chosen/chosen.css">
 
 	<div class="wrap">
-		<img src="https://server.fixperto.creactive.com.co/uploads/registros/profesional/<?php echo $Query_expert->avatar;?>" height="300">
+		<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->avatar;?>" height="300">
 
 		<h2>Estado</h2>
 		<table class="wp-list-table widefat" cellspacing="0">
@@ -861,8 +865,8 @@ function page_profesionales_editar_experto(){
 					<tr>
 						<td>Fotocopia documento</td>
 						<td>
-							<a href="https://server.fixperto.creactive.com.co/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" target="_blank" id="link_fotocopy">
-								<img src="https://server.fixperto.creactive.com.co/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" height="200" id="img_fotocopy">
+							<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" target="_blank" id="link_fotocopy">
+								<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" height="200" id="img_fotocopy">
 							</a>
 						</td>
 						<td>
@@ -879,8 +883,8 @@ function page_profesionales_editar_experto(){
 					<tr valign="top">
 						<td>arl</td>
 						<td>
-							<a href="https://server.fixperto.creactive.com.co/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" target="_blank" id="link_arl">
-								<img src="https://server.fixperto.creactive.com.co/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" height="200" id="img_arl">
+							<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" target="_blank" id="link_arl">
+								<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" height="200" id="img_arl">
 							</a>
 						</td>
 						<td>
@@ -897,8 +901,8 @@ function page_profesionales_editar_experto(){
 					<tr valign="top">
 						<td>salud_pension</td>
 						<td>
-							<a href="https://server.fixperto.creactive.com.co/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" target="_blank" id="link_salud">
-								<img src="https://server.fixperto.creactive.com.co/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" height="200" id="img_salud">
+							<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" target="_blank" id="link_salud">
+								<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" height="200" id="img_salud">
 							</a>
 						</td>
 						<td>
@@ -937,8 +941,8 @@ function page_profesionales_editar_experto(){
 				<form method="post">
 				<tr <?php echo $alter; ?>>
 					<td>
-						<a href="https://server.fixperto.creactive.com.co/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" target="_blank" id="link_certificado_<?php echo $suma_certificados;?>">
-							<img src="https://server.fixperto.creactive.com.co/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" height="150" id="img_certificado_<?php echo $suma_certificados;?>">
+						<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" target="_blank" id="link_certificado_<?php echo $suma_certificados;?>">
+							<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" height="150" id="img_certificado_<?php echo $suma_certificados;?>">
 						</a>
 					</td>
 					<td>
@@ -1004,8 +1008,8 @@ function page_profesionales_editar_experto(){
 				<form method="post">
 				<tr <?php echo $alter; ?>>
 					<td>
-						<a href="https://server.fixperto.creactive.com.co/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
-							<img src="https://server.fixperto.creactive.com.co/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>">
+						<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
+							<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>">
 						</a>
 					</td>
 					<td>
@@ -1265,7 +1269,16 @@ function page_profesionales_editar_experto(){
 						</td>
 						<td><input type="text" name="number" value="<?php echo $item_colaborador->number;?>"></td>
 						<td><input type="text" name="phone" value="<?php echo $item_colaborador->phone;?>"></td>
-						<td><img src="https://server.fixperto.creactive.com.co/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" height="50"></td>
+
+						<td>
+						<a href="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" target="_blank" id="link_col_<?php echo $item_colaborador->id;?>">
+							<img src="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" id="img_col_<?php echo $item_colaborador->id;?>" height="50">
+						</a>
+						
+						<br>
+						<input type="file" class="form-control-file" id="imagen_col_<?php echo $item_colaborador->id;?>"><br>
+						<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Colaborador('<?php echo $item_colaborador->id;?>', '<?php echo $item_colaborador->id;?>');">
+						</td>
 					
 						<td>
 						<?php echo Select_Categorias_Multi_Colaborador($item_colaborador->id);?>
@@ -1378,7 +1391,7 @@ function page_profesionales_editar_experto(){
 	function Do_Select_Category(){
 		//alert( $("#select_service").val() );
 		$.ajax({
-			url:"https://admin.fixperto.creactive.com.co/pagina_querys/", 
+			url:"<?php echo home_url('pagina_querys');?>", 
 			method: "POST",
 			data: { select_category : "ok", categoria : $("#select_service").val() }
 		}).done(function(html){
@@ -1391,7 +1404,7 @@ function page_profesionales_editar_experto(){
 	function Do_Select_Zona(){
 		//alert( $("#select_service").val() );
 		$.ajax({
-			url:"https://admin.fixperto.creactive.com.co/pagina_querys/", 
+			url:"<?php echo home_url('pagina_querys');?>", 
 			method: "POST",
 			data: { select_zona : "ok", categoria : $("#select_ciudad").val() }
 		}).done(function(html){
@@ -1405,7 +1418,7 @@ function page_profesionales_editar_experto(){
 		//alert(form.active.value);
 		if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
 			$.ajax({
-				url:"https://server.fixperto.creactive.com.co/fixperto/sendEmailActive", 
+				url:"<?php echo URL_BASE;?>/fixperto/sendEmailActive", 
 				method: "POST",
 				data: { name : form.nombre.value, email : form.correo.value, active:form.active.value }
 			}).done(function(html){
@@ -1421,7 +1434,7 @@ function page_profesionales_editar_experto(){
 	function Do_Reestablecer_Clave(form){
 		if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
 			$.ajax({
-				url:"https://server.fixperto.creactive.com.co/backOffice/changePassword", 
+				url:"<?php echo URL_BASE;?>/backOffice/changePassword", 
 				method: "POST",
 				data: { id : form.id_user.value, email : form.correo.value }
 			}).done(function(html){
@@ -1438,7 +1451,7 @@ function page_profesionales_editar_experto(){
 		if( $("#cant_dar_fixcoins").val() == 0 )return false;
 		if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
 			$.ajax({
-				url:"https://server.fixperto.creactive.com.co/fixperto/fixcoinGift", 
+				url:"<?php echo URL_BASE;?>/fixperto/fixcoinGift", 
 				method: "POST",
 				data: { user : "<?php echo $_POST["id"];?>", cant : $("#cant_dar_fixcoins").val() }
 			}).done(function(html){
@@ -1458,7 +1471,7 @@ function page_profesionales_editar_experto(){
         formData.append('archivo', files);
         formData.append('id', "<?php echo $Query_expert->id;?>");
         $.ajax({
-            url: 'https://server.fixperto.creactive.com.co/fixperto/modArlProfesional',
+            url: '<?php echo URL_BASE;?>/fixperto/modArlProfesional',
             type: 'post',
             data: formData,
             contentType: false,
@@ -1480,7 +1493,7 @@ function page_profesionales_editar_experto(){
         formData.append('archivo', files);
         formData.append('id', "<?php echo $Query_expert->id;?>");
         $.ajax({
-            url: 'https://server.fixperto.creactive.com.co/fixperto/modSaludPensionProfesional',
+            url: '<?php echo URL_BASE;?>/fixperto/modSaludPensionProfesional',
             type: 'post',
             data: formData,
             contentType: false,
@@ -1502,7 +1515,7 @@ function page_profesionales_editar_experto(){
         formData.append('archivo', files);
         formData.append('id', "<?php echo $Query_expert->id;?>");
         $.ajax({
-            url: 'https://server.fixperto.creactive.com.co/fixperto/modFotocopy',
+            url: '<?php echo URL_BASE;?>/fixperto/modFotocopy',
             type: 'post',
             data: formData,
             contentType: false,
@@ -1525,7 +1538,7 @@ function page_profesionales_editar_experto(){
         formData.append('archivo', files);
         formData.append('id', _id);
         $.ajax({
-            url: 'https://server.fixperto.creactive.com.co/fixperto/modCertificationsProfesional',
+            url: '<?php echo URL_BASE;?>/fixperto/modCertificationsProfesional',
             type: 'post',
             data: formData,
             contentType: false,
@@ -1547,7 +1560,7 @@ function page_profesionales_editar_experto(){
         formData.append('archivo', files);
         formData.append('id', _id);
         $.ajax({
-            url: 'https://server.fixperto.creactive.com.co/fixperto/modJobsProfesional',
+            url: '<?php echo URL_BASE;?>/fixperto/modJobsProfesional',
             type: 'post',
             data: formData,
             contentType: false,
@@ -1557,6 +1570,28 @@ function page_profesionales_editar_experto(){
                 if (response != 0) {
                     $("#img_proyecto_" + _suma).attr("src", response);
                     $("#link_proyecto_"+ _suma).attr("href", response);
+                } else {
+                    alert('Formato de imagen incorrecto.');
+                }
+            }
+        });
+	}
+	function SubirImagen_Colaborador(_id, _suma){
+		var formData = new FormData();
+        var files = $('#imagen_col_' + _suma)[0].files[0];
+        formData.append('archivo', files);
+        formData.append('id', _id);
+        $.ajax({
+            url: '<?php echo URL_BASE;?>/fixperto/modAvatarCollaborator',
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+				console.log(response);
+                if (response != 0) {
+                    $("#img_col_" + _suma).attr("src", response);
+                    $("#link_col_"+ _suma).attr("href", response);
                 } else {
                     alert('Formato de imagen incorrecto.');
                 }
@@ -1597,10 +1632,14 @@ function page_lista_servicios(){
 		$qs_insert = "UPDATE categories SET denomination='".$_POST["nombre"]."' WHERE id='".$_POST["id_item"]."'";
 		$q_insert = plugDB($qs_insert, "result");
 	}
+	if(isset($_POST["suspender_cat"])){
+		$qs_insert = "UPDATE services SET hidden='".$_POST["estado"]."' WHERE id='".$_POST["id_item"]."'";
+		$q_insert = plugDB($qs_insert, "result");
+	}
 	//
 	$WHERE = "";
 	$Qstr = "
-	SELECT s.id, s.denomination as Servicio, subs.suma_req as cant_req, if(exps.suma,exps.suma,0) as cant_exp
+	SELECT s.id, s.denomination as Servicio, subs.suma_req as cant_req, if(exps.suma,exps.suma,0) as cant_exp, s.hidden, s.imagen
 	FROM
 	services s
 	LEFT JOIN
@@ -1659,7 +1698,11 @@ function page_lista_servicios(){
 					?>
 					<tr valign="top" <?php echo $alter; ?>>
 						<td>
-						
+							<a href="<?php echo URL_BASE;?>/uploads/categories/<?php echo $lista->imagen;?>" target="_blank" id="link_cat_<?php echo $lista->id;?>">
+								<img src="<?php echo URL_BASE;?>/uploads/categories/<?php echo $lista->imagen;?>" height="100" id="img_cat_<?php echo $lista->id;?>">
+							</a><br>
+							<input type="file" class="form-control-file" id="imagen_cat_<?php echo $lista->id;?>"><br>
+							<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Categoria('<?php echo $lista->id;?>', '<?php echo $lista->id;?>');">
 						</td>
 						<td>
 							<form method="post" onSubmit="return Validar_Nombre(this);">
@@ -1678,6 +1721,24 @@ function page_lista_servicios(){
 								<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">	
 								<input type="submit" name="borrar_cat" value="Borrar Categoria">
 							</form>
+
+
+							<?php if($lista->hidden == "0"):?>
+							<form method="post" onSubmit="return confirm('Quiere Suspender: <?php echo $lista->Servicio;?>?');">
+								<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
+								<input type="hidden" name="estado" value="1">	
+								<input type="submit" name="suspender_cat" value="Suspender Categoria">
+							</form>
+							<?php else:?>
+								<form method="post" onSubmit="return confirm('Quiere Activar: <?php echo $lista->Servicio;?>?');">
+								<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">	
+								<input type="hidden" name="estado" value="0">
+								<input type="submit" name="suspender_cat" value="Activar Categoria">
+							</form>
+							<?php endif;?>
+
+
+
 						</td>
 					</tr>
 
@@ -1693,6 +1754,7 @@ function page_lista_servicios(){
 						foreach ( $Query2 as $lista_sub ):
 						?>
 						<tr>
+							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -1724,6 +1786,7 @@ function page_lista_servicios(){
 							<td></td>
 							<td></td>
 							<td></td>
+							<td></td>
 							<td>
 								<form method="post" onSubmit="return Validar_Nombre(this);">
 									<input type="hidden" name="id_parent" value="<?php echo $lista->id;?>">
@@ -1738,6 +1801,7 @@ function page_lista_servicios(){
 		<?php endif;?>
 	</div>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
 	<script type="text/javascript">
 		function HolaMundo(){
 			alert("Holas");
@@ -1750,6 +1814,29 @@ function page_lista_servicios(){
 			}
 			return true;
 		}
+		//
+		function SubirImagen_Categoria(_id, _suma){
+		var formData = new FormData();
+        var files = $('#imagen_cat_' + _suma)[0].files[0];
+        formData.append('archivo', files);
+        formData.append('id', _id);
+        $.ajax({
+            url: '<?php echo URL_BASE;?>/fixperto/modCategoryIcon',
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+				console.log(response);
+                if (response != 0) {
+                    $("#img_cat_" + _suma).attr("src", response);
+                    $("#link_cat_"+ _suma).attr("href", response);
+                } else {
+                    alert('Formato de imagen incorrecto.');
+                }
+            }
+        });
+	}
 	</script>
 	<?php
 }
@@ -1939,6 +2026,7 @@ function page_servicios_editar_servicio(){
 	WHERE a.request = '".$Query->id."'
 	";
 	$Query_Offers = plugDB($Str_Query_Offers, "result");
+	$exclude_tabla_offers = array("expert", "request", "cost");
 	//
 	$Str_Query_imagenes = "SELECT * FROM request_images WHERE request = '".$Query->id."'";
 	$Query_Imagenes = plugDB($Str_Query_imagenes, "result");
@@ -1946,10 +2034,47 @@ function page_servicios_editar_servicio(){
 	$Query_Chats = plugDB("SELECT * FROM messages WHERE request = '".$Query->id."'", "result");
 	$exclude_tabla_chats = array();
 	//
+	$Query_Problemas = plugDB("SELECT p.id, p.user, p.request, pt.denomination as problem_type, p.problem, p.date FROM problems p LEFT JOIN problem_type pt ON p.problem_type=pt.id WHERE request = '".$Query->id."'", "result");
+	$exclude_tabla_problemas = array();
+	//
+	$Query_cancel_cliente = plugDB("SELECT c.id, c.requests_id, ct.denomination as type, c.texto, c.date FROM cancel_request c LEFT JOIN cancellation_type ct ON c.type=ct.id WHERE c.requests_id = '".$Query->id."'", "result");
+	//
 	$alter_tabla_1 = "";
 	?>
 
 	<div class="wrap">
+
+
+		<?php if( Count($Query_cancel_cliente) > 0 ):?>
+			<h2>Cancelado por el usuario</h2>
+			<table class="wp-list-table widefat" cellspacing="0">
+				<thead>
+					<tr valign="top">
+						<?php foreach($Query_cancel_cliente[0] as $key => $value):?>
+						<?php if(!in_array($key, $exclude_tabla_problemas)):?><th><?php echo $key; ?></th><?php endif;?>
+						<?php endforeach; ?>
+					</tr>
+				</thead>
+				<tbody id="the-list">
+					<?php 
+					$alter = "";
+					foreach ( $Query_cancel_cliente as $lista ):
+						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+					?>
+					<tr valign="top" <?php echo $alter; ?>>
+						<?php foreach($lista as $key => $va):?>
+							<?php if(!in_array($key, $exclude_tabla_problemas)):?>
+
+								<td><?php echo $va;?></td>
+							
+							<?php endif;?>
+						<?php endforeach; ?>
+					</tr>
+					<?php endforeach;?>
+				</tbody>
+			</table>
+		<?php endif;?>
+
 		<h2>Servicio</h2>
 		<table class="wp-list-table widefat" cellspacing="0">
 			<thead>
@@ -2062,10 +2187,13 @@ function page_servicios_editar_servicio(){
 			</tbody>
 		</table>
 
-		<h2>Imagenes</h2>
-		<?php foreach($Query_Imagenes as $item_imagen):?>
-		<a href="https://server.fixperto.creactive.com.co/uploads/requests/<?php echo $item_imagen->image;?>" target="_blank"><img src="https://server.fixperto.creactive.com.co/uploads/requests/<?php echo $item_imagen->image;?>" height="200"></a>
-		<?php endforeach;?>
+		<?php if( Count($Query_Imagenes) > 0 ):?>
+			<h2>Imagenes</h2>
+			<?php foreach($Query_Imagenes as $item_imagen):?>
+			<a href="<?php echo URL_BASE;?>/uploads/requests/<?php echo $item_imagen->image;?>" target="_blank"><img src="<?php echo URL_BASE;?>/uploads/requests/<?php echo $item_imagen->image;?>" height="200"></a>
+			<?php endforeach;?>
+		<?php endif;?>
+
 
 		<h2>Ofertas</h2>
 		<table class="wp-list-table widefat" cellspacing="0">
@@ -2073,7 +2201,7 @@ function page_servicios_editar_servicio(){
 				<tr valign="top">
 				<th>Experto</th>
 					<?php foreach($Query_Offers[0] as $key => $value):?>
-						<th><?php echo $key; ?></th>
+						<?php if(!in_array($key, $exclude_tabla_offers)):?><th><?php echo $key; ?></th><?php endif;?>
 					<?php endforeach; ?>
 					<th>Acciones</th>
 				</tr>
@@ -2083,39 +2211,37 @@ function page_servicios_editar_servicio(){
 				$alter = "";
 				foreach ( $Query_Offers as $lista ):
 					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+					$Query_Cancel_Offer = plugDB("SELECT c.texto, c.date, ct.denomination as type FROM cancel_offert c LEFT JOIN cancellation_type ct ON c.type=ct.id WHERE offert = '".$lista->id."'", "result");
 				?>
 				
 				<tr valign="top" <?php echo $alter; ?>>
-					<?php $Query__Expert = plugDB("SELECT u.name as nombre, u.id as id_user FROM experts e LEFT JOIN users u ON e.user = u.id WHERE e.id = '".$lista->expert."'", "row");?>
 					<td>
-						<form method="post" action="admin.php?page=profesionales" target="_blank">
-							<input type="hidden" name="id" value="<?php echo $Query__Expert->id_user;?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="submit" value="<?php echo $Query__Expert->nombre;?>" class="button action">
-						</form>
+						<?php Gen_Btn_Experto($lista->expert);?>
 					</td>
 
 					<form method="post">
 					<?php foreach($lista as $it => $va):?>
-						<?php if($it == "start_date"):?>
-							<td><input type="datetime-local" name="start_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>"></td>
-						<?php elseif($it == "completed_date"):?>
-							<td><input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>"></td>
-						<?php elseif($it == "status"):?>
-							<td>
-								<select name="status">
-									<?php echo func_select_estado_servicio(
-										array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), 
-										$va
-									);?>
-								</select>
-							</td>
-						<?php elseif($it == "collaborator"):?>
-							<td><select name="collaborator"><?php echo Select_ColByExpert($lista->expert, $lista->collaborator);?></select></td>
-						<?php elseif($it == "hour"):?>
-							<td><input type="time" name="hour" value="<?php echo $va;?>"></td>
-						<?php else:?>
-							<td><?php echo $va;?></td>
+						<?php if(!in_array($it, $exclude_tabla_offers)):?>
+							<?php if($it == "start_date"):?>
+								<td><input type="datetime-local" name="start_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>"></td>
+							<?php elseif($it == "completed_date"):?>
+								<td><input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>"></td>
+							<?php elseif($it == "status"):?>
+								<td>
+									<select name="status">
+										<?php echo func_select_estado_servicio(
+											array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), 
+											$va
+										);?>
+									</select>
+								</td>
+							<?php elseif($it == "collaborator"):?>
+								<td><select name="collaborator"><?php echo Select_ColByExpert($lista->expert, $lista->collaborator);?></select></td>
+							<?php elseif($it == "hour"):?>
+								<td><input type="time" name="hour" value="<?php echo $va;?>"></td>
+							<?php else:?>
+								<td><?php echo $va;?></td>
+							<?php endif;?>
 						<?php endif;?>
 					<?php endforeach; ?>
 					<td>
@@ -2126,11 +2252,28 @@ function page_servicios_editar_servicio(){
 					</td>
 					</form>
 				</tr>
-				
+
+				<?php if( Count($Query_Cancel_Offer) > 0 ):?>
+					<?php 
+					foreach ( $Query_Cancel_Offer as $lista_cancel ):
+					?>
+				<tr>
+					<td><h3>Cancelado por el Experto</h3></td>
+					<td><?php echo $lista_cancel->texto;?></td>
+					<td><?php echo $lista_cancel->date;?></td>
+					<td><?php echo $lista_cancel->type;?></td>
+				</tr>
+				<?php endforeach; ?>
+				<?php endif;?>
+
+
 				<?php endforeach;?>
 			</tbody>
 		</table>
 
+
+
+		<?php if( Count($Query_Chats) > 0 ):?>
 		<h2>Chats Activos</h2>
 		<table class="wp-list-table widefat" cellspacing="0">
 			<thead>
@@ -2148,12 +2291,59 @@ function page_servicios_editar_servicio(){
 				?>
 				<tr valign="top" <?php echo $alter; ?>>
 					<?php foreach($lista as $key => $va):?>
-						<?php if(!in_array($key, $exclude_tabla_chats)):?><td><?php echo $va;?></td><?php endif;?>
+						<?php if(!in_array($key, $exclude_tabla_chats)):?>
+
+							<?php if($key == "de" || $key == "para"):?>
+								<td><?php Gen_Btn_By_User($va, true);?></td>
+							<?php else:?>
+								<td><?php echo $va;?></td>
+							<?php endif;?>
+						
+						
+						<?php endif;?>
 					<?php endforeach; ?>
 				</tr>
 				<?php endforeach;?>
 			</tbody>
 		</table>
+		<?php endif;?>
+
+		<?php if( Count($Query_Problemas) > 0 ):?>
+		<h2>Problemas</h2>
+		<table class="wp-list-table widefat" cellspacing="0">
+			<thead>
+				<tr valign="top">
+					<?php foreach($Query_Problemas[0] as $key => $value):?>
+					<?php if(!in_array($key, $exclude_tabla_problemas)):?><th><?php echo $key; ?></th><?php endif;?>
+					<?php endforeach; ?>
+				</tr>
+			</thead>
+			<tbody id="the-list">
+				<?php 
+				$alter = "";
+				foreach ( $Query_Problemas as $lista ):
+					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+				?>
+				<tr valign="top" <?php echo $alter; ?>>
+					<?php foreach($lista as $key => $va):?>
+						<?php if(!in_array($key, $exclude_tabla_problemas)):?>
+
+							<?php if($key == "user"):?>
+								<td><?php Gen_Btn_By_User($va, true);?></td>
+							<?php else:?>
+								<td><?php echo $va;?></td>
+							<?php endif;?>
+						
+						<?php endif;?>
+					<?php endforeach; ?>
+				</tr>
+				<?php endforeach;?>
+			</tbody>
+		</table>
+		<?php endif;?>
+
+
+
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
@@ -2161,7 +2351,7 @@ function page_servicios_editar_servicio(){
 	function Do_Select_Category(){
 		//alert( $("#select_service").val() );
 		$.ajax({
-			url:"https://admin.fixperto.creactive.com.co/pagina_querys/", 
+			url:"<?php echo home_url('pagina_querys');?>", 
 			method: "POST",
 			data: { select_category : "ok", categoria : $("#select_service").val() }
 		}).done(function(html){
@@ -2174,7 +2364,7 @@ function page_servicios_editar_servicio(){
 	function Do_Select_Zona(){
 		//alert( $("#select_service").val() );
 		$.ajax({
-			url:"https://admin.fixperto.creactive.com.co/pagina_querys/", 
+			url:"<?php echo home_url('pagina_querys');?>", 
 			method: "POST",
 			data: { select_zona : "ok", categoria : $("#select_ciudad").val() }
 		}).done(function(html){
@@ -2539,6 +2729,130 @@ function page_atencion_cliente_editar(){
 	<?php
 }
 //
+function page_referidos(){
+	if( isset($_POST["editar_atencion"]) ){
+		page_atencion_cliente_editar();
+		return;
+	}
+	//
+	$Qstr = "SELECT enti.id_expert as experto, enti.email, e_b.coupon, e_b.id as experto_redimio
+	FROM experts e_b
+	INNER JOIN 
+	(
+		SELECT e.id as id_expert, u.email, u.id as id_user, u.code FROM users u INNER JOIN experts e ON u.id = e.user 
+	)enti ON e_b.coupon = concat(enti.code, enti.id_user)
+	WHERE e_b.coupon IS NOT NULL 
+	ORDER BY e_b.coupon
+	";
+	$Query = plugDB($Qstr, "result");
+	?>
+	<div class="wrap">
+		<h2>Cupones de Referidos</h2>
+		<h4><?php echo Count($Query);?> Registros encontrados</h4>
+		<?php if($Query[0] != null):?>
+			<div div class="alignleft bulkactions">
+				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
+					<input type='hidden' name='type' value='transacciones_fixcoins'/>
+					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
+					<input type="submit" class="button action" id="exportar" name="exportar" value="Exportar a excel" />
+				</form>
+			</div><br><br>
+			<table class="wp-list-table widefat" cellspacing="0">
+				<thead>
+					<tr valign="top">
+						<?php foreach($Query[0] as $key => $value):?>
+							<th><?php echo $key; ?></th>
+						<?php endforeach; ?>
+					</tr>
+				</thead>
+				<tbody id="the-list">
+					<?php 
+					$alter = "";
+					foreach ( $Query as $lista ):
+						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+					?>
+					<tr valign="top" <?php echo $alter; ?>>
+						<?php foreach($lista as $it => $va):?>
+							<?php if($it == "experto_redimio" || $it == "experto"):?>
+								<td><?php echo Gen_Btn_Experto($va);?></td>
+							<?php else:?>
+								<td><?php echo $va;?></td>
+							<?php endif;?>
+							
+						<?php endforeach; ?>
+						
+					</tr>
+				<?php endforeach;?>
+			</table>
+		<?php endif;?>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+	<script type="text/javascript"></script>
+	<?php
+}
+//
+function page_reporte_clientes(){
+	if( isset($_POST["editar_atencion"]) ){
+		page_atencion_cliente_editar();
+		return;
+	}
+	//
+	$Qstr = "select exp.id, us.name, us.email,
+	(select count(ofr.id) from offers ofr where(ofr.expert= exp.id and ofr.status= 'completed') ) as trabajos_culminados,
+	(select sum(cat.cost) from offers ofr inner join requests req on(ofr.request= req.id)
+	  inner join categories cat on(req.category= cat.id) where(ofr.expert= exp.id )) as gasto_fixcoin,
+	(select count(ofr.id) from offers ofr where (ofr.expert= exp.id and (ofr.status= 'completed' or ofr.status= 'accepted'))) as ofertas_aceptadas,
+	(select count(ofr.id) from offers ofr where (ofr.expert= exp.id and (ofr.status= 'rejected'))) as ofertas_rechazadas,
+	(select count(req.id) from requests req
+   left join expert_cancel_requests can on(req.id = can.request)
+   left join offers off on(req.id = off.request)
+   where((can.id is null) and(off.expert is null) and req.status != 'progress'
+   and req.category in (select exp_cat.category from experts_categories exp_cat where(exp_cat.expert= exp.id))
+   and req.region in (select exp_reg.region from experts_regions exp_reg where(exp_reg.expert= exp.id)))) perdidas_oportunidades
+	from experts exp
+   inner join users us on( us.id= exp.user)";
+	$Query = plugDB($Qstr, "result");
+	?>
+	<div class="wrap">
+		<h2>Reporte Clientes</h2>
+		<h4><?php echo Count($Query);?> Registros encontrados</h4>
+		<?php if($Query[0] != null):?>
+			<div div class="alignleft bulkactions">
+				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
+					<input type='hidden' name='type' value='transacciones_fixcoins'/>
+					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
+					<input type="submit" class="button action" id="exportar" name="exportar" value="Exportar a excel" />
+				</form>
+			</div><br><br>
+			<table class="wp-list-table widefat" cellspacing="0">
+				<thead>
+					<tr valign="top">
+						<?php foreach($Query[0] as $key => $value):?>
+							<th><?php echo $key; ?></th>
+						<?php endforeach; ?>
+					</tr>
+				</thead>
+				<tbody id="the-list">
+					<?php 
+					$alter = "";
+					foreach ( $Query as $lista ):
+						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+					?>
+					<tr valign="top" <?php echo $alter; ?>>
+						<?php foreach($lista as $it => $va):?>
+							<td><?php echo $va;?></td>
+						<?php endforeach; ?>
+						
+					</tr>
+				<?php endforeach;?>
+			</table>
+		<?php endif;?>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+	<script type="text/javascript"></script>
+	<?php
+}
+//
 function func_select_estado_servicio($valores, $_actual){
 	$ret = "";
 	foreach($valores as $k => $v){
@@ -2657,25 +2971,35 @@ function func_tabla_form_servicio($q, $excluir_rows, $only_read){
 	return $ret;
 }
 //
-function Gen_Btn_Experto($id_expert){
+function Gen_Btn_Experto($id_expert, $show_tipo = false){
 	$Query__Expert = plugDB("SELECT u.name as nombre, u.id as id_user FROM experts e LEFT JOIN users u ON e.user = u.id WHERE e.id = '".$id_expert."'", "row");
 	?>
 	<form method="post" action="admin.php?page=profesionales" target="_blank">
 		<input type="hidden" name="id" value="<?php echo $Query__Expert->id_user;?>">
 		<input type="hidden" name="editar_cliente" value="ok">
-		<input type="submit" value="<?php echo $Query__Expert->nombre;?>" class="button action">
+		<input type="submit" value="<?php echo $Query__Expert->nombre;?><?php if($show_tipo == true) echo " (experto)";?>" class="button action">
 	</form>
 	<?php
 }
-function Gen_Btn_Cliente($id_user){
+function Gen_Btn_Cliente($id_user, $show_tipo = false){
 	$Query_Cus = plugDB("SELECT * FROM users WHERE id = '".$id_user."'", "row");
 	?>
 	<form method="post" action="admin.php?page=clientes" target="_blank">
 		<input type="hidden" name="id" value="<?php echo $Query_Cus->id;?>">
 		<input type="hidden" name="editar_cliente" value="ok">
-		<input type="submit" value="<?php echo $Query_Cus->name;?>" class="button action">
+		<input type="submit" value="<?php echo $Query_Cus->name;?><?php if($show_tipo == true) echo " (cliente)";?>" class="button action">
 	</form>
 	<?php
+}
+function Gen_Btn_By_User($id_user, $show_tipo = false){
+	$Query_Cus = plugDB("SELECT * FROM users WHERE id = '".$id_user."'", "row");
+	$Query__Expert = plugDB("SELECT * FROM experts e WHERE e.user = '".$id_user."'", "row");
+
+	if($Query__Expert != null){
+		Gen_Btn_Experto($Query__Expert->id, $show_tipo);
+	}else{
+		Gen_Btn_Cliente($id_user, $show_tipo);
+	}
 }
 //
 function Gen_String_Update($data, $excluir_rows){
