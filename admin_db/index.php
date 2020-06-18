@@ -168,8 +168,8 @@ function page_clientes_editar_cliente(){
 	$exclude_tabla_calificaciones = array();
 	//
 	?>
+
 	<div class="wrap">
-		
 		<img src="<?php echo URL_BASE;?>/uploads/registros/cliente/<?php echo $Query_Customer->avatar;?>" height="300">
 
 		<h2>Estado</h2>
@@ -263,6 +263,7 @@ function page_clientes_editar_cliente(){
 
 		</table>
 
+		<?php if( Count($Query_Request) > 0 ):?>
 		<h2>Servicios</h2>
 		<table class="wp-list-table widefat" cellspacing="0">
 			<thead>
@@ -293,7 +294,11 @@ function page_clientes_editar_cliente(){
 				<?php endforeach;?>
 			</tbody>
 		</table>
+		<?php else:?>
+			<h2>Servicios (0)</h2>
+		<?php endif;?>
 		
+		<?php if( Count($Query_Calificaciones) > 0 ):?>
 		<h2>Calificaciones</h2>
 		<table class="wp-list-table widefat" cellspacing="0">
 			<thead>
@@ -317,11 +322,12 @@ function page_clientes_editar_cliente(){
 				<?php endforeach;?>
 			</tbody>
 		</table>
-
+		<?php else:?>
+			<h2>Calificaciones (0)</h2>
+		<?php endif;?>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-
 	<script type="text/javascript">
 	function Do_Reestablecer_Clave(form){
 		if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
@@ -1326,6 +1332,7 @@ function page_profesionales_editar_experto(){
 		</table>
 		<?php endif;?>
 
+		<?php if( Count($Query_Ofers) > 0 ):?>
 		<h2>Servicios</h2>
 		<table class="wp-list-table widefat" cellspacing="0">
 			<thead>
@@ -1356,7 +1363,11 @@ function page_profesionales_editar_experto(){
 				<?php endforeach;?>
 			</tbody>
 		</table>
+		<?php else:?>
+			<h2>Servicios (0)</h2>
+		<?php endif;?>
 
+		<?php if( Count($Query_Calificaciones) > 0 ):?>
 		<h2>Calificaciones</h2>
 		<table class="wp-list-table widefat" cellspacing="0">
 			<thead>
@@ -1380,14 +1391,15 @@ function page_profesionales_editar_experto(){
 				<?php endforeach;?>
 			</tbody>
 		</table>
-
+		<?php else:?>
+			<h2>Calificaciones (0)</h2>
+		<?php endif;?>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
 	<script src="https://harvesthq.github.io/chosen/chosen.jquery.js" type="text/javascript"></script>
 	<script src="https://harvesthq.github.io/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://harvesthq.github.io/chosen/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
-
 	<script type="text/javascript">
 	function Do_Select_Category(){
 		//alert( $("#select_service").val() );
@@ -2044,8 +2056,6 @@ function page_servicios_editar_servicio(){
 	?>
 
 	<div class="wrap">
-
-
 		<?php if( Count($Query_cancel_cliente) > 0 ):?>
 			<h2>Cancelado por el usuario</h2>
 			<table class="wp-list-table widefat" cellspacing="0">
@@ -2189,13 +2199,15 @@ function page_servicios_editar_servicio(){
 		</table>
 
 		<?php if( Count($Query_Imagenes) > 0 ):?>
-			<h2>Imagenes</h2>
-			<?php foreach($Query_Imagenes as $item_imagen):?>
-			<a href="<?php echo URL_BASE;?>/uploads/requests/<?php echo $item_imagen->image;?>" target="_blank"><img src="<?php echo URL_BASE;?>/uploads/requests/<?php echo $item_imagen->image;?>" height="200"></a>
-			<?php endforeach;?>
+		<h2>Imagenes</h2>
+		<?php foreach($Query_Imagenes as $item_imagen):?>
+		<a href="<?php echo URL_BASE;?>/uploads/requests/<?php echo $item_imagen->image;?>" target="_blank"><img src="<?php echo URL_BASE;?>/uploads/requests/<?php echo $item_imagen->image;?>" height="200"></a>
+		<?php endforeach;?>
+		<?php else:?>
+			<h2>Imagenes (0)</h2>
 		<?php endif;?>
 
-
+		<?php if( Count($Query_Offers) > 0 ):?>
 		<h2>Ofertas</h2>
 		<table class="wp-list-table widefat" cellspacing="0">
 			<thead>
@@ -2214,7 +2226,6 @@ function page_servicios_editar_servicio(){
 					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 					$Query_Cancel_Offer = plugDB("SELECT c.texto, c.date, ct.denomination as type FROM cancel_offert c LEFT JOIN cancellation_type ct ON c.type=ct.id WHERE offert = '".$lista->id."'", "result");
 				?>
-				
 				<tr valign="top" <?php echo $alter; ?>>
 					<td>
 						<?php Gen_Btn_Experto($lista->expert);?>
@@ -2253,7 +2264,6 @@ function page_servicios_editar_servicio(){
 					</td>
 					</form>
 				</tr>
-
 				<?php if( Count($Query_Cancel_Offer) > 0 ):?>
 					<?php 
 					foreach ( $Query_Cancel_Offer as $lista_cancel ):
@@ -2266,13 +2276,12 @@ function page_servicios_editar_servicio(){
 				</tr>
 				<?php endforeach; ?>
 				<?php endif;?>
-
-
 				<?php endforeach;?>
 			</tbody>
 		</table>
-
-
+		<?php else:?>
+			<h2>Ofertas (0)</h2>
+		<?php endif;?>
 
 		<?php if( Count($Query_Chats) > 0 ):?>
 		<h2>Chats Activos</h2>
@@ -2307,6 +2316,8 @@ function page_servicios_editar_servicio(){
 				<?php endforeach;?>
 			</tbody>
 		</table>
+		<?php else:?>
+		<h2>Chats Activos (0)</h2>
 		<?php endif;?>
 
 		<?php if( Count($Query_Problemas) > 0 ):?>
@@ -2341,10 +2352,9 @@ function page_servicios_editar_servicio(){
 				<?php endforeach;?>
 			</tbody>
 		</table>
+		<?php else:?>
+		<h2>Problemas (0)</h2>
 		<?php endif;?>
-
-
-
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
