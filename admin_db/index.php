@@ -14,6 +14,7 @@ function function_enable_pages(){
 	add_submenu_page( 'admin_db', 'Atencion_Cliente', 'Atencion_Cliente', 'administrator', 'atencion_cliente', 'page_atencion_cliente');//	
 	add_submenu_page( 'admin_db', 'Cupones_Referidos', 'Cupones_Referidos', 'administrator', 'cupones_referidos', 'page_referidos');//	
 	add_submenu_page( 'admin_db', 'Categorias', 'Categorias', 'administrator', 'lista_servicios', 'page_lista_servicios');//	
+	add_submenu_page( 'admin_db', 'Contenidos', 'Contenidos', 'administrator', 'contenidos', 'page_contenidos');//	
 	remove_submenu_page( 'admin_db', 'admin_db' );
 }
 //
@@ -2850,6 +2851,109 @@ function page_reporte_clientes(){
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
 	<script type="text/javascript"></script>
+	<?php
+}
+//
+function page_contenidos(){
+	//print_r($_POST);
+	if( isset($_POST["save_valor_fixcoin"]) ){
+		$qs_update = "UPDATE contenidos SET ".Gen_String_Update($_POST, array("save_valor_fixcoin"))." WHERE clave='valor_fixcoin_referido'";
+		$q_update = plugDB($qs_update, "result");
+	}
+	if( isset($_POST["add_certificado"]) ){
+		$qs_update = "INSERT INTO certifications_type (denomination, uri) VALUES ('".$_POST["denomination"]."', '".$_POST["uri"]."')";
+		$q_update = plugDB($qs_update, "result");
+	}
+	if( isset($_POST["borrar_certificado"]) ){
+		$qs_update = "DELETE FROM certifications_type WHERE id = '".$_POST["id_item"]."'";
+		$q_update = plugDB($qs_update, "result");
+	}
+	if( isset($_POST["update_certificado"]) ){
+		$qs_update = "UPDATE certifications_type SET ".Gen_String_Update($_POST, array("update_certificado", "id_item"))." WHERE id='".$_POST["id_item"]."'";
+		$q_update = plugDB($qs_update, "result");
+	}
+	//
+	$Query_Valor_Fixcoin = plugDB("SELECT * FROM contenidos WHERE clave = 'valor_fixcoin_referido'", "row");
+	$Query_Certificados = plugDB("SELECT * FROM certifications_type", "result");
+	$exclude_tabla_certificados = array();
+	//
+	?>
+	<div class="wrap">
+		
+		<h2>Contenidos y Ajustes</h2>
+		<table class="wp-list-table widefat" cellspacing="0">
+			<form method="post">
+				<tr>
+					<td>Valor Fixcoin cuando refieres a un amigo</td>
+					<td><input type="number" name="valor" value="<?php echo $Query_Valor_Fixcoin->valor;?>" required></td>
+					<td><?php echo $Query_Valor_Fixcoin->fecha;?></td>
+					<td><input type="submit" name="save_valor_fixcoin" value="Guardar" class="button action"></td>
+				</tr>
+			</form>
+		</table>
+
+
+
+		<h2>Certificados</h2>
+		<table class="wp-list-table widefat" cellspacing="0">
+			<thead>
+				<tr valign="top">
+					<?php foreach($Query_Certificados[0] as $key => $value):?>
+					<?php if(!in_array($key, $exclude_tabla_certificados)):?><th><?php echo $key; ?></th><?php endif;?>
+					<?php endforeach; ?>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody id="the-list">
+				<?php 
+				$alter = "";
+				foreach ( $Query_Certificados as $lista ):
+					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+				?>
+				<form method="post">
+					<tr valign="top" <?php echo $alter; ?>>
+						<?php foreach($lista as $key => $va):?>
+							<?php if(!in_array($key, $exclude_tabla_certificados)):?>
+								<?php if( $key == "denomination" || $key == "uri" ):?>
+									<td><input type="text" name="<?php echo $key;?>" value="<?php echo $va;?>" required></td>
+								<?php else:?>
+									<td><?php echo $va;?></td>
+								<?php endif;?>
+							<?php endif;?>
+						<?php endforeach; ?>
+						<td>
+							<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
+							<input type="submit" name="update_certificado" value="Actualizar" class="button action">
+							<input type="submit" name="borrar_certificado" value="Borrar" class="button action">
+						</td>
+					</tr>
+				</form>
+				<?php endforeach;?>
+
+				<form method="post">
+					<tr>
+						<td>Nuevo</td>
+						<td><input type="text" name="denomination" placeholder="Nombre" required></td>
+						<td><input type="text" name="uri" placeholder="Uri" required></td>
+						<td><input type="submit" name="add_certificado" value="Crear" class="button action"></td>
+					</tr>
+				</form>
+
+
+			</tbody>
+		</table>
+
+
+		
+		
+
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+
+	<script type="text/javascript">
+	
+	</script>
 	<?php
 }
 //
