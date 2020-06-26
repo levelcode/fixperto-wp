@@ -8,13 +8,18 @@
 	<style>
 		body {
 			max-width: 800px;
-			margin: 20px auto;
+			margin: 0 auto;
+			padding: 20px;
 			font-family: "Arial", "Helvetica", sans-serif;
 		}
 
 		body > header {
 			margin-bottom: 50px;
 			text-align: center;
+		}
+
+		body > header h1 {
+			margin-top: 0;
 		}
 	</style>
 </head>
