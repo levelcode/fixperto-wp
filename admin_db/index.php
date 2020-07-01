@@ -50,6 +50,14 @@ function page_clientes(){
 		}
 		$WHERE .= "TIMESTAMPDIFF(YEAR,u.birth_date,CURDATE()) = '".$_POST["edad"]."'";
 	}
+	if(isset($_POST["buscador"])){
+		if($WHERE == ""){
+			$WHERE .= "WHERE ";
+		}else{
+			$WHERE .= " AND ";
+		}
+		$WHERE .= "u.name LIKE '%".$_POST["buscador"]."%' OR u.email LIKE '%".$_POST["buscador"]."%'";
+	}
 	//
 	$Qstr = "
 	SELECT u.id as id_user, u.name, u.email, u.date_registry, u.birth_date, g.denomination as Genero, TIMESTAMPDIFF(YEAR,u.birth_date,CURDATE()) AS Edad, serv.cant as Cant_Servicios
@@ -74,11 +82,13 @@ function page_clientes(){
 					<option value='-1' selected>Edad</option>
 					<?php echo func_select_edad($_POST["edad"]);?>
 				</select>
+				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
+				<input type="submit" value="Buscar" class="button action">
 			</form>
 		</div><br><br>
 		<div div class="alignleft actions bulkactions">
 			<form method='post'>
-			<input type="submit" class="button action" name="todos" value="Limpiar Filtros">
+				<input type="submit" class="button action" name="todos" value="Limpiar Filtros">
 			</form>
 		</div><br><br>
 		<h4><?php echo Count($Query);?> Registros encontrados</h4>
@@ -420,6 +430,14 @@ function page_profesionales(){
 		}
 		$WHERE .= "e.certification_sena = '".$_POST["certification_sena"]."'";
 	}
+	if(isset($_POST["buscador"])){
+		if($WHERE == ""){
+			$WHERE .= "WHERE ";
+		}else{
+			$WHERE .= " AND ";
+		}
+		$WHERE .= "u.name LIKE '%".$_POST["buscador"]."%' OR u.email LIKE '%".$_POST["buscador"]."%'";
+	}
 	//u.birth_date, e.profile_description,
 	$Qstr = "
 	SELECT 
@@ -512,6 +530,8 @@ function page_profesionales(){
 					<option value='-1'>Certification Sena</option>
 					<?php echo func_select_estado_servicio(array("Si"=>"1", "No"=>"0"), $_POST["certification_sena"]);?>
 				</select>
+				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
+				<input type="submit" value="Buscar" class="button action">
 			</form>
 		</div><br><br>
 		<div div class="alignleft actions bulkactions">
@@ -1902,6 +1922,14 @@ function page_servicios(){
 		}
 		$WHERE .= "reg.reg1id = '".$_POST["zona"]."'";
 	}
+	if(isset($_POST["buscador"])){
+		if($WHERE == ""){
+			$WHERE .= "WHERE ";
+		}else{
+			$WHERE .= " AND ";
+		}
+		$WHERE .= "c.name LIKE '%".$_POST["buscador"]."%' OR r.description LIKE '%".$_POST["buscador"]."%'";
+	}
 	//
 	$Qstr = "
 	SELECT r.id as id_req, c.name as Cliente, cat.cat as Categoria, cat.sub_cat as Sub_Categoria, reg.ciudad as Ciudad, reg.zona as Zona, r.description as Descripcion, r.registry_date as Fecha, r.status as Status, r.address as Direccion, IF(sum_pos.suma,sum_pos.suma,0) as Postulados
@@ -1935,6 +1963,8 @@ function page_servicios(){
 					<?php echo func_select_tabla_id_denomination("cities", $_POST["ciudad"]);?>
 				</select>
 				<select name="zona" onchange="this.form.submit()"><?php echo func_select_sub_zonas($_POST["ciudad"], $_POST["zona"]);?></select>
+				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
+				<input type="submit" value="Buscar" class="button action">
 			</form>
 		</div><br><br>
 		<div div class="alignleft actions bulkactions">
@@ -2390,6 +2420,16 @@ function page_servicios_editar_servicio(){
 }
 //
 function page_transacciones_planes(){
+	$WHERE = "";
+	if(isset($_POST["buscador"])){
+		if($WHERE == ""){
+			$WHERE .= "WHERE ";
+		}else{
+			$WHERE .= " AND ";
+		}
+		$WHERE .= "entidad.nombre LIKE '%".$_POST["buscador"]."%' OR entidad.correo LIKE '%".$_POST["buscador"]."%'";
+	}
+
 	$tabla = "transaction_plan";
 	$Qstr = "SELECT entidad.nombre, entidad.correo, entidad.nombre, entidad.documento, entidad.nit, p.denomination as plan, tran.date_registry, tran.date_response, tran.transaction_id, p.price as valor, sta.denomination as estado
 	FROM 
@@ -2401,11 +2441,18 @@ function page_transacciones_planes(){
 	)entidad ON tran.expert = entidad.id_expert
 	LEFT JOIN plans p ON tran.plan = p.id
 	LEFT JOIN status_epayco sta ON sta.id = tran.status
+	$WHERE
 	";
 	$Query = plugDB($Qstr, "result");
 	?>
 	<div class="wrap">
 		<h2>Transacciones -> Planes</h2>
+		<div div class="alignleft actions bulkactions">
+			<form method='post'>
+				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
+				<input type="submit" value="Buscar" class="button action">
+			</form>
+		</div><br><br>
 		<h4><?php echo Count($Query);?> Registros encontrados</h4>
 		<?php if($Query[0] != null):?>
 			<div div class="alignleft bulkactions">
@@ -2443,6 +2490,16 @@ function page_transacciones_planes(){
 	<?php
 }
 function page_transacciones_fixcoins(){
+	$WHERE = "";
+	if(isset($_POST["buscador"])){
+		if($WHERE == ""){
+			$WHERE .= "WHERE ";
+		}else{
+			$WHERE .= " AND ";
+		}
+		$WHERE .= "entidad.nombre LIKE '%".$_POST["buscador"]."%' OR entidad.correo LIKE '%".$_POST["buscador"]."%'";
+	}
+
 	$tabla = "transaction_fixcoin";
 	$Qstr = "SELECT entidad.nombre, entidad.correo, entidad.nombre, entidad.documento, entidad.nit, fp.cant as fixcoins, tran.date_registry, tran.date_response, tran.transaction_id, fp.price as valor, sta.denomination as estado
 	FROM 
@@ -2454,11 +2511,18 @@ function page_transacciones_fixcoins(){
 	)entidad ON tran.expert = entidad.id_expert
 	LEFT JOIN fixcoins_package fp ON tran.fixcoins_package = fp.id
 	LEFT JOIN status_epayco sta ON sta.id = tran.status
+	$WHERE
 	";
 	$Query = plugDB($Qstr, "result");
 	?>
 	<div class="wrap">
 		<h2>Transacciones -> Fixcoins</h2>
+		<div div class="alignleft actions bulkactions">
+			<form method='post'>
+				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
+				<input type="submit" value="Buscar" class="button action">
+			</form>
+		</div><br><br>
 		<h4><?php echo Count($Query);?> Registros encontrados</h4>
 		<?php if($Query[0] != null):?>
 			<div div class="alignleft bulkactions">
@@ -2501,18 +2565,35 @@ function page_atencion_cliente(){
 		page_atencion_cliente_editar();
 		return;
 	}
+	$WHERE = "";
+	if(isset($_POST["buscador"])){
+		if($WHERE == ""){
+			$WHERE .= "WHERE ";
+		}else{
+			$WHERE .= " AND ";
+		}
+		$WHERE .= "u.name LIKE '%".$_POST["buscador"]."%' OR u.email LIKE '%".$_POST["buscador"]."%'";
+	}
 	//
 	$Qstr = "SELECT cs.id, u.name, u.email, cs.date_registry, ty.denomination as tipo, cs.description, st.denomination as status
 	FROM customer_support cs
 	LEFT JOIN users u ON cs.user = u.id	
 	LEFT JOIN type_customer_support ty ON cs.type_customer_support=ty.id
 	LEFT JOIN status_customer_support st ON cs.status = st.id
+	$WHERE
 	ORDER BY cs.id DESC
+	
 	";
 	$Query = plugDB($Qstr, "result");
 	?>
 	<div class="wrap">
 		<h2>Atencion al Cliente</h2>
+		<div div class="alignleft actions bulkactions">
+			<form method='post'>
+				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
+				<input type="submit" value="Buscar" class="button action">
+			</form>
+		</div><br><br>
 		<h4><?php echo Count($Query);?> Registros encontrados</h4>
 		<?php if($Query[0] != null):?>
 			<div div class="alignleft bulkactions">
