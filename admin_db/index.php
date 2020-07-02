@@ -15,6 +15,7 @@ function function_enable_pages(){
 	add_submenu_page( 'admin_db', 'Cupones_Referidos', 'Cupones_Referidos', 'administrator', 'cupones_referidos', 'page_referidos');//	
 	add_submenu_page( 'admin_db', 'Categorias', 'Categorias', 'administrator', 'lista_servicios', 'page_lista_servicios');//	
 	add_submenu_page( 'admin_db', 'Contenidos', 'Contenidos', 'administrator', 'contenidos', 'page_contenidos');//	
+	add_submenu_page( 'admin_db', 'Graficos', 'Graficos', 'administrator', 'graficos', 'page_graficos');//	
 	remove_submenu_page( 'admin_db', 'admin_db' );
 }
 //
@@ -22,6 +23,15 @@ function page_admin(){
 	?>
 	<div class="wrap">
 		<h2>Fixperto</h2>
+	</div>
+	<?php
+}
+//
+function page_graficos(){
+	?>
+	<div class="wrap">
+		<h2>Graficos</h2>
+		<iframe width="800" height="1350" src="https://datastudio.google.com/embed/reporting/f1fe94c8-6a6c-4e6b-8aec-af1627906138/page/YuNWB" frameborder="0" style="border:0" allowfullscreen></iframe>
 	</div>
 	<?php
 }
