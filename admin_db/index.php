@@ -4,21 +4,42 @@ require_once __DIR__.'/../configuracion.php';
 //
 add_action('admin_menu' , 'function_enable_pages');
 function function_enable_pages(){
-	add_menu_page('Fixperto', 'Fixperto', 'read', 'admin_db', 'page_admin', '', 3);
-	add_submenu_page( 'admin_db', 'Clientes', 'Clientes', 'administrator', 'clientes', 'page_clientes');//	
-	add_submenu_page( 'admin_db', 'Reporte_Clientes', 'Reporte_Clientes', 'administrator', 'reporte_clientes', 'page_reporte_clientes');//	
-	add_submenu_page( 'admin_db', 'Profesionales', 'Profesionales', 'administrator', 'profesionales', 'page_profesionales');//	
-	add_submenu_page( 'admin_db', 'Servicios', 'Servicios', 'administrator', 'servicios', 'page_servicios');//	
-	add_submenu_page( 'admin_db', 'Transacciones_Planes', 'Transacciones_Planes', 'administrator', 'transacciones_planes', 'page_transacciones_planes');//	
-	add_submenu_page( 'admin_db', 'Transacciones_Fixcoins', 'Transacciones_Fixcoins', 'administrator', 'transacciones_fixcoins', 'page_transacciones_fixcoins');//	
-	add_submenu_page( 'admin_db', 'Atencion_Cliente', 'Atencion_Cliente', 'administrator', 'atencion_cliente', 'page_atencion_cliente');//	
-	add_submenu_page( 'admin_db', 'Cupones_Referidos', 'Cupones_Referidos', 'administrator', 'cupones_referidos', 'page_referidos');//	
-	add_submenu_page( 'admin_db', 'Categorias', 'Categorias', 'administrator', 'lista_servicios', 'page_lista_servicios');//	
-	add_submenu_page( 'admin_db', 'Contenidos', 'Contenidos', 'administrator', 'contenidos', 'page_contenidos');//	
-	add_submenu_page( 'admin_db', 'Graficos', 'Graficos', 'administrator', 'graficos', 'page_graficos');//	
-	remove_submenu_page( 'admin_db', 'admin_db' );
+	//add_menu_page('Fixperto', 'Fixperto', 'read', 'admin_db', 'page_admin', '', 1);
+	//add_submenu_page( 'admin_db', 'Clientes', 'Clientes', 'administrator', 'clientes', 'page_clientes');//	
+	//add_submenu_page( 'admin_db', 'Reporte_Clientes', 'Reporte_Clientes', 'administrator', 'reporte_clientes', 'page_reporte_clientes');//	
+	//add_submenu_page( 'admin_db', 'Profesionales', 'Profesionales', 'administrator', 'profesionales', 'page_profesionales');//	
+	//add_submenu_page( 'admin_db', 'Servicios', 'Servicios', 'administrator', 'servicios', 'page_servicios');//	
+	//add_submenu_page( 'admin_db', 'Transacciones_Planes', 'Transacciones_Planes', 'administrator', 'transacciones_planes', 'page_transacciones_planes');//	
+	//add_submenu_page( 'admin_db', 'Transacciones_Fixcoins', 'Transacciones_Fixcoins', 'administrator', 'transacciones_fixcoins', 'page_transacciones_fixcoins');//	
+	//add_submenu_page( 'admin_db', 'Atencion_Cliente', 'Atencion_Cliente', 'administrator', 'atencion_cliente', 'page_atencion_cliente');//	
+	//add_submenu_page( 'admin_db', 'Cupones_Referidos', 'Cupones_Referidos', 'administrator', 'cupones_referidos', 'page_referidos');//	
+	//add_submenu_page( 'admin_db', 'Categorias', 'Categorias', 'administrator', 'lista_servicios', 'page_lista_servicios');//	
+	//add_submenu_page( 'admin_db', 'Contenidos', 'Contenidos', 'administrator', 'contenidos', 'page_contenidos');//	
+	//add_submenu_page( 'admin_db', 'Graficos', 'Graficos', 'administrator', 'graficos', 'page_graficos');//	
+	//remove_submenu_page( 'admin_db', 'admin_db' );
+
+	add_menu_page('Transacciones', 'Transacciones', 'read', 'transaccion_db', 'page_admin', '', 1);
+	add_submenu_page( 'transaccion_db', 'Transacciones_Planes', 'Transacciones_Planes', 'administrator', 'transacciones_planes', 'page_transacciones_planes');//	
+	add_submenu_page( 'transaccion_db', 'Transacciones_Fixcoins', 'Transacciones_Fixcoins', 'administrator', 'transacciones_fixcoins', 'page_transacciones_fixcoins');//
+	add_submenu_page( 'transaccion_db', 'Cupones_Referidos', 'Cupones_Referidos', 'administrator', 'cupones_referidos', 'page_referidos');//	
+	remove_submenu_page( 'transaccion_db', 'transaccion_db' );
+
+	add_menu_page('General', 'General', 'read', 'general_db', 'page_admin', '', 0);
+	add_submenu_page( 'general_db', 'Reporte_Grafico', 'Reporte_Grafico', 'administrator', 'graficos', 'page_graficos');//
+	add_submenu_page( 'general_db', 'Clientes', 'Clientes', 'administrator', 'clientes', 'page_clientes');
+	add_submenu_page( 'general_db', 'Reporte_Clientes', 'Reporte_Clientes', 'administrator', 'reporte_clientes', 'page_reporte_clientes');//	
+	add_submenu_page( 'general_db', 'Profesionales', 'Profesionales', 'administrator', 'profesionales', 'page_profesionales');//	
+	add_submenu_page( 'general_db', 'Servicios', 'Servicios', 'administrator', 'servicios', 'page_servicios');//
+	remove_submenu_page( 'general_db', 'general_db' );
+
+	add_menu_page('Atencion_Cliente', 'Atencion_Cliente', 'read', 'atencion_cliente', 'page_atencion_cliente', '', 1);
+
+	add_menu_page('Configuracion', 'Configuracion', 'read', 'configuracion_db', 'page_admin', '', 0);
+	add_submenu_page( 'configuracion_db', 'Contenidos', 'Contenidos', 'administrator', 'contenidos', 'page_contenidos');//
+	add_submenu_page( 'configuracion_db', 'Categorias', 'Categorias', 'administrator', 'lista_servicios', 'page_lista_servicios');//	
+	remove_submenu_page( 'configuracion_db', 'configuracion_db' );
+	
 }
-//
 function page_admin(){
 	?>
 	<div class="wrap">
@@ -30,7 +51,6 @@ function page_admin(){
 function page_graficos(){
 	?>
 	<div class="wrap">
-		<h2>Graficos</h2>
 		<iframe width="800" height="1350" src="https://datastudio.google.com/embed/reporting/f1fe94c8-6a6c-4e6b-8aec-af1627906138/page/YuNWB" frameborder="0" style="border:0" allowfullscreen></iframe>
 	</div>
 	<?php
@@ -80,41 +100,125 @@ function page_clientes(){
 	";
 	$Query = plugDB($Qstr, "result");
 	?>
-	<div class="wrap">
-		<h2>Clientes</h2>
-		<div div class="alignleft actions bulkactions">
-			<form method='post'>
-				<select name="genero" onchange="this.form.submit()">
-					<option value='-1'>Genero</option>
-					<?php echo func_select_tabla_id_denomination("gender", $_POST["genero"]);?>
-				</select>
-				<select name="edad" onchange="this.form.submit()">
-					<option value='-1' selected>Edad</option>
-					<?php echo func_select_edad($_POST["edad"]);?>
-				</select>
-				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
-				<input type="submit" value="Buscar" class="button action">
-			</form>
-		</div><br><br>
-		<div div class="alignleft actions bulkactions">
-			<form method='post'>
-				<input type="submit" class="button action" name="todos" value="Limpiar Filtros">
-			</form>
-		</div><br><br>
-		<h4><?php echo Count($Query);?> Registros encontrados</h4>
-		<?php if($Query[0] != null):?>
-			<div div class="alignleft bulkactions">
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			jQuery('#la_data_tabla').DataTable();
+			jQuery('#wpfooter').remove();
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		[id="formulario"] *{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Clientes (<?php echo Count($Query);?> Registros)</h1>
+		</div>
+
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
 				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
 					<input type='hidden' name='type' value='usuarios'/>
 					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
-					<input type="submit" class="button action" id="exportar" name="exportar" value="Exportar a excel" />
+					<input type="submit" id="exportar" name="exportar" value="Exportar a excel" class="ui-btn" data-theme="b" />
 				</form>
-			</div><br><br>
-			<table class="wp-list-table widefat" cellspacing="0">
+			</div>
+			<div data-role="controlgroup" data-type="horizontal" style="width:10px">
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<select name="genero" onchange="this.form.submit()">
+						<option value='-1'>Genero</option>
+						<?php echo func_select_tabla_id_denomination("gender", $_POST["genero"]);?>
+					</select>
+					<select name="edad" onchange="this.form.submit()">
+						<option value='-1' selected>Edad</option>
+						<?php echo func_select_edad($_POST["edad"]);?>
+					</select>
+					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
+						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%">
+					</div>
+					<input type="submit" value="Buscar" data-theme="b">
+				</form>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+				</form>
+			</div>
+		</div>
+
+		<div role="content" class="ui-content">
+	
+			<!-- <div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<select name="genero" onchange="this.form.submit()">
+						<option value='-1'>Genero</option>
+						<?php echo func_select_tabla_id_denomination("gender", $_POST["genero"]);?>
+					</select>
+					<select name="edad" onchange="this.form.submit()">
+						<option value='-1' selected>Edad</option>
+						<?php echo func_select_edad($_POST["edad"]);?>
+					</select>
+					<div class="ui-input-text ui-body-inherit ui-corner-all controlgroup-textinput ui-btn ui-shadow-inset">
+						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" class="ui-btn ui-corner-all">
+					</div>
+					
+					<input type="submit" value="Buscar">
+				</form>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+				</form>
+			</div> -->
+		
+			<?php if($Query[0] != null):?>
+			<!-- <div data-role="controlgroup" data-type="horizontal">
+				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
+					<input type='hidden' name='type' value='usuarios'/>
+					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
+					<input type="submit" id="exportar" name="exportar" value="Exportar a excel" class="ui-btn" data-theme="b" />
+				</form>
+			</div> -->
+
+			<table id="la_data_tabla" class="fix_table" cellspacing="0">
 				<thead>
 					<tr valign="top">
 						<?php foreach($Query[0] as $key => $value):?>
-							<th><?php echo $key; ?></th>
+							<th><?php echo Traductor_Nombre_Columnas($key);?></th>
 						<?php endforeach; ?>
 						<th>Editar</th>
 					</tr>
@@ -130,32 +234,37 @@ function page_clientes(){
 							<td><?php echo $va;?></td>
 						<?php endforeach; ?>
 						<td>
-							<form method="post">
+							<form method="post" data-role="controlgroup">
 								<input type="hidden" name="id" value="<?php echo $lista->id_user;?>">
 								<input type="hidden" name="editar_cliente" value="ok">
-								<input type="submit" value="Editar" class="button action">
+								<input type="submit" value="Editar" class="ui-btn" data-theme="b">
 							</form>
 						</td>
 					</tr>
 				<?php endforeach;?>
 			</table>
-		<?php endif;?>
+			<?php endif;?>
+		</div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-	<script type="text/javascript"></script>
+	
 	<?php
 }
 function page_clientes_editar_cliente(){
 	//print_r($_POST);
 	if( isset($_POST["es_usuario"]) ){
 		//echo "<br><br>".Gen_String_Update($_POST, array("editar_cliente", "es_usuario"));
-		$qs_update = "UPDATE users SET ".Gen_String_Update($_POST, array("editar_cliente", "es_usuario"))." WHERE id='".$_POST["id"]."'";
+		$qs_update = "UPDATE users SET ".Gen_String_Update($_POST, array("editar_cliente", "es_usuario", "phone"))." WHERE id='".$_POST["id"]."'";
 		$q_update = plugDB($qs_update, "result");
+
+		$qs_update_phone = "UPDATE customers SET phone='".$_POST["phone"]."' WHERE user='".$_POST["id"]."'";
+		$q_update_phone = plugDB($qs_update_phone, "result");
 	}
 	if( isset($_POST["es_customer"]) ){
 		//echo "<br><br>".Gen_String_Update($_POST, array("editar_cliente", "es_usuario"));
-		$qs_update = "UPDATE customers SET ".Gen_String_Update($_POST, array("editar_cliente", "es_customer"))." WHERE user='".$_POST["id"]."'";
-		$q_update = plugDB($qs_update, "result");
+		$qs_update_phone = "UPDATE customers SET phone='".$_POST["phone"]."' WHERE user='".$_POST["id"]."'";
+		//$qs_update = "UPDATE customers SET ".Gen_String_Update($_POST, array("editar_cliente", "es_customer"))." WHERE user='".$_POST["id"]."'";
+		$q_update_phone = plugDB($qs_update_phone, "result");
+		//echo "<h3>".$qs_update."</h3>";
 	}
 	if( isset($_POST["update_active"]) ){
 		$qs_update = "UPDATE customers SET active='".$_POST["active"]."' WHERE user='".$_POST["id"]."'";
@@ -188,170 +297,202 @@ function page_clientes_editar_cliente(){
 	$exclude_tabla_calificaciones = array();
 	//
 	?>
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			<?php if( Count($Query_Request) > 0 ):?>
+				jQuery('#tabla_servicios').DataTable();
+			<?php endif;?>
+			
+			<?php if( Count($Query_Calificaciones) > 0 ):?>
+				jQuery('#tabla_calificaciones').DataTable();
+			<?php endif;?>
 
-	<div class="wrap">
-		<img src="<?php echo URL_BASE;?>/uploads/registros/cliente/<?php echo $Query_Customer->avatar;?>" height="300">
+			jQuery('#wpfooter').remove();
+			jQuery.mobile.page.prototype.options.keepNative = "select, input, textarea";
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
 
-		<h2>Estado</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<?php if($Query_Customer->active == 1):?>
-				<tr>
-					<td>ACTIVO</td>
-					<td>
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		.formulario{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
+	
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1><?php echo $Query->name;?></h1>
+		</div>
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
+				<?php if($Query_Customer->active == 1):?>
 					<form method="post">
 						<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 						<input type="hidden" name="editar_cliente" value="ok">
 						<input type="hidden" name="update_active" value="ok">
 						<input type="hidden" name="active" value="0">
-						<input type="submit" value="Desactivar" class="button action">
+						<input type="submit" value="Desactivar" data-theme="b">
 					</form>
-					</td>
-				</tr>
 				<?php else:?>
-				<tr>
-					<td>INACTIVO</td>
-					<td>
 					<form method="post">
 						<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 						<input type="hidden" name="editar_cliente" value="ok">
 						<input type="hidden" name="update_active" value="ok">
 						<input type="hidden" name="active" value="1">
-						<input type="submit" value="Activar" class="button action">
+						<input type="submit" value="Activar" data-theme="b">
 					</form>
-					</td>
-				</tr>
-			<?php endif;?>
-			<tr class="alternate">
-					<td>Restablecer Contraseña</td>
-					<td>
-						<form method="post" onSubmit="return Do_Reestablecer_Clave(this);">
-							<input type="hidden" name="correo" value="<?php echo $Query->email;?>">
-							<input type="hidden" name="id_user" value="<?php echo $_POST["id"];?>">
-							<input type="submit" value="Restablecer Contraseña" class="button action">
-						</form>
-					</td>
-				</tr>
-		</table>
+				<?php endif;?>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method="post" onSubmit="return Do_Reestablecer_Clave(this);">
+					<input type="hidden" name="correo" value="<?php echo $Query->email;?>">
+					<input type="hidden" name="id_user" value="<?php echo $_POST["id"];?>">
+					<input type="submit" value="Restablecer Contraseña" data-theme="b">
+				</form>
+			</div>	
+		</div>
 
-		<h2>Información personal</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<th>Campo</th>
-					<th>Valor</th>
-				</tr>
-			</thead>
+		<div role="content" class="ui-content">
+			<a href="<?php echo URL_BASE;?>/uploads/registros/cliente/<?php echo $Query_Customer->avatar;?>" target="_blank">
+				<img src="<?php echo URL_BASE;?>/uploads/registros/cliente/<?php echo $Query_Customer->avatar;?>" height="200">
+			</a>
 
-			<form method="post" name="la_data">
-				<tbody id="the-list">
-					<?php 
-					echo func_tabla_form(
-						$Query, 
-						array("photo", "notification", "notification_chat", "token", "code", "password", "code_number", "validate_number"),
-						array("id", "date_registry", "authentication_date")
-					);
-					?>
-					<tr>
-						<td>
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="submit" name="es_usuario" value="Guardar" class="button action">
-						</td>
-						<td></td>
-					</tr>
-				</tbody>
-			</form>
+			<div data-role="collapsible" >
+			    <h4>Información personal</h4>
+			    <p>
+					<form method="post" name="la_data" class="formulario">
+						<ul data-role="listview" data-inset="true">
+							<?php 
+								echo func_tabla_form_fieldcontainer(
+									$Query, 
+									array("photo", "notification", "notification_chat", "token", "code", "password", "code_number", "validate_number"),
+									array("id", "date_registry", "authentication_date")
+								);
+							?>
+							<li class="ui-field-contain">
+								<label for="phone">Telefono:</label>
+								<input type="text" name="phone" value="<?php echo $Query_Customer->phone;?>" data-clear-btn="true">
+							</li>
+							<li class="ui-body ui-body-b">
+								<fieldset class="ui-grid-a">
+										<div class="ui-block-a"></div>
+										<div class="ui-block-b">
+											<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+											<input type="hidden" name="editar_cliente" value="ok">
+											<input type="submit" name="es_usuario" value="Guardar" data-role="button" data-theme="b">
+										</div>
+								</fieldset>
+							</li>
+						</ul>
+					</form>
+				</p>
+			</div>
 
-			<form method="post" name="la_data">
-				<tbody id="the-list">
-					<tr>
-						<td>Telefono:</td>
-						<td>
-							<input type="text" name="phone" value="<?php echo $Query_Customer->phone;?>">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="submit" name="es_customer" value="Guardar" class="button action">
-						</td>
-						<td></td>
-					</tr>
-				</tbody>
-			</form>
+			<div data-role="collapsible">
+			    <h4>Servicios</h4>
+			    <p>
+					<?php if( Count($Query_Request) > 0 ):?>
+					<table id="tabla_servicios" class="fix_table" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<?php foreach($Query_Request[0] as $key => $value):?>
+								<?php if(!in_array($key, $exclude_tabla_servicios)):?><th><?php echo Traductor_Nombre_Columnas($key); ?></th><?php endif;?>
+								<?php endforeach; ?>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach ( $Query_Request as $lista ):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<tr valign="top" <?php echo $alter; ?>>
+								<?php foreach($lista as $key => $va):?>
+									<?php if(!in_array($key, $exclude_tabla_servicios)):?><td><?php echo $va;?></td><?php endif;?>
+								<?php endforeach; ?>
+								<td>
+									<form method="post" action="admin.php?page=servicios" data-role="controlgroup">
+										<input type="hidden" name="id" value="<?php echo $lista->id;?>">
+										<input type="submit" name="editar_servicio" value="Editar" class="ui-btn" data-theme="b">
+									</form>
+								</td>
+							</tr>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+					<?php else:?>
+						Servicios (0)
+					<?php endif;?>
+				</p>
+			</div>
 
-		</table>
-
-		<?php if( Count($Query_Request) > 0 ):?>
-		<h2>Servicios</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<?php foreach($Query_Request[0] as $key => $value):?>
-					<?php if(!in_array($key, $exclude_tabla_servicios)):?><th><?php echo $key; ?></th><?php endif;?>
-					<?php endforeach; ?>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_Request as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<tr valign="top" <?php echo $alter; ?>>
-					<?php foreach($lista as $key => $va):?>
-						<?php if(!in_array($key, $exclude_tabla_servicios)):?><td><?php echo $va;?></td><?php endif;?>
-					<?php endforeach; ?>
-					<td>
-						<form method="post" action="admin.php?page=servicios">
-							<input type="hidden" name="id" value="<?php echo $lista->id;?>">
-							<input type="submit" name="editar_servicio" value="Editar" class="button action">
-						</form>
-					</td>
-				</tr>
-				<?php endforeach;?>
-			</tbody>
-		</table>
-		<?php else:?>
-			<h2>Servicios (0)</h2>
-		<?php endif;?>
-		
-		<?php if( Count($Query_Calificaciones) > 0 ):?>
-		<h2>Calificaciones</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<?php foreach($Query_Calificaciones[0] as $key => $value):?>
-					<?php if(!in_array($key, $exclude_tabla_calificaciones)):?><th><?php echo $key; ?></th><?php endif;?>
-					<?php endforeach; ?>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_Calificaciones as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<tr valign="top" <?php echo $alter; ?>>
-					<?php foreach($lista as $key => $va):?>
-						<?php if(!in_array($key, $exclude_tabla_calificaciones)):?><td><?php echo $va;?></td><?php endif;?>
-					<?php endforeach; ?>
-				</tr>
-				<?php endforeach;?>
-			</tbody>
-		</table>
-		<?php else:?>
-			<h2>Calificaciones (0)</h2>
-		<?php endif;?>
+			<div data-role="collapsible">
+			    <h4>Calificaciones</h4>
+			    <p>
+					<?php if( Count($Query_Calificaciones) > 0 ):?>
+					<table id="tabla_calificaciones" class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<?php foreach($Query_Calificaciones[0] as $key => $value):?>
+								<?php if(!in_array($key, $exclude_tabla_calificaciones)):?><th><?php echo $key; ?></th><?php endif;?>
+								<?php endforeach; ?>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach ( $Query_Calificaciones as $lista ):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<tr valign="top" <?php echo $alter; ?>>
+								<?php foreach($lista as $key => $va):?>
+									<?php if(!in_array($key, $exclude_tabla_calificaciones)):?><td><?php echo $va;?></td><?php endif;?>
+								<?php endforeach; ?>
+							</tr>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+					<?php else:?>
+						Calificaciones (0)
+					<?php endif;?>
+				</p>
+			</div>
+		</div>
 	</div>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+	
 	<script type="text/javascript">
 	function Do_Reestablecer_Clave(form){
 		if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
-			$.ajax({
+			jQuery.ajax({
 				url:"<?php echo URL_BASE;?>/backOffice/changePassword", 
 				method: "POST",
 				data: { id : form.id_user.value, email : form.correo.value }
@@ -510,87 +651,141 @@ function page_profesionales(){
 	$Colum_No_Mostrar = array("id_user", "birth_date", "date_arl", "date_salud_pension", "profile_description");
 	?>
 
-	<div class="wrap">
-		<h2>Profesionales</h2>
-		<div div class="alignleft actions bulkactions">
-		<form method='post'>
-				<select name="tipo" onchange="this.form.submit()">
-					<option value="-1">Tipo</option>
-					<?php echo func_select_estado_servicio(array("Independiente"=>"0", "Empresa"=>"1"), $_POST["tipo"]);?>
-				</select>
-				<select name="ciudad" onchange="this.form.submit()">
-					<option value='-1'>Ciudad</option>
-					<?php echo func_select_tabla_id_denomination("cities", $_POST["ciudad"]);?>
-				</select>
-				<select name="zona" onchange="this.form.submit()"><?php echo func_select_sub_zonas($_POST["ciudad"], $_POST["zona"]);?></select>
-				<select name="categoria" onchange="this.form.submit()">
-					<option value='-1'>Categoria</option>
-					<?php echo func_select_tabla_id_denomination("services", $_POST["categoria"]);?>
-				</select>
-				<select name="sub_categoria" onchange="this.form.submit()"><?php echo func_select_sub_categorias($_POST["categoria"], $_POST["sub_categoria"]);?></select>
-				<select name="plan" onchange="this.form.submit()">
-					<option value='-1'>Plan</option>
-					<?php echo func_select_tabla_id_denomination("plans", $_POST["plan"]);?>
-				</select>
-				<select name="estado_plan" onchange="this.form.submit()">
-					<option value='-1'>Estado Plan</option>
-					<?php echo func_select_estado_servicio(array("Activo"=>"active", "Cancelado"=>"cancelled"), $_POST["estado_plan"]);?>
-				</select>
-				<select name="certification_sena" onchange="this.form.submit()">
-					<option value='-1'>Certification Sena</option>
-					<?php echo func_select_estado_servicio(array("Si"=>"1", "No"=>"0"), $_POST["certification_sena"]);?>
-				</select>
-				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
-				<input type="submit" value="Buscar" class="button action">
-			</form>
-		</div><br><br>
-		<div div class="alignleft actions bulkactions">
-			<form method='post'>
-			<input type="submit" class="button action" name="todos" value="Limpiar Filtros">
-			</form>
-		</div><br><br>
-		<h4><?php echo Count($Query);?> Registros encontrados</h4>
-		<?php if($Query[0] != null):?>
-			<div div class="alignleft bulkactions">
+	<script type="text/javascript">
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			jQuery('#la_data_tabla').DataTable();
+			jQuery('#wpfooter').remove();
+		} );
+	</script>
+
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		.formulario{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Profesionales (<?php echo Count($Query);?> Registros)</h1>
+		</div>
+
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
 				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls_experts.php' target='_blank' method='post'>
 					<input type='hidden' name='type' value='expertos'/>
 					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
-					<input type="submit" class="button action" id="exportar" name="exportar" value="Exportar a excel" />
+					<input type="submit" id="exportar" name="exportar" value="Exportar a excel" class="ui-btn" data-theme="b" />
 				</form>
-			</div><br><br>
-			<table class="wp-list-table widefat" cellspacing="0">
-				<thead>
-					<tr valign="top">
-						<?php foreach($Query[0] as $key => $value):?>
-						<?php if( !in_array($key, $Colum_No_Mostrar) ):?><th><?php echo $key; ?></th><?php endif;?>
-						<?php endforeach; ?>
-						<th>Editar</th>
-					</tr>
-				</thead>
-				<tbody id="the-list">
-					<?php 
-					$alter = "";
-					foreach ( $Query as $lista ):
-						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-					?>
-					<tr valign="top" <?php echo $alter; ?>>
-						<?php foreach($lista as $it => $va):?>
-							<?php if( !in_array($it, $Colum_No_Mostrar) ):?><td><?php echo $va;?></td><?php endif;?>
-						<?php endforeach; ?>
-						<td>
-							<form method="post">
-								<input type="hidden" name="id" value="<?php echo $lista->id_user;?>">
-								<input type="hidden" name="editar_cliente" value="ok">
-								<input type="submit" value="Editar" class="button action">
-							</form>
-						</td>
-					</tr>
-				<?php endforeach;?>
-			</table>
-		<?php endif;?>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal" style="width:10px">
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<select name="tipo" onchange="this.form.submit()">
+						<option value="-1">Tipo</option>
+						<?php echo func_select_estado_servicio(array("Independiente"=>"0", "Empresa"=>"1"), $_POST["tipo"]);?>
+					</select>
+					<select name="ciudad" onchange="this.form.submit()">
+						<option value='-1'>Ciudad</option>
+						<?php echo func_select_tabla_id_denomination("cities", $_POST["ciudad"]);?>
+					</select>
+					<select name="zona" onchange="this.form.submit()"><?php echo func_select_sub_zonas($_POST["ciudad"], $_POST["zona"]);?></select>
+					<select name="categoria" onchange="this.form.submit()">
+						<option value='-1'>Categoria</option>
+						<?php echo func_select_tabla_id_denomination("services", $_POST["categoria"]);?>
+					</select>
+					<select name="sub_categoria" onchange="this.form.submit()"><?php echo func_select_sub_categorias($_POST["categoria"], $_POST["sub_categoria"]);?></select>
+					<select name="plan" onchange="this.form.submit()">
+						<option value='-1'>Plan</option>
+						<?php echo func_select_tabla_id_denomination("plans", $_POST["plan"]);?>
+					</select>
+					<select name="estado_plan" onchange="this.form.submit()">
+						<option value='-1'>Estado Plan</option>
+						<?php echo func_select_estado_servicio(array("Activo"=>"active", "Cancelado"=>"cancelled"), $_POST["estado_plan"]);?>
+					</select>
+					<select name="certification_sena" onchange="this.form.submit()">
+						<option value='-1'>Certification Sena</option>
+						<?php echo func_select_estado_servicio(array("Si"=>"1", "No"=>"0"), $_POST["certification_sena"]);?>
+					</select>
+					<div class="ui-input-text ui-body-inherit ui-corner-all controlgroup-textinput ui-btn ui-shadow-inset">
+						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required  class="ui-btn ui-corner-all">
+					</div>
+					<input type="submit" value="Buscar" data-theme="b">
+				</form>
+			</div>
+
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+				</form>
+			</div>
+		</div>
+		
+		<!-- <div role="content" class="ui-content"> -->
+			<?php if($Query[0] != null):?>
+				<table class="wp-list-table widefat" id="la_data_tabla" cellspacing="0">
+					<thead>
+						<tr valign="top">
+							<?php foreach($Query[0] as $key => $value):?>
+							<?php if( !in_array($key, $Colum_No_Mostrar) ):?><th><?php echo $key; ?></th><?php endif;?>
+							<?php endforeach; ?>
+							<th>Editar</th>
+						</tr>
+					</thead>
+					<tbody id="the-list">
+						<?php 
+						$alter = "";
+						foreach ( $Query as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<tr valign="top" <?php echo $alter; ?>>
+							<?php foreach($lista as $it => $va):?>
+								<?php if( !in_array($it, $Colum_No_Mostrar) ):?><td><?php echo $va;?></td><?php endif;?>
+							<?php endforeach; ?>
+							<td>
+								<form method="post" data-role="controlgroup">
+									<input type="hidden" name="id" value="<?php echo $lista->id_user;?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="submit" value="Editar" class="ui-btn" data-theme="b">
+								</form>
+							</td>
+						</tr>
+					<?php endforeach;?>
+				</table>
+			<?php endif;?>
+		<!-- </div> -->
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-	<script type="text/javascript"></script>
+
 	<?php
 }
 function page_profesionales_editar_experto(){
@@ -718,18 +913,66 @@ function page_profesionales_editar_experto(){
 	$Query_Referidos = plugDB("SELECT e.id as id, u.date_registry as fecha FROM experts e LEFT JOIN users u ON e.user=u.id WHERE coupon='".$Query->code.$Query->id."'", "result");
 	//
 	?>
+
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			<?php if( Count($Query_Ofers) > 0 ):?>
+				jQuery('#tabla_servicios').DataTable();
+			<?php endif;?>
+			
+			<?php if( Count($Query_Calificaciones) > 0 ):?>
+				jQuery('#tabla_calificaciones').DataTable();
+			<?php endif;?>
+
+			jQuery('#wpfooter').remove();
+			//jQuery.mobile.page.prototype.options.keepNative = "select, input, textarea";
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		.formulario{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
+
 	<link rel="stylesheet" href="https://harvesthq.github.io/chosen/chosen.css">
 
-	<div class="wrap">
-		<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->avatar;?>" height="300">
-
-		<h2>Estado</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<tbody id="the-list">
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1><?php echo $Query->name;?></h1>
+		</div>
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
 				<?php if($Query_expert->active == 1):?>
-				<tr>
-					<td>ACTIVO</td>
-					<td>
 					<form method="post" onSubmit="return Do_Activar_Experto(this);">
 						<input type="hidden" name="nombre" value="<?php echo $Query->name;?>">
 						<input type="hidden" name="correo" value="<?php echo $Query->email;?>">
@@ -737,14 +980,9 @@ function page_profesionales_editar_experto(){
 						<input type="hidden" name="editar_cliente" value="ok">
 						<input type="hidden" name="update_active" value="ok">
 						<input type="hidden" name="active" value="0">
-						<input type="submit" value="Desactivar" class="button action">
+						<input type="submit" value="Desactivar" data-theme="b">
 					</form>
-					</td>
-				</tr>
 				<?php else:?>
-				<tr>
-					<td>INACTIVO</td>
-					<td>
 					<form method="post" onSubmit="return Do_Activar_Experto(this);">
 						<input type="hidden" name="nombre" value="<?php echo $Query->name;?>">
 						<input type="hidden" name="correo" value="<?php echo $Query->email;?>">
@@ -752,895 +990,945 @@ function page_profesionales_editar_experto(){
 						<input type="hidden" name="editar_cliente" value="ok">
 						<input type="hidden" name="update_active" value="ok">
 						<input type="hidden" name="active" value="1">
-						<input type="submit" value="Activar" class="button action">
+						<input type="submit" value="Activar" data-theme="b">
 					</form>
-					</td>
-				</tr>
 				<?php endif;?>
-				<tr class="alternate">
-					<td>Restablecer Contraseña</td>
-					<td>
-						<form method="post" onSubmit="return Do_Reestablecer_Clave(this);">
-							<input type="hidden" name="correo" value="<?php echo $Query->email;?>">
-							<input type="hidden" name="id_user" value="<?php echo $_POST["id"];?>">
-							<input type="submit" value="Restablecer Contraseña" class="button action">
-						</form>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+			</div>
 
-		<h2>Fixcoins</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<tbody id="the-list">
-				<tr>
-					<td>Actual</td>
-					<td id="label_actual_fixcoins"><?php echo $Query_expert->fitcoints;?></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-
-				<tr class="alternate">
-					<td>Dar</td>
-					<td><input type="number" value="0" min="0" id="cant_dar_fixcoins"></td>
-					<td>
-						<input type="button" value="Enviar" class="button action" onClick="Do_Dar_Fixcoins();">
-					</td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-
-		<h2>Información personal</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<th>Campo</th>
-					<th>Valor</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<form method="post" name="la_data">
-				<?php 
-				echo func_tabla_form(
-					$Query, 
-					array("photo", "notification", "notification_chat", "token", "code", "password", "code_number", "validate_number"),
-					array("id", "date_registry", "authentication_date")
-				);
-				?>
-				
-				<tr>
-					<td>
-						<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-						<input type="hidden" name="editar_cliente" value="ok">
-						<input type="submit" name="es_usuario" value="Guardar" class="button action">
-					</td>
-					<td></td>
-				</tr>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method="post" onSubmit="return Do_Reestablecer_Clave(this);">
+					<input type="hidden" name="correo" value="<?php echo $Query->email;?>">
+					<input type="hidden" name="id_user" value="<?php echo $_POST["id"];?>">
+					<input type="submit" value="Restablecer Contraseña" data-theme="b">
 				</form>
+			</div>
+		</div>
 
-				
-			</tbody>
-		</table>
+		<div role="content" class="ui-content">
+			<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->avatar;?>" target="_blank">
+				<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->avatar;?>" height="200">
+			</a>
 
-		<h2>Información profesional</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<th>Campo</th>
-					<th>Valor</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<form method="post" name="la_data">
+			<!-- <div data-role="collapsible">
+			    <h4>template</h4>
+			    <p>
+					<form method="post" name="la_data" class="formulario">
+						<ul data-role="listview" data-inset="true">
+							<li class="ui-field-contain">
+								<label for="name2">Text Input:</label>
+								<input type="text" name="name2" id="name2" value="" data-clear-btn="true">
+							</li>
+							
+							<li class="ui-body ui-body-b">
+								<fieldset class="ui-grid-a">
+									<div class="ui-block-a"></div>
+									<div class="ui-block-b">
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_cliente" value="ok">
+										<input type="submit" name="es_usuario" value="Guardar" data-role="button" data-theme="b">
+									</div>
+								</fieldset>
+							</li>
+						</ul>
+					</form>
+				</p>
+			</div> -->
 
-				<tr class="alternate">
-					<td>Tipo</td>
-					<td><?php echo ($Query_expert->type == 0)?"Independiente":"Empresa";?></td>
-				</tr>
+			<div data-role="collapsible">
+			    <h4>Fixcoins</h4>
+			    <p>
+				<table class="wp-list-table widefat" cellspacing="0">
+					<tbody id="the-list">
+						<tr>
+							<td>Actual</td>
+							<td id="label_actual_fixcoins"><?php echo $Query_expert->fitcoints;?></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
 
-				<tr>
-					<td>identification_type</td>
-					<td>
-					<select name="identification_type">
-						<?php echo func_select_tabla_id_denomination("identification_type", $Query_expert->identification_type);?>
-					</select>
-					</td>
-				</tr>
+						<tr class="alternate">
+							<td>Dar</td>
+							<td><input type="number" value="0" min="0" id="cant_dar_fixcoins"></td>
+							<td>
+								<input type="button" value="Enviar" class="button action" onClick="Do_Dar_Fixcoins();">
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				</p>
+			</div>
 
-				<?php
-				echo func_tabla_form(
-					$Query_expert, 
-					array("id","user","type","profile_description","active","identification_type", "educational_level", "date_arl", "arl" , "date_salud_pension", "salud_pension", "avatar", "fotocopy", "fitcoints"),
-					array("id", "user")
-				);
-				?>
+			<div data-role="collapsible">
+			    <h4>Información personal</h4>
+			    <p>
+					<form method="post" name="la_data" class="formulario">
+						<ul data-role="listview" data-inset="true">
+							<?php 
+								echo func_tabla_form_fieldcontainer(
+									$Query, 
+									array("photo", "notification", "notification_chat", "token", "code", "password", "code_number", "validate_number"),
+									array("id", "date_registry", "authentication_date")
+								);
+							?>
+							<li class="ui-body ui-body-b">
+								<fieldset class="ui-grid-a">
+									<div class="ui-block-a"></div>
+									<div class="ui-block-b">
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_cliente" value="ok">
+										<input type="submit" name="es_usuario" value="Guardar" class="button action">
+									</div>
+								</fieldset>
+							</li>
+						</ul>
+					</form>
+				</p>
+			</div>
 
-				<tr>
-					<td>educational_level</td>
-					<td>
-					<select name="educational_level">
-						<?php echo func_select_tabla_id_denomination("educational_level", $Query_expert->educational_level);?>
-					</select>
-					</td>
-				</tr>
-				
-				<tr class="alternate">
-					<td>Descripción</td>
-					<td>
-						<textarea name="profile_description"><?php echo $Query_expert->profile_description;?></textarea>
-					</td>
-				</tr>
+			<div data-role="collapsible">
+			    <h4>Información profesional</h4>
+			    <p>
+					<form method="post" name="la_data" class="formulario">
+						<ul data-role="listview" data-inset="true">
+							<li class="ui-field-contain">
+								<label>Tipo:</label>
+								<?php echo ($Query_expert->type == 0)?"Independiente":"Empresa";?>
+							</li>
+							<li class="ui-field-contain">
+								<label>identification_type:</label>
+								<select name="identification_type">
+									<?php echo func_select_tabla_id_denomination("identification_type", $Query_expert->identification_type);?>
+								</select>
+							</li>
+							<?php
+							echo func_tabla_form_fieldcontainer(
+								$Query_expert, 
+								array("id","user","type","profile_description","active","identification_type", "educational_level", "date_arl", "arl" , "date_salud_pension", "salud_pension", "avatar", "fotocopy", "fitcoints"),
+								array("id", "user")
+							);
+							?>
+							<li class="ui-field-contain">
+								<label>educational_level:</label>
+								<select name="educational_level">
+									<?php echo func_select_tabla_id_denomination("educational_level", $Query_expert->educational_level);?>
+								</select>
+							</li>
+							<li class="ui-field-contain">
+								<label>Descripción:</label>
+								<textarea name="profile_description"><?php echo $Query_expert->profile_description;?></textarea>
+							</li>
+							<li class="ui-body ui-body-b">
+								<fieldset class="ui-grid-a">
+									<div class="ui-block-a"></div>
+									<div class="ui-block-b">
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_cliente" value="ok">
+										<input type="submit" name="es_experto" value="Guardar" class="button action">
+									</div>
+								</fieldset>
+							</li>
+						</ul>
+					</form>
+				</p>
+			</div>
 
-				<tr>
-					<td>
-						<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-						<input type="hidden" name="editar_cliente" value="ok">
-						<input type="submit" name="es_experto" value="Guardar" class="button action">
-					</td>
-					<td></td>
-				</tr>
+			<?php if($Query_expert->type == 0):?>
+			<div data-role="collapsible">
+			    <h4>Seguridad social</h4>
+			    <p>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<th>Campo</th>
+								<th>Valor</th>
+								<th>Accion</th>
+							</tr>
+						</thead>
+					<tbody id="the-list">
+						<form method="post" name="la_data">
+							<tr>
+								<td>Fotocopia documento</td>
+								<td>
+									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" target="_blank" id="link_fotocopy">
+										<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" height="200" id="img_fotocopy">
+									</a>
+								</td>
+								<td>
+									<input type="file" class="form-control-file" id="imagen_fotocopy"><br>
+									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Fotocopy();">
+								</td>
+							</tr>
 
-				</form>
-			</tbody>
-		</table>
+							<tr valign="top" class="alternate">
+								<td>date_arl</td>
+								<td><input type="datetime-local" name="date_arl" value="<?php echo (new DateTime($Query_expert->date_arl))->format("Y-m-d\\TH:i:s");?>"></td>
+								<td></td>
+							</tr>
+							<tr valign="top">
+								<td>arl</td>
+								<td>
+									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" target="_blank" id="link_arl">
+										<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" height="200" id="img_arl">
+									</a>
+								</td>
+								<td>
+									<input type="file" class="form-control-file" id="imagen_arl"><br>
+									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Arl();">
+								</td>
+							</tr>
 
-		<?php if($Query_expert->type == 0):?>
-		<h2>Seguridad social</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<th>Campo</th>
-					<th>Valor</th>
-					<th>Accion</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<form method="post" name="la_data">
-					<tr>
-						<td>Fotocopia documento</td>
-						<td>
-							<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" target="_blank" id="link_fotocopy">
-								<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" height="200" id="img_fotocopy">
-							</a>
-						</td>
-						<td>
-							<input type="file" class="form-control-file" id="imagen_fotocopy"><br>
-							<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Fotocopy();">
-						</td>
-					</tr>
-
-					<tr valign="top" class="alternate">
-						<td>date_arl</td>
-						<td><input type="datetime-local" name="date_arl" value="<?php echo (new DateTime($Query_expert->date_arl))->format("Y-m-d\\TH:i:s");?>"></td>
-						<td></td>
-					</tr>
-					<tr valign="top">
-						<td>arl</td>
-						<td>
-							<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" target="_blank" id="link_arl">
-								<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" height="200" id="img_arl">
-							</a>
-						</td>
-						<td>
-							<input type="file" class="form-control-file" id="imagen_arl"><br>
-							<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Arl();">
-						</td>
-					</tr>
-
-					<tr valign="top" class="alternate">
-						<td>date_salud_pension</td>
-						<td><input type="datetime-local" name="date_salud_pension" value="<?php echo (new DateTime($Query_expert->date_salud_pension))->format("Y-m-d\\TH:i:s");?>"></td>
-						<td></td>
-					</tr>
-					<tr valign="top">
-						<td>salud_pension</td>
-						<td>
-							<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" target="_blank" id="link_salud">
-								<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" height="200" id="img_salud">
-							</a>
-						</td>
-						<td>
-							<input type="file" class="form-control-file" id="imagen_salud"><br>
-							<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Salud();">
-						</td>
-					</tr>
-					<tr valign="top">
-						<td>
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="submit" name="es_experto" value="Guardar" class="button action">
-						</td>
-						<td></td>
-					</tr>
-				</form>
-			</tbody>
-		</table>
-		<h2>Certificados</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top" valign="top">
-					<th>Imagen</th>
-					<th>Editar Imagen</th>
-					<th>Tipo certificado</th>
-					<th>Accion</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				$suma_certificados = 0;
-				foreach($Query_Certificados as $item_certificado):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<form method="post">
-				<tr <?php echo $alter; ?>>
-					<td>
-						<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" target="_blank" id="link_certificado_<?php echo $suma_certificados;?>">
-							<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" height="150" id="img_certificado_<?php echo $suma_certificados;?>">
-						</a>
-					</td>
-					<td>
-						<input type="file" class="form-control-file" id="imagen_certificado_<?php echo $suma_certificados;?>"><br>
-						<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Certificado('<?php echo $item_certificado->id;?>', '<?php echo $suma_certificados;?>');">
-					</td>
-					<td>
-						<select name="certification_type">
-							<?php echo func_select_tabla_id_denomination("certifications_type", $item_certificado->certification_type);?>
-						</select>
-					</td>
-					<td>
-						<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-						<input type="hidden" name="editar_cliente" value="ok">
-						<input type="hidden" name="id_certi" value="<?php echo $item_certificado->id;?>">
-						<input type="submit" name="update_certificado" value="Actualizar" class="button action">
-						<input type="submit" name="del_certificado" value="Borrar" class="button action">
-					</td>
-				</tr>
-				</form>
-				<?php 
-				$suma_certificados++;
-				endforeach;
-				?>
-				<form method="post">
-					<tr>
-						<td></td>
-						<td></td>
-						<td>
-							<select name="certification_type">
-								<?php echo func_select_tabla_id_denomination("certifications_type", "");?>
-							</select>
-						</td>
-						<td>
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
-							<input type="submit" name="add_certificado" value="Crear" class="button action">
-						</td>
-					</tr>
-				</form>
-			</tbody>
-		</table>
-		<?php endif;?>
-
-		<h2>Proyectos</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top" valign="top">
-					<th>Imagen</th>
-					<th>Editar Imagen</th>
-					<th>Titulo Proyecto</th>
-					<th>Accion</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				$suma_proyectos = 0;
-				foreach($Query_Proyectos as $item_proyecto):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<form method="post">
-				<tr <?php echo $alter; ?>>
-					<td>
-						<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
-							<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>">
-						</a>
-					</td>
-					<td>
-						<input type="file" class="form-control-file" id="imagen_proyecto_<?php echo $suma_proyectos;?>"><br>
-						<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Proyecto('<?php echo $item_proyecto->id;?>', '<?php echo $suma_proyectos;?>');">
-					</td>
-					<td>
-						<input type="text" name="description" value="<?php echo $item_proyecto->description;?>" required>
-					</td>
-					<td>
-						<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-						<input type="hidden" name="editar_cliente" value="ok">
-						<input type="hidden" name="id_proy" value="<?php echo $item_proyecto->id;?>">
-						<input type="submit" name="update_proyecto" value="Actualizar" class="button action">
-						<input type="submit" name="del_proyecto" value="Borrar" class="button action">
-					</td>
-				</tr>
-				</form>
-				<?php 
-				$suma_proyectos++;
-				endforeach;
-				?>
-				<form method="post">
-					<tr>
-						<td></td>
-						<td></td>
-						<td>
-							<input type="text" name="description" placeholder="Titulo Proyecto" required>
-						</td>
-						<td>
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
-							<input type="submit" name="add_proyecto" value="Crear" class="button action">
-						</td>
-					</tr>
-				</form>
-			</tbody>
-		</table>
-
-		<h2>Referidos</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<tr>
-				<td>Mi Cupon</td>
-				<td><?php echo $Query->code."".$Query->id;?></td>
-			</tr>
-		</table>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top" valign="top">
-					<th>Referido</th>
-					<th>Fecha registro</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach($Query_Referidos as $item_referido):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<tr valign="top" valign="top">
-					<td><?php Gen_Btn_Experto($item_referido->id);?></td>
-					<td><?php echo $item_referido->fecha;?></td>
-				</tr>
-				<?php endforeach;?>
-			</tbody>
-		</table>
-
-		<h2>Plan</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<th>Campo</th>
-					<th>Valor</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<form method="post" name="la_data">
-					<tr valign="top" class="alternate">
-						<td>Plan</td>
-						<td>
-							<select name="plan">
-							<?php echo func_select_tabla_id_denomination("plans", $Query_Expert_Plan->plan);?>
-							</select>
-						</td>
-					</tr>
-					<tr valign="top" >
-						<td>start_date</td>
-						<td><input type="datetime-local" name="start_date" value="<?php echo (new DateTime($Query_Expert_Plan->start_date))->format("Y-m-d\\TH:i:s");?>"></td>
-					</tr>
-					<tr valign="top" class="alternate">
-						<td>end_date</td>
-						<td><input type="datetime-local" name="end_date" value="<?php echo (new DateTime($Query_Expert_Plan->end_date))->format("Y-m-d\\TH:i:s");?>"></td>
-					</tr>
-					<tr valign="top" >
-						<td>status</td>
-						<td><?php echo $Query_Expert_Plan->status;?></td>
-					</tr>
-					<tr valign="top" class="alternate">
-						<td>
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="id_plan" value="<?php echo $Query_Expert_Plan->id;?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="submit" name="es_plan" value="Guardar" class="button action">
-						</td>
-						<td></td>
-					</tr>
-				</form>
-			</tbody>
-		</table>
-
-		<h2>Categorias</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<?php foreach($Query_Categorias[0] as $key => $value):?>
-					<?php if($key == "Categoria" || $key == "Sub_Categoria"):?><th><?php echo $key; ?></th><?php endif;?>
-					<?php endforeach; ?>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_Categorias as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<tr valign="top" <?php echo $alter; ?>>
-					<?php foreach($lista as $it => $va):?>
-						<?php if($it == "Categoria" || $it == "Sub_Categoria"):?><td><?php echo $va;?></td><?php endif;?>
-					<?php endforeach; ?>
-					<td>
+							<tr valign="top" class="alternate">
+								<td>date_salud_pension</td>
+								<td><input type="datetime-local" name="date_salud_pension" value="<?php echo (new DateTime($Query_expert->date_salud_pension))->format("Y-m-d\\TH:i:s");?>"></td>
+								<td></td>
+							</tr>
+							<tr valign="top">
+								<td>salud_pension</td>
+								<td>
+									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" target="_blank" id="link_salud">
+										<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" height="200" id="img_salud">
+									</a>
+								</td>
+								<td>
+									<input type="file" class="form-control-file" id="imagen_salud"><br>
+									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Salud();">
+								</td>
+							</tr>
+							<tr valign="top">
+								<td>
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="submit" name="es_experto" value="Guardar" class="button action">
+								</td>
+								<td></td>
+							</tr>
+							</form>
+						</tbody>
+					</table>
+				</p>
+			</div>
+			<div data-role="collapsible">
+			    <h4>Certificados</h4>
+			    <p>
+					<table class="wp-list-table widefat" cellspacing="0">
+					<thead>
+						<tr valign="top" valign="top">
+							<th>Imagen</th>
+							<th>Editar Imagen</th>
+							<th>Tipo certificado</th>
+							<th>Accion</th>
+						</tr>
+					</thead>
+					<tbody id="the-list">
+						<?php 
+						$alter = "";
+						$suma_certificados = 0;
+						foreach($Query_Certificados as $item_certificado):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
 						<form method="post">
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
-							<input type="hidden" name="category" value="<?php echo $lista->id_cat;?>">
-							<input type="submit" name="del_categoria" value="Borrar" class="button action">
+						<tr <?php echo $alter; ?>>
+							<td>
+								<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" target="_blank" id="link_certificado_<?php echo $suma_certificados;?>">
+									<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" height="150" id="img_certificado_<?php echo $suma_certificados;?>">
+								</a>
+							</td>
+							<td>
+								<input type="file" class="form-control-file" id="imagen_certificado_<?php echo $suma_certificados;?>"><br>
+								<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Certificado('<?php echo $item_certificado->id;?>', '<?php echo $suma_certificados;?>');">
+							</td>
+							<td>
+								<select name="certification_type">
+									<?php echo func_select_tabla_id_denomination("certifications_type", $item_certificado->certification_type);?>
+								</select>
+							</td>
+							<td>
+								<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+								<input type="hidden" name="editar_cliente" value="ok">
+								<input type="hidden" name="id_certi" value="<?php echo $item_certificado->id;?>">
+								<input type="submit" name="update_certificado" value="Actualizar" class="button action">
+								<input type="submit" name="del_certificado" value="Borrar" class="button action">
+							</td>
+						</tr>
 						</form>
-					</td>
-				</tr>
-				<?php endforeach;?>
-				
-				<form method="post">
-				<tr valign="top">
-					<td>
-						<select id="select_service" onchange="Do_Select_Category();">
-							<?php echo func_select_tabla_id_denomination("services", "");?>
-						</select>
-					</td>
-
-					<td>
-						<select name="category" id="select_category">
-							<?php echo func_select_sub_categorias("", "");?>
-						</select>
-					</td>
-					
-					<td>
-						<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-						<input type="hidden" name="editar_cliente" value="ok">
-						<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
-						<input type="submit" name="add_categoria" value="Crear" class="button action">
-					</td>
-				</tr>
-				</form>
-
-			</tbody>
-		</table>
-
-		<h2>Regiones</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<?php foreach($Query_Region[0] as $key => $value):?>
-					<?php if($key == "Categoria" || $key == "Sub_Categoria"):?><th><?php echo $key; ?></th><?php endif;?>
-					<?php endforeach; ?>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_Region as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<tr valign="top" <?php echo $alter; ?>>
-					<?php foreach($lista as $it => $va):?>
-						<?php if($it == "Categoria" || $it == "Sub_Categoria"):?><td><?php echo $va;?></td><?php endif;?>
-					<?php endforeach; ?>
-					<td>
+						<?php 
+						$suma_certificados++;
+						endforeach;
+						?>
 						<form method="post">
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
-							<input type="hidden" name="category" value="<?php echo $lista->id_cat;?>">
-							<input type="submit" name="del_region" value="Borrar" class="button action">
+							<tr>
+								<td></td>
+								<td></td>
+								<td>
+									<select name="certification_type">
+										<?php echo func_select_tabla_id_denomination("certifications_type", "");?>
+									</select>
+								</td>
+								<td>
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
+									<input type="submit" name="add_certificado" value="Crear" class="button action">
+								</td>
+							</tr>
 						</form>
-					</td>
-				</tr>
-				<?php endforeach;?>
-				
-				<form method="post">
-				<tr valign="top">
-					<td>
-						<select id="select_ciudad" onchange="Do_Select_Zona();">
-							<?php echo func_select_tabla_id_denomination("cities", "");?>	
-						</select>
-					</td>
+					</tbody>
+					</table>
+				</p>
+			</div>
+			<?php endif;?>
 
-					<td>
-						<select id="select_zona" name="region">
-							<?php echo func_select_sub_zonas("", "");?>
-						</select>
-					</td>
-					
-					<td>
-						<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-						<input type="hidden" name="editar_cliente" value="ok">
-						<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
-						<input type="submit" name="add_region" value="Crear" class="button action">
-					</td>
-				</tr>
-				</form>
-			</tbody>
-		</table>
+			<div data-role="collapsible">
+			    <h4>Proyectos</h4>
+			    <p>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top" valign="top">
+								<th>Imagen</th>
+								<th>Editar Imagen</th>
+								<th>Titulo Proyecto</th>
+								<th>Accion</th>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							$suma_proyectos = 0;
+							foreach($Query_Proyectos as $item_proyecto):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<form method="post">
+							<tr <?php echo $alter; ?>>
+								<td>
+									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
+										<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>">
+									</a>
+								</td>
+								<td>
+									<input type="file" class="form-control-file" id="imagen_proyecto_<?php echo $suma_proyectos;?>"><br>
+									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Proyecto('<?php echo $item_proyecto->id;?>', '<?php echo $suma_proyectos;?>');">
+								</td>
+								<td>
+									<input type="text" name="description" value="<?php echo $item_proyecto->description;?>" required>
+								</td>
+								<td>
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="hidden" name="id_proy" value="<?php echo $item_proyecto->id;?>">
+									<input type="submit" name="update_proyecto" value="Actualizar" class="button action">
+									<input type="submit" name="del_proyecto" value="Borrar" class="button action">
+								</td>
+							</tr>
+							</form>
+							<?php 
+							$suma_proyectos++;
+							endforeach;
+							?>
+							<form method="post">
+								<tr>
+									<td></td>
+									<td></td>
+									<td>
+										<input type="text" name="description" placeholder="Titulo Proyecto" required>
+									</td>
+									<td>
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_cliente" value="ok">
+										<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
+										<input type="submit" name="add_proyecto" value="Crear" class="button action">
+									</td>
+								</tr>
+							</form>
+						</tbody>
+					</table>
+				</p>
+			</div>
 
-		<?php if($Query_expert->type == 1):?>
-		<h2>Colaboradores</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<th>Nombre</th>
-					<th>Email</th>
-					<th>Tipo identificacion</th>
-					<th>Numero identificacion</th>
-					<th>Telefono</th>
-					<th>Foto</th>
-					<th>Categorias</th>
-					<th>Guardar</th>
-					<th>Borrar</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach($Query_Colaboradores as $item_colaborador):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<form method="post">
-					<tr valign="top" <?php echo $alter; ?>>
-						<td><?php //echo $item_colaborador->id;?><input type="text" name="name" value="<?php echo $item_colaborador->name;?>"></td>
-						<td><input type="email" name="email" value="<?php echo $item_colaborador->email;?>"></td>
-						<td>
-							<select name="identification_type">
-								<?php echo func_select_tabla_id_denomination("identification_type", $item_colaborador->identification_type);?>
-							</select>
-						</td>
-						<td><input type="text" name="number" value="<?php echo $item_colaborador->number;?>"></td>
-						<td><input type="text" name="phone" value="<?php echo $item_colaborador->phone;?>"></td>
+			<div data-role="collapsible">
+			    <h4>Referidos</h4>
+			    <p>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<tr>
+							<td>Mi Cupon</td>
+							<td><?php echo $Query->code."".$Query->id;?></td>
+						</tr>
+					</table>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top" valign="top">
+								<th>Referido</th>
+								<th>Fecha registro</th>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach($Query_Referidos as $item_referido):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<tr valign="top" valign="top">
+								<td><?php Gen_Btn_Experto($item_referido->id);?></td>
+								<td><?php echo $item_referido->fecha;?></td>
+							</tr>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+				</p>
+			</div>
 
-						<td>
-						<a href="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" target="_blank" id="link_col_<?php echo $item_colaborador->id;?>">
-							<img src="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" id="img_col_<?php echo $item_colaborador->id;?>" height="50">
-						</a>
-						
-						<br>
-						<input type="file" class="form-control-file" id="imagen_col_<?php echo $item_colaborador->id;?>"><br>
-						<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Colaborador('<?php echo $item_colaborador->id;?>', '<?php echo $item_colaborador->id;?>');">
-						</td>
-					
-						<td>
-						<?php echo Select_Categorias_Multi_Colaborador($item_colaborador->id);?>
-						</td>
+			<div data-role="collapsible">
+			    <h4>Plan</h4>
+			    <p>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<th>Campo</th>
+								<th>Valor</th>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<form method="post" name="la_data">
+								<tr valign="top" class="alternate">
+									<td>Plan</td>
+									<td>
+										<select name="plan">
+										<?php echo func_select_tabla_id_denomination("plans", $Query_Expert_Plan->plan);?>
+										</select>
+									</td>
+								</tr>
+								<tr valign="top" >
+									<td>start_date</td>
+									<td><input type="datetime-local" name="start_date" value="<?php echo (new DateTime($Query_Expert_Plan->start_date))->format("Y-m-d\\TH:i:s");?>"></td>
+								</tr>
+								<tr valign="top" class="alternate">
+									<td>end_date</td>
+									<td><input type="datetime-local" name="end_date" value="<?php echo (new DateTime($Query_Expert_Plan->end_date))->format("Y-m-d\\TH:i:s");?>"></td>
+								</tr>
+								<tr valign="top" >
+									<td>status</td>
+									<td><?php echo $Query_Expert_Plan->status;?></td>
+								</tr>
+								<tr valign="top" class="alternate">
+									<td>
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="id_plan" value="<?php echo $Query_Expert_Plan->id;?>">
+										<input type="hidden" name="editar_cliente" value="ok">
+										<input type="submit" name="es_plan" value="Guardar" class="button action">
+									</td>
+									<td></td>
+								</tr>
+							</form>
+						</tbody>
+					</table>
+				</p>
+			</div>
 
-						<td>
-							<input type="hidden" name="id_col" value="<?php echo $item_colaborador->id;?>">
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="submit" name="update_colaborador" value="Guardar" class="button action">
-						</td>
+			<div data-role="collapsible">
+			    <h4>Categorias</h4>
+			    <p>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<?php foreach($Query_Categorias[0] as $key => $value):?>
+								<?php if($key == "Categoria" || $key == "Sub_Categoria"):?><th><?php echo $key; ?></th><?php endif;?>
+								<?php endforeach; ?>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach ( $Query_Categorias as $lista ):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<tr valign="top" <?php echo $alter; ?>>
+								<?php foreach($lista as $it => $va):?>
+									<?php if($it == "Categoria" || $it == "Sub_Categoria"):?><td><?php echo $va;?></td><?php endif;?>
+								<?php endforeach; ?>
+								<td>
+									<form method="post">
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_cliente" value="ok">
+										<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
+										<input type="hidden" name="category" value="<?php echo $lista->id_cat;?>">
+										<input type="submit" name="del_categoria" value="Borrar" class="button action">
+									</form>
+								</td>
+							</tr>
+							<?php endforeach;?>
+							
+							<form method="post">
+							<tr valign="top">
+								<td>
+									<select id="select_service" onchange="Do_Select_Category();">
+										<?php echo func_select_tabla_id_denomination("services", "");?>
+									</select>
+								</td>
 
-						<td>
-							<input type="submit" name="borrar_colaborador" value="Borrar" class="button action">
-						</td>
-					</tr>
-				</form>
-				<?php endforeach;
-				if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<form method="post">
-					<tr valign="top" <?php echo $alter; ?>>
-						<td><input type="text" name="name" placeholder="Nombre" required></td>
-						<td><input type="email" name="email" placeholder="Correo" required></td>
-						<td>
-							<select name="identification_type">
-								<?php echo func_select_tabla_id_denomination("identification_type", "");?>
-							</select>
-						</td>
-						<td><input type="text" name="number" placeholder="Numero Documento"></td>
-						<td><input type="text" name="phone" placeholder="Telefono"></td>
-						<td></td>
-						<td></td>
-						<td>
-							<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="submit" name="add_colaborador" value="Crear" class="button action">
-						</td>
-						<td></td>
-					</tr>
-				</form>
-			</tbody>
-		</table>
-		<?php endif;?>
+								<td>
+									<select name="category" id="select_category">
+										<?php echo func_select_sub_categorias("", "");?>
+									</select>
+								</td>
+								
+								<td>
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
+									<input type="submit" name="add_categoria" value="Crear" class="button action">
+								</td>
+							</tr>
+							</form>
 
-		<?php if( Count($Query_Ofers) > 0 ):?>
-		<h2>Servicios</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<?php foreach($Query_Ofers[0] as $key => $value):?>
-						<th><?php echo $key; ?></th>
-					<?php endforeach; ?>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_Ofers as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<tr valign="top" <?php echo $alter; ?>>
-					<?php foreach($lista as $it => $va):?>
-						<td><?php echo $va;?></td>
-					<?php endforeach; ?>
-					<td>
-						<form method="post" action="admin.php?page=servicios">
-							<input type="hidden" name="id" value="<?php echo $lista->id_request;?>">
-							<input type="submit" name="editar_servicio" value="Editar" class="button action">
-						</form>
-					</td>
-				</tr>
-				<?php endforeach;?>
-			</tbody>
-		</table>
-		<?php else:?>
-			<h2>Servicios (0)</h2>
-		<?php endif;?>
+						</tbody>
+					</table>
+				</p>
+			</div>
 
-		<?php if( Count($Query_Calificaciones) > 0 ):?>
-		<h2>Calificaciones</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<?php foreach($Query_Calificaciones[0] as $key => $value):?>
-					<?php if(!in_array($key, $exclude_tabla_calificaciones)):?><th><?php echo $key; ?></th><?php endif;?>
-					<?php endforeach; ?>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_Calificaciones as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<tr valign="top" <?php echo $alter; ?>>
-					<?php foreach($lista as $key => $va):?>
-						<?php if(!in_array($key, $exclude_tabla_calificaciones)):?><td><?php echo $va;?></td><?php endif;?>
-					<?php endforeach; ?>
-				</tr>
-				<?php endforeach;?>
-			</tbody>
-		</table>
-		<?php else:?>
-			<h2>Calificaciones (0)</h2>
-		<?php endif;?>
+			<div data-role="collapsible">
+			    <h4>Regiones</h4>
+			    <p>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<?php foreach($Query_Region[0] as $key => $value):?>
+								<?php if($key == "Categoria" || $key == "Sub_Categoria"):?><th><?php echo $key; ?></th><?php endif;?>
+								<?php endforeach; ?>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach ( $Query_Region as $lista ):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<tr valign="top" <?php echo $alter; ?>>
+								<?php foreach($lista as $it => $va):?>
+									<?php if($it == "Categoria" || $it == "Sub_Categoria"):?><td><?php echo $va;?></td><?php endif;?>
+								<?php endforeach; ?>
+								<td>
+									<form method="post">
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_cliente" value="ok">
+										<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
+										<input type="hidden" name="category" value="<?php echo $lista->id_cat;?>">
+										<input type="submit" name="del_region" value="Borrar" class="button action">
+									</form>
+								</td>
+							</tr>
+							<?php endforeach;?>
+							
+							<form method="post">
+							<tr valign="top">
+								<td>
+									<select id="select_ciudad" onchange="Do_Select_Zona();">
+										<?php echo func_select_tabla_id_denomination("cities", "");?>	
+									</select>
+								</td>
+
+								<td>
+									<select id="select_zona" name="region">
+										<?php echo func_select_sub_zonas("", "");?>
+									</select>
+								</td>
+								
+								<td>
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
+									<input type="submit" name="add_region" value="Crear" class="button action">
+								</td>
+							</tr>
+							</form>
+						</tbody>
+					</table>
+				</p>
+			</div>
+
+			<?php if($Query_expert->type == 1):?>
+			<div data-role="collapsible">
+			    <h4>Colaboradores</h4>
+			    <p>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<th>Nombre</th>
+								<th>Email</th>
+								<th>Tipo identificacion</th>
+								<th>Numero identificacion</th>
+								<th>Telefono</th>
+								<th>Foto</th>
+								<th>Categorias</th>
+								<th>Guardar</th>
+								<th>Borrar</th>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach($Query_Colaboradores as $item_colaborador):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<form method="post">
+								<tr valign="top" <?php echo $alter; ?>>
+									<td><?php //echo $item_colaborador->id;?><input type="text" name="name" value="<?php echo $item_colaborador->name;?>"></td>
+									<td><input type="email" name="email" value="<?php echo $item_colaborador->email;?>"></td>
+									<td>
+										<select name="identification_type">
+											<?php echo func_select_tabla_id_denomination("identification_type", $item_colaborador->identification_type);?>
+										</select>
+									</td>
+									<td><input type="text" name="number" value="<?php echo $item_colaborador->number;?>"></td>
+									<td><input type="text" name="phone" value="<?php echo $item_colaborador->phone;?>"></td>
+
+									<td>
+									<a href="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" target="_blank" id="link_col_<?php echo $item_colaborador->id;?>">
+										<img src="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" id="img_col_<?php echo $item_colaborador->id;?>" height="50">
+									</a>
+									
+									<br>
+									<input type="file" class="form-control-file" id="imagen_col_<?php echo $item_colaborador->id;?>"><br>
+									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Colaborador('<?php echo $item_colaborador->id;?>', '<?php echo $item_colaborador->id;?>');">
+									</td>
+								
+									<td>
+									<?php echo Select_Categorias_Multi_Colaborador($item_colaborador->id);?>
+									</td>
+
+									<td>
+										<input type="hidden" name="id_col" value="<?php echo $item_colaborador->id;?>">
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_cliente" value="ok">
+										<input type="submit" name="update_colaborador" value="Guardar" class="button action">
+									</td>
+
+									<td>
+										<input type="submit" name="borrar_colaborador" value="Borrar" class="button action">
+									</td>
+								</tr>
+							</form>
+							<?php endforeach;
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<form method="post">
+								<tr valign="top" <?php echo $alter; ?>>
+									<td><input type="text" name="name" placeholder="Nombre" required></td>
+									<td><input type="email" name="email" placeholder="Correo" required></td>
+									<td>
+										<select name="identification_type">
+											<?php echo func_select_tabla_id_denomination("identification_type", "");?>
+										</select>
+									</td>
+									<td><input type="text" name="number" placeholder="Numero Documento"></td>
+									<td><input type="text" name="phone" placeholder="Telefono"></td>
+									<td></td>
+									<td></td>
+									<td>
+										<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_cliente" value="ok">
+										<input type="submit" name="add_colaborador" value="Crear" class="button action">
+									</td>
+									<td></td>
+								</tr>
+							</form>
+						</tbody>
+					</table>
+				</p>
+			</div>
+			<?php endif;?>
+
+			<div data-role="collapsible">
+			    <h4>Servicios</h4>
+			    <p>
+					<?php if( Count($Query_Ofers) > 0 ):?>
+					<table class="wp-list-table widefat" cellspacing="0" id="tabla_servicios">
+						<thead>
+							<tr valign="top">
+								<?php foreach($Query_Ofers[0] as $key => $value):?>
+									<th><?php echo $key; ?></th>
+								<?php endforeach; ?>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach ( $Query_Ofers as $lista ):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<tr valign="top" <?php echo $alter; ?>>
+								<?php foreach($lista as $it => $va):?>
+									<td><?php echo $va;?></td>
+								<?php endforeach; ?>
+								<td>
+									<form method="post" action="admin.php?page=servicios">
+										<input type="hidden" name="id" value="<?php echo $lista->id_request;?>">
+										<input type="submit" name="editar_servicio" value="Editar" class="button action">
+									</form>
+								</td>
+							</tr>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+					<?php endif;?>
+				</p>
+			</div>
+
+			<div data-role="collapsible">
+			    <h4>Calificaciones</h4>
+			    <p>
+					<?php if( Count($Query_Calificaciones) > 0 ):?>
+					<table class="wp-list-table widefat" cellspacing="0" id="tabla_calificaciones">
+						<thead>
+							<tr valign="top">
+								<?php foreach($Query_Calificaciones[0] as $key => $value):?>
+								<?php if(!in_array($key, $exclude_tabla_calificaciones)):?><th><?php echo $key; ?></th><?php endif;?>
+								<?php endforeach; ?>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach ( $Query_Calificaciones as $lista ):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<tr valign="top" <?php echo $alter; ?>>
+								<?php foreach($lista as $key => $va):?>
+									<?php if(!in_array($key, $exclude_tabla_calificaciones)):?><td><?php echo $va;?></td><?php endif;?>
+								<?php endforeach; ?>
+							</tr>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+					<?php endif;?>
+				</p>
+			</div>
+
+		</div>
+		
 	</div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  -->
 	<script src="https://harvesthq.github.io/chosen/chosen.jquery.js" type="text/javascript"></script>
 	<script src="https://harvesthq.github.io/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://harvesthq.github.io/chosen/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script type="text/javascript">
-	function Do_Select_Category(){
-		//alert( $("#select_service").val() );
-		$.ajax({
-			url:"<?php echo home_url('pagina_querys');?>", 
-			method: "POST",
-			data: { select_category : "ok", categoria : $("#select_service").val() }
-		}).done(function(html){
-			//alert(html);
-			$("#select_category").html(html);
-		}).fail(function() {
-			alert( "error" );
-		});
-	}
-	function Do_Select_Zona(){
-		//alert( $("#select_service").val() );
-		$.ajax({
-			url:"<?php echo home_url('pagina_querys');?>", 
-			method: "POST",
-			data: { select_zona : "ok", categoria : $("#select_ciudad").val() }
-		}).done(function(html){
-			//alert(html);
-			$("#select_zona").html(html);
-		}).fail(function() {
-			alert( "error" );
-		});
-	}
-	function Do_Activar_Experto(form){
-		//alert(form.active.value);
-		if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
-			$.ajax({
-				url:"<?php echo URL_BASE;?>/fixperto/sendEmailActive", 
+		function Do_Select_Category(){
+			//alert( jQuery("#select_service").val() );
+			jQuery.ajax({
+				url:"<?php echo home_url('pagina_querys');?>", 
 				method: "POST",
-				data: { name : form.nombre.value, email : form.correo.value, active:form.active.value }
+				data: { select_category : "ok", categoria : jQuery("#select_service").val() }
 			}).done(function(html){
 				//alert(html);
-				//$("#select_zona").html(html);
+				jQuery("#select_category").html(html);
 			}).fail(function() {
-				alert( "error enviando el correo" );
+				alert( "error" );
 			});
-			return true;
 		}
-		return false;
-	}
-	function Do_Reestablecer_Clave(form){
-		if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
-			$.ajax({
-				url:"<?php echo URL_BASE;?>/backOffice/changePassword", 
+		function Do_Select_Zona(){
+			//alert( jQuery("#select_service").val() );
+			jQuery.ajax({
+				url:"<?php echo home_url('pagina_querys');?>", 
 				method: "POST",
-				data: { id : form.id_user.value, email : form.correo.value }
+				data: { select_zona : "ok", categoria : jQuery("#select_ciudad").val() }
 			}).done(function(html){
 				//alert(html);
-				//$("#select_zona").html(html);
-				alert( "Correo enviado con exito!" );
+				jQuery("#select_zona").html(html);
 			}).fail(function() {
-				alert( "error enviando el correo" );
+				alert( "error" );
 			});
 		}
-		return false;
-	}
-	function Do_Dar_Fixcoins(){
-		if( $("#cant_dar_fixcoins").val() == 0 )return false;
-		if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
-			$.ajax({
-				url:"<?php echo URL_BASE;?>/fixperto/fixcoinGift", 
-				method: "POST",
-				data: { user : "<?php echo $_POST["id"];?>", cant : $("#cant_dar_fixcoins").val() }
-			}).done(function(html){
-				console.log(html);
-				$("#label_actual_fixcoins").html(html);
-				alert( "Correo enviado con exito!" );
-			}).fail(function() {
-				//alert( "error enviando el correo" );
+		function Do_Activar_Experto(form){
+			//alert(form.active.value);
+			if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
+				jQuery.ajax({
+					url:"<?php echo URL_BASE;?>/fixperto/sendEmailActive", 
+					method: "POST",
+					data: { name : form.nombre.value, email : form.correo.value, active:form.active.value }
+				}).done(function(html){
+					//alert(html);
+					//$("#select_zona").html(html);
+				}).fail(function() {
+					alert( "error enviando el correo" );
+				});
+				return true;
+			}
+			return false;
+		}
+		function Do_Reestablecer_Clave(form){
+			if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
+				jQuery.ajax({
+					url:"<?php echo URL_BASE;?>/backOffice/changePassword", 
+					method: "POST",
+					data: { id : form.id_user.value, email : form.correo.value }
+				}).done(function(html){
+					//alert(html);
+					//$("#select_zona").html(html);
+					alert( "Correo enviado con exito!" );
+				}).fail(function() {
+					alert( "error enviando el correo" );
+				});
+			}
+			return false;
+		}
+		function Do_Dar_Fixcoins(){
+			if( $("#cant_dar_fixcoins").val() == 0 )return false;
+			if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
+				jQuery.ajax({
+					url:"<?php echo URL_BASE;?>/fixperto/fixcoinGift", 
+					method: "POST",
+					data: { user : "<?php echo $_POST["id"];?>", cant : $("#cant_dar_fixcoins").val() }
+				}).done(function(html){
+					console.log(html);
+					$("#label_actual_fixcoins").html(html);
+					alert( "Correo enviado con exito!" );
+				}).fail(function() {
+					//alert( "error enviando el correo" );
+				});
+			}
+			return false;
+		}
+		//
+		function SubirImagen_Arl(){
+			var formData = new FormData();
+			var files = $('#imagen_arl')[0].files[0];
+			formData.append('archivo', files);
+			formData.append('id', "<?php echo $Query_expert->id;?>");
+			jQuery.ajax({
+				url: '<?php echo URL_BASE;?>/fixperto/modArlProfesional',
+				type: 'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function(response) {
+					console.log(response);
+					if (response != 0) {
+						$("#img_arl").attr("src", response);
+						$("#link_arl").attr("href", response);
+					} else {
+						alert('Formato de imagen incorrecto.');
+					}
+				}
 			});
 		}
-		return false;
-	}
-	//
-	function SubirImagen_Arl(){
-		var formData = new FormData();
-        var files = $('#imagen_arl')[0].files[0];
-        formData.append('archivo', files);
-        formData.append('id', "<?php echo $Query_expert->id;?>");
-        $.ajax({
-            url: '<?php echo URL_BASE;?>/fixperto/modArlProfesional',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-				console.log(response);
-                if (response != 0) {
-                    $("#img_arl").attr("src", response);
-                    $("#link_arl").attr("href", response);
-                } else {
-                    alert('Formato de imagen incorrecto.');
-                }
-            }
-        });
-	}
-	function SubirImagen_Salud(){
-		var formData = new FormData();
-        var files = $('#imagen_salud')[0].files[0];
-        formData.append('archivo', files);
-        formData.append('id', "<?php echo $Query_expert->id;?>");
-        $.ajax({
-            url: '<?php echo URL_BASE;?>/fixperto/modSaludPensionProfesional',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-				console.log(response);
-                if (response != 0) {
-                    $("#img_salud").attr("src", response);
-                    $("#link_salud").attr("href", response);
-                } else {
-                    alert('Formato de imagen incorrecto.');
-                }
-            }
-        });
-	}
-	function SubirImagen_Fotocopy(){
-		var formData = new FormData();
-        var files = $('#imagen_fotocopy')[0].files[0];
-        formData.append('archivo', files);
-        formData.append('id', "<?php echo $Query_expert->id;?>");
-        $.ajax({
-            url: '<?php echo URL_BASE;?>/fixperto/modFotocopy',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-				console.log(response);
-                if (response != 0) {
-                    $("#img_fotocopy").attr("src", response);
-                    $("#link_fotocopy").attr("href", response);
-                } else {
-                    alert('Formato de imagen incorrecto.');
-                }
-            }
-        });
-	}
-	//
-	function SubirImagen_Certificado(_id, _suma){
-		var formData = new FormData();
-        var files = $('#imagen_certificado_' + _suma)[0].files[0];
-        formData.append('archivo', files);
-        formData.append('id', _id);
-        $.ajax({
-            url: '<?php echo URL_BASE;?>/fixperto/modCertificationsProfesional',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-				console.log(response);
-                if (response != 0) {
-                    $("#img_certificado_" + _suma).attr("src", response);
-                    $("#link_certificado_"+ _suma).attr("href", response);
-                } else {
-                    alert('Formato de imagen incorrecto.');
-                }
-            }
-        });
-	}
-	function SubirImagen_Proyecto(_id, _suma){
-		var formData = new FormData();
-        var files = $('#imagen_proyecto_' + _suma)[0].files[0];
-        formData.append('archivo', files);
-        formData.append('id', _id);
-        $.ajax({
-            url: '<?php echo URL_BASE;?>/fixperto/modJobsProfesional',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-				console.log(response);
-                if (response != 0) {
-                    $("#img_proyecto_" + _suma).attr("src", response);
-                    $("#link_proyecto_"+ _suma).attr("href", response);
-                } else {
-                    alert('Formato de imagen incorrecto.');
-                }
-            }
-        });
-	}
-	function SubirImagen_Colaborador(_id, _suma){
-		var formData = new FormData();
-        var files = $('#imagen_col_' + _suma)[0].files[0];
-        formData.append('archivo', files);
-        formData.append('id', _id);
-        $.ajax({
-            url: '<?php echo URL_BASE;?>/fixperto/modAvatarCollaborator',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-				console.log(response);
-                if (response != 0) {
-                    $("#img_col_" + _suma).attr("src", response);
-                    $("#link_col_"+ _suma).attr("href", response);
-                } else {
-                    alert('Formato de imagen incorrecto.');
-                }
-            }
-        });
-	}
+		function SubirImagen_Salud(){
+			var formData = new FormData();
+			var files = $('#imagen_salud')[0].files[0];
+			formData.append('archivo', files);
+			formData.append('id', "<?php echo $Query_expert->id;?>");
+			jQuery.ajax({
+				url: '<?php echo URL_BASE;?>/fixperto/modSaludPensionProfesional',
+				type: 'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function(response) {
+					console.log(response);
+					if (response != 0) {
+						$("#img_salud").attr("src", response);
+						$("#link_salud").attr("href", response);
+					} else {
+						alert('Formato de imagen incorrecto.');
+					}
+				}
+			});
+		}
+		function SubirImagen_Fotocopy(){
+			var formData = new FormData();
+			var files = $('#imagen_fotocopy')[0].files[0];
+			formData.append('archivo', files);
+			formData.append('id', "<?php echo $Query_expert->id;?>");
+			jQuery.ajax({
+				url: '<?php echo URL_BASE;?>/fixperto/modFotocopy',
+				type: 'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function(response) {
+					console.log(response);
+					if (response != 0) {
+						$("#img_fotocopy").attr("src", response);
+						$("#link_fotocopy").attr("href", response);
+					} else {
+						alert('Formato de imagen incorrecto.');
+					}
+				}
+			});
+		}
+		//
+		function SubirImagen_Certificado(_id, _suma){
+			var formData = new FormData();
+			var files = $('#imagen_certificado_' + _suma)[0].files[0];
+			formData.append('archivo', files);
+			formData.append('id', _id);
+			jQuery.ajax({
+				url: '<?php echo URL_BASE;?>/fixperto/modCertificationsProfesional',
+				type: 'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function(response) {
+					console.log(response);
+					if (response != 0) {
+						$("#img_certificado_" + _suma).attr("src", response);
+						$("#link_certificado_"+ _suma).attr("href", response);
+					} else {
+						alert('Formato de imagen incorrecto.');
+					}
+				}
+			});
+		}
+		function SubirImagen_Proyecto(_id, _suma){
+			var formData = new FormData();
+			var files = $('#imagen_proyecto_' + _suma)[0].files[0];
+			formData.append('archivo', files);
+			formData.append('id', _id);
+			jQuery.ajax({
+				url: '<?php echo URL_BASE;?>/fixperto/modJobsProfesional',
+				type: 'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function(response) {
+					console.log(response);
+					if (response != 0) {
+						$("#img_proyecto_" + _suma).attr("src", response);
+						$("#link_proyecto_"+ _suma).attr("href", response);
+					} else {
+						alert('Formato de imagen incorrecto.');
+					}
+				}
+			});
+		}
+		function SubirImagen_Colaborador(_id, _suma){
+			var formData = new FormData();
+			var files = $('#imagen_col_' + _suma)[0].files[0];
+			formData.append('archivo', files);
+			formData.append('id', _id);
+			jQuery.ajax({
+				url: '<?php echo URL_BASE;?>/fixperto/modAvatarCollaborator',
+				type: 'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function(response) {
+					console.log(response);
+					if (response != 0) {
+						$("#img_col_" + _suma).attr("src", response);
+						$("#link_col_"+ _suma).attr("href", response);
+					} else {
+						alert('Formato de imagen incorrecto.');
+					}
+				}
+			});
+		}
 	</script>
 	<?php
 }
@@ -1707,148 +1995,127 @@ function page_lista_servicios(){
 	//
 	$Query = plugDB($Qstr, "result");
 	?>
-	<div class="wrap">
-		<h2>Categorias</h2>
-		<div div class="alignleft actions bulkactions">
-			<form method="post" onSubmit="return Validar_Nombre(this);">
-				<input type="text" name="nombre" placeholder="Ingrese Nombre" value="">
-				<input type="submit" name="crear_categoria" value="Crear Categoria">
-			</form>
-		</div><br><br>
-		<h4><?php echo Count($Query);?> Registros encontrados</h4>
-		<?php if($Query[0] != null):?>
-			<div div class="alignleft bulkactions">
-				
+
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			//jQuery('#la_data_tabla').DataTable();
+			jQuery('#wpfooter').remove();
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		[id="formulario"] *{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Categorias (<?php echo Count($Query);?> Registros)</h1>
+		</div>
+
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method="post" onSubmit="return Validar_Nombre(this);">
+					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
+						<input type="text" name="nombre" placeholder="Ingrese Nombre" value="">
+					</div>
+					<input type="submit" name="crear_categoria" value="Crear Categoria" class="ui-btn" data-theme="b">
+				</form>
 			</div>
-			<table class="wp-list-table widefat" cellspacing="0">
-				<thead>
-					<tr valign="top">
-						<th>Icono</th>
-						<th>Categorias</th>
-						<th>Cant Servicios</th>
-						<th>Cant Expertos</th>
-						<th>Sub Categorias</th>
-						<th>Cant Servicios</th>
-						<th>Costo Fixcoin</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
+		</div>
 
-				<tbody id="the-list">
-					<?php 
-					$alter = "class='alternate'";
-					foreach ( $Query as $lista ):
-					?>
-					<tr valign="top" <?php echo $alter; ?>>
-						<td>
-							<a href="<?php echo URL_BASE;?>/uploads/categories/<?php echo $lista->imagen;?>" target="_blank" id="link_cat_<?php echo $lista->id;?>">
-								<img src="<?php echo URL_BASE;?>/uploads/categories/<?php echo $lista->imagen;?>" height="100" id="img_cat_<?php echo $lista->id;?>">
-							</a><br>
-							<input type="file" class="form-control-file" id="imagen_cat_<?php echo $lista->id;?>"><br>
-							<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Categoria('<?php echo $lista->id;?>', '<?php echo $lista->id;?>');">
-						</td>
-						<td>
-							<form method="post" onSubmit="return Validar_Nombre(this);">
-								<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
-								<input type="text" name="nombre" value="<?php echo $lista->Servicio;?>">
-								<input type="submit" name="editar_nombre_cat" value="Editar">
-							</form>
-						</td>
-						<td><?php echo $lista->cant_req;?></td>
-						<td><?php echo $lista->cant_exp;?></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>
-							<form method="post" onSubmit="return confirm('Quiere borrar: <?php echo $lista->Servicio;?>?');">
-								<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">	
-								<input type="submit" name="borrar_cat" value="Borrar Categoria">
-							</form>
+		
 
-
-							<?php if($lista->hidden == "0"):?>
-							<form method="post" onSubmit="return confirm('Quiere Suspender: <?php echo $lista->Servicio;?>?');">
-								<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
-								<input type="hidden" name="estado" value="1">	
-								<input type="submit" name="suspender_cat" value="Suspender Categoria">
-							</form>
-							<?php else:?>
-								<form method="post" onSubmit="return confirm('Quiere Activar: <?php echo $lista->Servicio;?>?');">
-								<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">	
-								<input type="hidden" name="estado" value="0">
-								<input type="submit" name="suspender_cat" value="Activar Categoria">
-							</form>
-							<?php endif;?>
+		<div role="content" class="ui-content">
+			<?php if($Query[0] != null):?>
+				<?php foreach ( $Query as $lista ):?>
+					<div data-role="collapsible" >
+					    <h4><?php echo $lista->Servicio;?><!-- , Servicios: <?php echo $lista->cant_req;?>, Expertos: <?php echo $lista->cant_exp;?> --></h4>
+					    <p>
+							<div class="ui-grid-b">
+								<div class="ui-block-a">
+									<a href="<?php echo URL_BASE;?>/uploads/categories/<?php echo $lista->imagen;?>" target="_blank" id="link_cat_<?php echo $lista->id;?>">
+										<img src="<?php echo URL_BASE;?>/uploads/categories/<?php echo $lista->imagen;?>" height="100" id="img_cat_<?php echo $lista->id;?>">
+									</a><br>
+									<input type="file" class="form-control-file" id="imagen_cat_<?php echo $lista->id;?>"><br>
+									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Categoria('<?php echo $lista->id;?>', '<?php echo $lista->id;?>');">
+								</div>
+								<div class="ui-block-b">
+									<form method="post" onSubmit="return Validar_Nombre(this);">
+										<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
+										<input type="text" name="nombre" value="<?php echo $lista->Servicio;?>">
+										<input type="submit" name="editar_nombre_cat" value="Editar">
+									</form>
+									<form method="post" onSubmit="return confirm('Quiere borrar: <?php echo $lista->Servicio;?>?');">
+									<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">	
+									<input type="submit" name="borrar_cat" value="Borrar Categoria">
+									</form>
+									<?php if($lista->hidden == "0"):?>
+										<form method="post" onSubmit="return confirm('Quiere Suspender: <?php echo $lista->Servicio;?>?');">
+											<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
+											<input type="hidden" name="estado" value="1">	
+											<input type="submit" name="suspender_cat" value="Suspender Categoria">
+										</form>
+									<?php else:?>
+										<form method="post" onSubmit="return confirm('Quiere Activar: <?php echo $lista->Servicio;?>?');">
+											<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">	
+											<input type="hidden" name="estado" value="0">
+											<input type="submit" name="suspender_cat" value="Activar Categoria">
+										</form>
+									<?php endif;?>
+								</div>
+								<div class="ui-block-c">
+									<table class="wp-list-table widefat" cellspacing="0">
+										<?php Mis_Sub_Cates($lista->id);?>
+									</table>
+								</div>
+							</div>
+						</p>
+					</div>
+				<?php endforeach;?>
 
 
+				
+			<?php endif;?>
+		</div>
 
-						</td>
-					</tr>
-
-						<?php
-						$q_sub = "
-						SELECT c.*, if(req.suma,req.suma,0)as suma
-						FROM categories c 
-						LEFT JOIN (SELECT COUNT(*) as suma, category FROM requests GROUP BY category)req ON c.id = req.category
-						WHERE service = '".$lista->id."'
-						ORDER BY c.denomination ASC
-						";
-						$Query2 = plugDB($q_sub, "result");
-						foreach ( $Query2 as $lista_sub ):
-						?>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>
-								<form method="post" onSubmit="return Validar_Nombre(this);">
-									<input type="hidden" name="id_item" value="<?php echo $lista_sub->id;?>">
-									<input type="text" name="nombre" value="<?php echo $lista_sub->denomination;?>">
-									<input type="submit" name="editar_nombre_subcat" value="Editar">
-								</form>
-							</td>
-							<td><?php echo $lista_sub->suma;?></td>
-							<td>
-								<form method="post">
-									<input type="hidden" name="id_item" value="<?php echo $lista_sub->id;?>">
-									<input type="number" name="costo_item" value="<?php echo $lista_sub->cost;?>">
-									<input type="submit" name="editar_fixcoin_subcat" value="Editar">
-								</form>
-							</td>
-							<td>
-								<form method="post" onSubmit="return confirm('Quiere borrar: <?php echo $lista_sub->denomination;?>?');">
-									<input type="hidden" name="id_item" value="<?php echo $lista_sub->id;?>">	
-									<input type="submit" name="borrar_subcat" value="Borrar Subcategoria">
-								</form>
-							</td>
-						</tr>
-						
-						<?php endforeach;?>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>
-								<form method="post" onSubmit="return Validar_Nombre(this);">
-									<input type="hidden" name="id_parent" value="<?php echo $lista->id;?>">
-									<input type="text" name="nombre" placeholder="Ingrese nombre">
-									<input type="submit" name="crear_subcat" value="Crear Subcategoria">
-								</form>
-							</td>
-						</tr>
-					<?php endforeach;?>
-				</tbody>
-			</table>
-		<?php endif;?>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
 	<script type="text/javascript">
 		function HolaMundo(){
 			alert("Holas");
-			$.ajax( {url:"https://google.com"} );
+			jQuery.ajax( {url:"https://google.com"} );
 		}
 		function Validar_Nombre(form){
 			if(form.nombre.value == ""){
@@ -1859,28 +2126,76 @@ function page_lista_servicios(){
 		}
 		//
 		function SubirImagen_Categoria(_id, _suma){
-		var formData = new FormData();
-        var files = $('#imagen_cat_' + _suma)[0].files[0];
-        formData.append('archivo', files);
-        formData.append('id', _id);
-        $.ajax({
-            url: '<?php echo URL_BASE;?>/fixperto/modCategoryIcon',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-				console.log(response);
-                if (response != 0) {
-                    $("#img_cat_" + _suma).attr("src", response);
-                    $("#link_cat_"+ _suma).attr("href", response);
-                } else {
-                    alert('Formato de imagen incorrecto.');
-                }
-            }
-        });
-	}
+			var formData = new FormData();
+			var files = $('#imagen_cat_' + _suma)[0].files[0];
+			formData.append('archivo', files);
+			formData.append('id', _id);
+			jQuery.ajax({
+				url: '<?php echo URL_BASE;?>/fixperto/modCategoryIcon',
+				type: 'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function(response) {
+					console.log(response);
+					if (response != 0) {
+						jQuery("#img_cat_" + _suma).attr("src", response);
+						jQuery("#link_cat_"+ _suma).attr("href", response);
+					} else {
+						alert('Formato de imagen incorrecto.');
+					}
+				}
+			});
+		}
 	</script>
+	<?php
+}
+function Mis_Sub_Cates($id){
+	$q_sub = "
+	SELECT c.*, if(req.suma,req.suma,0)as suma
+	FROM categories c 
+	LEFT JOIN (SELECT COUNT(*) as suma, category FROM requests GROUP BY category)req ON c.id = req.category
+	WHERE service = '".$id."'
+	ORDER BY c.denomination ASC
+	";
+	$Query2 = plugDB($q_sub, "result");
+	foreach ( $Query2 as $lista_sub ):
+	?>
+	<tr>
+		<td>
+			<form method="post" onSubmit="return Validar_Nombre(this);">
+			<input type="hidden" name="id_item" value="<?php echo $lista_sub->id;?>">
+			<input type="text" name="nombre" value="<?php echo $lista_sub->denomination;?>">
+			<input type="submit" name="editar_nombre_subcat" value="Editar">
+			</form>
+		</td>
+		<td><?php echo $lista_sub->suma;?></td>
+		<td>
+			<form method="post">
+				<input type="hidden" name="id_item" value="<?php echo $lista_sub->id;?>">
+				<input type="number" name="costo_item" value="<?php echo $lista_sub->cost;?>">
+				<input type="submit" name="editar_fixcoin_subcat" value="Editar">
+			</form>
+		</td>
+		<td>
+			<form method="post" onSubmit="return confirm('Quiere borrar: <?php echo $lista_sub->denomination;?>?');">
+				<input type="hidden" name="id_item" value="<?php echo $lista_sub->id;?>">	
+				<input type="submit" name="borrar_subcat" value="Borrar Subcategoria">
+			</form>
+		</td>
+	</tr>
+	<?php
+	endforeach;
+	?>
+	<tr>
+		<td>
+			<form method="post" onSubmit="return Validar_Nombre(this);">
+				<input type="hidden" name="id_parent" value="<?php echo $id;?>">
+				<input type="text" name="nombre" placeholder="Ingrese nombre">
+				<input type="submit" name="crear_subcat" value="Crear Subcategoria">
+			</form>
+		</td>
+	</tr>
 	<?php
 }
 //
@@ -1955,75 +2270,124 @@ function page_servicios(){
 	$Query = plugDB($Qstr, "result");
 	$Colum_No_Mostrar = array("");
 	?>
-	<div class="wrap">
-		<h2>Servicios</h2>
-		<div div class="alignleft actions bulkactions">
-			<form method='post'>
-				<select name="estado" onchange="this.form.submit()">
-					<option value='-1'>Estado</option>
-					<?php echo func_select_estado_servicio(array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), $_POST["estado"]);?>
-				</select>
-				<select name="categoria" onchange="this.form.submit()">
-					<option value='-1'>Categoria</option>
-					<?php echo func_select_tabla_id_denomination("services", $_POST["categoria"]);?>
-				</select>
-				<select name="sub_categoria" onchange="this.form.submit()"><?php echo func_select_sub_categorias($_POST["categoria"], $_POST["sub_categoria"]);?></select>
-				<select name="ciudad" onchange="this.form.submit()">
-					<option value='-1'>Ciudad</option>
-					<?php echo func_select_tabla_id_denomination("cities", $_POST["ciudad"]);?>
-				</select>
-				<select name="zona" onchange="this.form.submit()"><?php echo func_select_sub_zonas($_POST["ciudad"], $_POST["zona"]);?></select>
-				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
-				<input type="submit" value="Buscar" class="button action">
-			</form>
-		</div><br><br>
-		<div div class="alignleft actions bulkactions">
-			<form method='post'>
-			<input type="submit" class="button action" name="todos" value="Limpiar Filtros">
-			</form>
-		</div><br><br>
 
-		<h4><?php echo Count($Query);?> Registros encontrados</h4>
-		<?php if($Query[0] != null):?>
-			<div div class="alignleft bulkactions">
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			jQuery('#la_data_tabla').DataTable();
+			jQuery('#wpfooter').remove();
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		[id="formulario"] *{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Servicios (<?php echo Count($Query);?> Registros)</h1>
+		</div>
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
 				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
 					<input type='hidden' name='type' value='servicios'/>
 					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
-					<input type="submit" class="button action" id="exportar" name="exportar" value="Exportar a excel" />
+					<input type="submit" id="exportar" name="exportar" value="Exportar a excel" class="ui-btn" data-theme="b" />
 				</form>
-			</div><br><br>
-			<table class="wp-list-table widefat" cellspacing="0">
-				<thead>
-					<tr valign="top">
-						<?php foreach($Query[0] as $key => $value):?>
-						<?php if(!in_array($key, $Colum_No_Mostrar)):?><th><?php echo $key; ?></th><?php endif;?>
-						<?php endforeach; ?>
-						<th>Editar</th>
-					</tr>
-				</thead>
-				<tbody id="the-list">
-					<?php 
-					$alter = "";
-					foreach ( $Query as $lista ):
-						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-					?>
-					<tr valign="top" <?php echo $alter; ?>>
-						<?php foreach($lista as $it => $va):?>
-							<?php if(!in_array($it, $Colum_No_Mostrar)):?><td><?php echo $va;?></td><?php endif;?>
-						<?php endforeach; ?>
-						<td>
-							<form method="post">
-								<input type="hidden" name="id" value="<?php echo $lista->id_req;?>">
-								<input type="submit" name="editar_servicio" value="Editar" class="button action">
-							</form>
-						</td>
-					</tr>
-				<?php endforeach;?>
-			</table>
-		<?php endif;?>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal" style="width:10px">
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<select name="estado" onchange="this.form.submit()">
+						<option value='-1'>Estado</option>
+						<?php echo func_select_estado_servicio(array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), $_POST["estado"]);?>
+					</select>
+					<select name="categoria" onchange="this.form.submit()">
+						<option value='-1'>Categoria</option>
+						<?php echo func_select_tabla_id_denomination("services", $_POST["categoria"]);?>
+					</select>
+					<select name="sub_categoria" onchange="this.form.submit()"><?php echo func_select_sub_categorias($_POST["categoria"], $_POST["sub_categoria"]);?></select>
+					<select name="ciudad" onchange="this.form.submit()">
+						<option value='-1'>Ciudad</option>
+						<?php echo func_select_tabla_id_denomination("cities", $_POST["ciudad"]);?>
+					</select>
+					<select name="zona" onchange="this.form.submit()"><?php echo func_select_sub_zonas($_POST["ciudad"], $_POST["zona"]);?></select>
+					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
+						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%">
+					</div>
+					<input type="submit" value="Buscar" data-theme="b">
+				</form>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+				</form>
+			</div>
+		</div>
+		<div role="content" class="ui-content">
+			<?php if($Query[0] != null):?>
+				<table id="la_data_tabla" cellspacing="0">
+					<thead>
+						<tr valign="top">
+							<?php foreach($Query[0] as $key => $value):?>
+							<?php if(!in_array($key, $Colum_No_Mostrar)):?><th><?php echo $key; ?></th><?php endif;?>
+							<?php endforeach; ?>
+							<th>Editar</th>
+						</tr>
+					</thead>
+					<tbody id="the-list">
+						<?php 
+						$alter = "";
+						foreach ( $Query as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<tr valign="top" <?php echo $alter; ?>>
+							<?php foreach($lista as $it => $va):?>
+								<?php if(!in_array($it, $Colum_No_Mostrar)):?><td><?php echo $va;?></td><?php endif;?>
+							<?php endforeach; ?>
+							<td>
+								<form method="post" data-role="controlgroup">
+									<input type="hidden" name="id" value="<?php echo $lista->id_req;?>">
+									<input type="submit" name="editar_servicio" value="Editar" class="ui-btn" data-theme="b">
+								</form>
+							</td>
+						</tr>
+					<?php endforeach;?>
+				</table>
+			<?php endif;?>
+		</div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-	<script type="text/javascript"></script>
 	<?php
 }
 function page_servicios_editar_servicio(){
@@ -2094,8 +2458,61 @@ function page_servicios_editar_servicio(){
 	//
 	$alter_tabla_1 = "";
 	?>
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			<?php if( Count($Query_Request) > 0 ):?>
+				//jQuery('#tabla_servicios').DataTable();
+			<?php endif;?>
+			
+			<?php if( Count($Query_Calificaciones) > 0 ):?>
+				//jQuery('#tabla_calificaciones').DataTable();
+			<?php endif;?>
 
-	<div class="wrap">
+			jQuery('#wpfooter').remove();
+			jQuery.mobile.page.prototype.options.keepNative = "select, input, textarea";
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		.formulario{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Servicio</h1>
+		</div>
+
 		<?php if( Count($Query_cancel_cliente) > 0 ):?>
 			<h2>Cancelado por el usuario</h2>
 			<table class="wp-list-table widefat" cellspacing="0">
@@ -2115,9 +2532,7 @@ function page_servicios_editar_servicio(){
 					<tr valign="top" <?php echo $alter; ?>>
 						<?php foreach($lista as $key => $va):?>
 							<?php if(!in_array($key, $exclude_tabla_problemas)):?>
-
 								<td><?php echo $va;?></td>
-							
 							<?php endif;?>
 						<?php endforeach; ?>
 					</tr>
@@ -2126,282 +2541,291 @@ function page_servicios_editar_servicio(){
 			</table>
 		<?php endif;?>
 
-		<h2>Servicio</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<th>Campo</th>
-					<th>Valor</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<tr>
-					<td>Cliente</td>
-					<td>
-						<form method="post" action="admin.php?page=clientes" target="_blank">
-							<input type="hidden" name="id" value="<?php echo $Query_Cus->id;?>">
-							<input type="hidden" name="editar_cliente" value="ok">
-							<input type="submit" value="<?php echo $Query_Cus->name;?>" class="button action">
-						</form>
-					</td>
-				</tr>
-			<form method="post" name="la_data">
-				<?php 
-				echo func_tabla_form_servicio(
-					$Query, 
-					array("category", "region", "customer", "cancellation_type", "status", "emergency", "registry_date", "start_date", "hour", "completed_date"),
-					array("id")
-				);
-				?>
-
-				<tr valign="top" <?php $alter_tabla_1=Do_Alter_Tr($alter_tabla_1);echo $alter_tabla_1;?>>
-					<td>completed_date</td>
-					<td><input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($Query->completed_date))->format("Y-m-d\\TH:i:s");?>"></td>
-				</tr>
-
-				<tr <?php $alter_tabla_1=Do_Alter_Tr($alter_tabla_1);echo $alter_tabla_1;?>>
-					<td>Categoria</td>
-					<td>
-						<select id="select_service" onchange="Do_Select_Category();">
-							<?php echo func_select_tabla_id_denomination("services", $Query_Cat->id);?>
-						</select>
-					</td>
-				</tr>
-
-				<tr <?php $alter_tabla_1=Do_Alter_Tr($alter_tabla_1);echo $alter_tabla_1;?>>
-					<td>Sub Categoria</td>
-					<td>
-						<select name="category" id="select_category">
-							<?php echo func_select_sub_categorias($Query_Cat->id, $Query->category);?>
-						</select>
-					</td>
-				</tr>
-
-				<tr <?php $alter_tabla_1=Do_Alter_Tr($alter_tabla_1);echo $alter_tabla_1;?>>
-					<td>Ciudad</td>
-					<td>
-						<select id="select_ciudad" onchange="Do_Select_Zona();">
-							<?php echo func_select_tabla_id_denomination("cities", $Query_Reg->id);?>	
-						</select>
-					</td>
-				</tr>
-
-				<tr <?php $alter_tabla_1=Do_Alter_Tr($alter_tabla_1);echo $alter_tabla_1;?>>
-					<td>Zona</td>
-					<td>
-						<select id="select_zona" name="region">
-							<?php echo func_select_sub_zonas($Query_Reg->id, $Query->region);?>
-						</select>
-					</td>
-				</tr>
-
-				<tr <?php $alter_tabla_1=Do_Alter_Tr($alter_tabla_1);echo $alter_tabla_1;?>>
-					<td>Estado</td>
-					<td>
-						<select name="status">
-							<?php echo func_select_estado_servicio(
-								array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), 
-								$Query->status
-							);?>
-						</select>
-					</td>
-				</tr>
-
-				<tr <?php $alter_tabla_1=Do_Alter_Tr($alter_tabla_1);echo $alter_tabla_1;?>>
-					<td>
-						Fecha Registro
-					</td>
-					<td>
-						<?php echo $Query->registry_date;?>
-					</td>
-				</tr>
-
-				<tr <?php $alter_tabla_1=Do_Alter_Tr($alter_tabla_1);echo $alter_tabla_1;?>>
-					<td>
-						Costo del servicio (Fixcoins)
-					</td>
-					<td>
-						<?php $q_costo = plugDB("SELECT cost FROM categories WHERE id = '".$Query->category."'", "row"); echo $q_costo->cost;?>
-					</td>
-				</tr>
-
-				<tr <?php $alter_tabla_1=Do_Alter_Tr($alter_tabla_1);echo $alter_tabla_1;?>>
-					<td>
-						<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-						<input type="hidden" name="editar_servicio" value="ok">
-						<input type="submit" name="es_usuario" value="Guardar" class="button action">
-					</td>
-					<td></td>
-				</tr>
-
-				</form>
-			</tbody>
-		</table>
-
-		<?php if( Count($Query_Imagenes) > 0 ):?>
-		<h2>Imagenes</h2>
-		<?php foreach($Query_Imagenes as $item_imagen):?>
-		<a href="<?php echo URL_BASE;?>/uploads/requests/<?php echo $item_imagen->image;?>" target="_blank"><img src="<?php echo URL_BASE;?>/uploads/requests/<?php echo $item_imagen->image;?>" height="200"></a>
-		<?php endforeach;?>
-		<?php else:?>
-			<h2>Imagenes (0)</h2>
-		<?php endif;?>
-
-		<?php if( Count($Query_Offers) > 0 ):?>
-		<h2>Ofertas</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-				<th>Experto</th>
-					<?php foreach($Query_Offers[0] as $key => $value):?>
-						<?php if(!in_array($key, $exclude_tabla_offers)):?><th><?php echo $key; ?></th><?php endif;?>
-					<?php endforeach; ?>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_Offers as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-					$Query_Cancel_Offer = plugDB("SELECT c.texto, c.date, ct.denomination as type FROM cancel_offert c LEFT JOIN cancellation_type ct ON c.type=ct.id WHERE offert = '".$lista->id."'", "result");
-				?>
-				<tr valign="top" <?php echo $alter; ?>>
-					<td>
-						<?php Gen_Btn_Experto($lista->expert);?>
-					</td>
-
-					<form method="post">
-					<?php foreach($lista as $it => $va):?>
-						<?php if(!in_array($it, $exclude_tabla_offers)):?>
-							<?php if($it == "start_date"):?>
-								<td><input type="datetime-local" name="start_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>"></td>
-							<?php elseif($it == "completed_date"):?>
-								<td><input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>"></td>
-							<?php elseif($it == "status"):?>
-								<td>
-									<select name="status">
-										<?php echo func_select_estado_servicio(
-											array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), 
-											$va
-										);?>
-									</select>
-								</td>
-							<?php elseif($it == "collaborator"):?>
-								<td><select name="collaborator"><?php echo Select_ColByExpert($lista->expert, $lista->collaborator);?></select></td>
-							<?php elseif($it == "hour"):?>
-								<td><input type="time" name="hour" value="<?php echo $va;?>"></td>
-							<?php else:?>
-								<td><?php echo $va;?></td>
-							<?php endif;?>
-						<?php endif;?>
-					<?php endforeach; ?>
-					<td>
-						<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-						<input type="hidden" name="editar_servicio" value="ok">
-						<input type="hidden" name="id_offer" value="<?php echo $lista->id;?>">
-						<input type="submit" name="update_offer" value="Guardar" class="button action">
-					</td>
+		<div role="content" class="ui-content">
+			<!-- <div data-role="collapsible">
+			    <h4>template</h4>
+			    <p>
+					<form method="post" name="la_data" class="formulario">
+						<ul data-role="listview" data-inset="true">
+							<li class="ui-field-contain">
+								<label for="name2">Text Input:</label>
+								<input type="text" name="name2" id="name2" value="" data-clear-btn="true">
+							</li>
+							
+							<li class="ui-body ui-body-b">
+								<fieldset class="ui-grid-a">
+									<div class="ui-block-a"></div>
+									<div class="ui-block-b">
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_cliente" value="ok">
+										<input type="submit" name="es_usuario" value="Guardar" data-role="button" data-theme="b">
+									</div>
+								</fieldset>
+							</li>
+						</ul>
 					</form>
-				</tr>
-				<?php if( Count($Query_Cancel_Offer) > 0 ):?>
-					<?php 
-					foreach ( $Query_Cancel_Offer as $lista_cancel ):
-					?>
-				<tr>
-					<td><h3>Cancelado por el Experto</h3></td>
-					<td><?php echo $lista_cancel->texto;?></td>
-					<td><?php echo $lista_cancel->date;?></td>
-					<td><?php echo $lista_cancel->type;?></td>
-				</tr>
-				<?php endforeach; ?>
-				<?php endif;?>
-				<?php endforeach;?>
-			</tbody>
-		</table>
-		<?php else:?>
-			<h2>Ofertas (0)</h2>
-		<?php endif;?>
+				</p>
+			</div> -->
 
-		<?php if( Count($Query_Chats) > 0 ):?>
-		<h2>Chats Activos</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<?php foreach($Query_Chats[0] as $key => $value):?>
-					<?php if(!in_array($key, $exclude_tabla_chats)):?><th><?php echo $key; ?></th><?php endif;?>
-					<?php endforeach; ?>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_Chats as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<tr valign="top" <?php echo $alter; ?>>
-					<?php foreach($lista as $key => $va):?>
-						<?php if(!in_array($key, $exclude_tabla_chats)):?>
+			<div data-role="collapsible">
+			    <h4>Información</h4>
+			    <p>
+					<form method="post" action="admin.php?page=clientes" target="_blank">
+						<ul data-role="listview" data-inset="true">
+							<li class="ui-field-contain">
+								<label for="">Cliente:</label>
+								<input type="hidden" name="id" value="<?php echo $Query_Cus->id;?>">
+								<input type="hidden" name="editar_cliente" value="ok">
+								<input type="submit" value="<?php echo $Query_Cus->name;?>" class="button action">
+							</li>
+						</ul>			
+					</form>
+					<form method="post" name="la_data">
+						<ul data-role="listview" data-inset="true">
+							<?php 
+							echo func_tabla_form_fieldcontainer(
+								$Query, 
+								array("category", "region", "customer", "cancellation_type", "status", "emergency", "registry_date", "start_date", "hour", "completed_date"),
+								array("id")
+							);
+							?>
+							<li class="ui-field-contain">
+								<label for="">Cliente:</label>
+							</li>
+							<li class="ui-field-contain">
+								<label for="">completed_date:</label>
+								<input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($Query->completed_date))->format("Y-m-d\\TH:i:s");?>">
+							</li>
+							<li class="ui-field-contain">
+								<label for="">Categoria:</label>
+								<select id="select_service" onchange="Do_Select_Category();">
+									<?php echo func_select_tabla_id_denomination("services", $Query_Cat->id);?>
+								</select>
+							</li>
+							<li class="ui-field-contain">
+								<label for="">Sub Categoria:</label>
+								<select name="category" id="select_category">
+									<?php echo func_select_sub_categorias($Query_Cat->id, $Query->category);?>
+								</select>
+							</li>
+							<li class="ui-field-contain">
+								<label for="">Ciudad:</label>
+								<select id="select_ciudad" onchange="Do_Select_Zona();">
+									<?php echo func_select_tabla_id_denomination("cities", $Query_Reg->id);?>	
+								</select>
+							</li>
+							<li class="ui-field-contain">
+								<label for="">Zona:</label>
+								<select id="select_zona" name="region">
+									<?php echo func_select_sub_zonas($Query_Reg->id, $Query->region);?>
+								</select>
+							</li>
+							<li class="ui-field-contain">
+								<label for="">Estado:</label>
+								<select name="status">
+									<?php echo func_select_estado_servicio(
+										array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), 
+										$Query->status
+									);?>
+								</select>
+							</li>
+							<li class="ui-field-contain">
+								<label for="">Fecha Registro:</label>
+								<?php echo $Query->registry_date;?>
+							</li>
+							<li class="ui-field-contain">
+								<label for="">Costo del servicio (Fixcoins):</label>
+								<?php $q_costo = plugDB("SELECT cost FROM categories WHERE id = '".$Query->category."'", "row"); echo $q_costo->cost;?>
+							</li>
+							<li class="ui-body ui-body-b">
+								<fieldset class="ui-grid-a">
+									<div class="ui-block-a"></div>
+									<div class="ui-block-b">
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_servicio" value="ok">
+										<input type="submit" name="es_usuario" value="Guardar" class="button action">
+									</div>
+								</fieldset>
+							</li>
+						</ul>		
+					</form>
+				</p>
+			</div>
 
-							<?php if($key == "de" || $key == "para"):?>
-								<td><?php Gen_Btn_By_User($va, true);?></td>
-							<?php else:?>
-								<td><?php echo $va;?></td>
+			<div data-role="collapsible">
+			    <h4>Imagenes</h4>
+			    <p>
+					<?php if( Count($Query_Imagenes) > 0 ):?>
+						<?php foreach($Query_Imagenes as $item_imagen):?>
+							<a href="<?php echo URL_BASE;?>/uploads/requests/<?php echo $item_imagen->image;?>" target="_blank"><img src="<?php echo URL_BASE;?>/uploads/requests/<?php echo $item_imagen->image;?>" height="200"></a>
+						<?php endforeach;?>
+					<?php endif;?>
+				</p>
+			</div>
+
+			<div data-role="collapsible">
+			    <h4>Ofertas</h4>
+			    <p>
+					<?php if( Count($Query_Offers) > 0 ):?>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top">
+							<th>Experto</th>
+								<?php foreach($Query_Offers[0] as $key => $value):?>
+									<?php if(!in_array($key, $exclude_tabla_offers)):?><th><?php echo $key; ?></th><?php endif;?>
+								<?php endforeach; ?>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach ( $Query_Offers as $lista ):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+								$Query_Cancel_Offer = plugDB("SELECT c.texto, c.date, ct.denomination as type FROM cancel_offert c LEFT JOIN cancellation_type ct ON c.type=ct.id WHERE offert = '".$lista->id."'", "result");
+							?>
+							<tr valign="top" <?php echo $alter; ?>>
+								<td>
+									<?php Gen_Btn_Experto($lista->expert);?>
+								</td>
+								<form method="post">
+								<?php foreach($lista as $it => $va):?>
+									<?php if(!in_array($it, $exclude_tabla_offers)):?>
+										<?php if($it == "start_date"):?>
+											<td><input type="datetime-local" name="start_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>"></td>
+										<?php elseif($it == "completed_date"):?>
+											<td><input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>"></td>
+										<?php elseif($it == "status"):?>
+											<td>
+												<select name="status">
+													<?php echo func_select_estado_servicio(
+														array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), 
+														$va
+													);?>
+												</select>
+											</td>
+										<?php elseif($it == "collaborator"):?>
+											<td><select name="collaborator"><?php echo Select_ColByExpert($lista->expert, $lista->collaborator);?></select></td>
+										<?php elseif($it == "hour"):?>
+											<td><input type="time" name="hour" value="<?php echo $va;?>"></td>
+										<?php else:?>
+											<td><?php echo $va;?></td>
+										<?php endif;?>
+									<?php endif;?>
+								<?php endforeach; ?>
+								<td>
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_servicio" value="ok">
+									<input type="hidden" name="id_offer" value="<?php echo $lista->id;?>">
+									<input type="submit" name="update_offer" value="Guardar" class="button action">
+								</td>
+								</form>
+							</tr>
+							<?php if( Count($Query_Cancel_Offer) > 0 ):?>
+								<?php 
+								foreach ( $Query_Cancel_Offer as $lista_cancel ):
+								?>
+							<tr>
+								<td><h3>Cancelado por el Experto</h3></td>
+								<td><?php echo $lista_cancel->texto;?></td>
+								<td><?php echo $lista_cancel->date;?></td>
+								<td><?php echo $lista_cancel->type;?></td>
+							</tr>
+							<?php endforeach; ?>
 							<?php endif;?>
-						
-						
-						<?php endif;?>
-					<?php endforeach; ?>
-				</tr>
-				<?php endforeach;?>
-			</tbody>
-		</table>
-		<?php else:?>
-		<h2>Chats Activos (0)</h2>
-		<?php endif;?>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+					<?php endif;?>
+				</p>
+			</div>
 
-		<?php if( Count($Query_Problemas) > 0 ):?>
-		<h2>Problemas</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<?php foreach($Query_Problemas[0] as $key => $value):?>
-					<?php if(!in_array($key, $exclude_tabla_problemas)):?><th><?php echo $key; ?></th><?php endif;?>
-					<?php endforeach; ?>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_Problemas as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<tr valign="top" <?php echo $alter; ?>>
-					<?php foreach($lista as $key => $va):?>
-						<?php if(!in_array($key, $exclude_tabla_problemas)):?>
+			<div data-role="collapsible">
+			    <h4>Chats Activos</h4>
+			    <p>
+					<?php if( Count($Query_Chats) > 0 ):?>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<?php foreach($Query_Chats[0] as $key => $value):?>
+								<?php if(!in_array($key, $exclude_tabla_chats)):?><th><?php echo $key; ?></th><?php endif;?>
+								<?php endforeach; ?>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach ( $Query_Chats as $lista ):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<tr valign="top" <?php echo $alter; ?>>
+								<?php foreach($lista as $key => $va):?>
+									<?php if(!in_array($key, $exclude_tabla_chats)):?>
 
-							<?php if($key == "user"):?>
-								<td><?php Gen_Btn_By_User($va, true);?></td>
-							<?php else:?>
-								<td><?php echo $va;?></td>
-							<?php endif;?>
-						
-						<?php endif;?>
-					<?php endforeach; ?>
-				</tr>
-				<?php endforeach;?>
-			</tbody>
-		</table>
-		<?php else:?>
-		<h2>Problemas (0)</h2>
-		<?php endif;?>
+										<?php if($key == "de" || $key == "para"):?>
+											<td><?php Gen_Btn_By_User($va, true);?></td>
+										<?php else:?>
+											<td><?php echo $va;?></td>
+										<?php endif;?>
+									
+									
+									<?php endif;?>
+								<?php endforeach; ?>
+							</tr>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+					<?php endif;?>
+				</p>
+			</div>
+
+			<div data-role="collapsible">
+			    <h4>Problemas</h4>
+			    <p>
+					<?php if( Count($Query_Problemas) > 0 ):?>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<?php foreach($Query_Problemas[0] as $key => $value):?>
+								<?php if(!in_array($key, $exclude_tabla_problemas)):?><th><?php echo $key; ?></th><?php endif;?>
+								<?php endforeach; ?>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach ( $Query_Problemas as $lista ):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<tr valign="top" <?php echo $alter; ?>>
+								<?php foreach($lista as $key => $va):?>
+									<?php if(!in_array($key, $exclude_tabla_problemas)):?>
+
+										<?php if($key == "user"):?>
+											<td><?php Gen_Btn_By_User($va, true);?></td>
+										<?php else:?>
+											<td><?php echo $va;?></td>
+										<?php endif;?>
+									
+									<?php endif;?>
+								<?php endforeach; ?>
+							</tr>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+					<?php endif;?>
+				</p>
+			</div>
+
+		</div>
+		
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
 	<script type="text/javascript">
 	function Do_Select_Category(){
 		//alert( $("#select_service").val() );
-		$.ajax({
+		jQuery.ajax({
 			url:"<?php echo home_url('pagina_querys');?>", 
 			method: "POST",
 			data: { select_category : "ok", categoria : $("#select_service").val() }
@@ -2414,7 +2838,7 @@ function page_servicios_editar_servicio(){
 	}
 	function Do_Select_Zona(){
 		//alert( $("#select_service").val() );
-		$.ajax({
+		jQuery.ajax({
 			url:"<?php echo home_url('pagina_querys');?>", 
 			method: "POST",
 			data: { select_zona : "ok", categoria : $("#select_ciudad").val() }
@@ -2455,48 +2879,106 @@ function page_transacciones_planes(){
 	";
 	$Query = plugDB($Qstr, "result");
 	?>
-	<div class="wrap">
-		<h2>Transacciones -> Planes</h2>
-		<div div class="alignleft actions bulkactions">
-			<form method='post'>
-				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
-				<input type="submit" value="Buscar" class="button action">
-			</form>
-		</div><br><br>
-		<h4><?php echo Count($Query);?> Registros encontrados</h4>
-		<?php if($Query[0] != null):?>
-			<div div class="alignleft bulkactions">
+
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			jQuery('#la_data_tabla').DataTable();
+			jQuery('#wpfooter').remove();
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		[id="formulario"] *{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Transacciones -> Planes (<?php echo Count($Query);?> Registros)</h1>
+		</div>
+
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
 				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
 					<input type='hidden' name='type' value='transacciones_planes'/>
 					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
-					<input type="submit" class="button action" id="exportar" name="exportar" value="Exportar a excel" />
+					<input type="submit" id="exportar" name="exportar" value="Exportar a excel" class="ui-btn" data-theme="b" />
 				</form>
-			</div><br><br>
-			<table class="wp-list-table widefat" cellspacing="0">
-				<thead>
-					<tr valign="top">
-						<?php foreach($Query[0] as $key => $value):?>
-							<th><?php echo $key; ?></th>
-						<?php endforeach; ?>
-					</tr>
-				</thead>
-				<tbody id="the-list">
-					<?php 
-					$alter = "";
-					foreach ( $Query as $lista ):
-						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-					?>
-					<tr valign="top" <?php echo $alter; ?>>
-						<?php foreach($lista as $it => $va):?>
-							<td><?php echo $va;?></td>
-						<?php endforeach; ?>
-					</tr>
-				<?php endforeach;?>
-			</table>
-		<?php endif;?>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal" style="width:10px">
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
+						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%">
+					</div>
+					<input type="submit" value="Buscar" data-theme="b">
+				</form>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+				</form>
+			</div>
+		</div>
+
+		<div role="content" class="ui-content">
+			<?php if($Query[0] != null):?>
+				<table id="la_data_tabla" cellspacing="0">
+					<thead>
+						<tr valign="top">
+							<?php foreach($Query[0] as $key => $value):?>
+								<th><?php echo $key; ?></th>
+							<?php endforeach; ?>
+						</tr>
+					</thead>
+					<tbody id="the-list">
+						<?php 
+						$alter = "";
+						foreach ( $Query as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<tr valign="top" <?php echo $alter; ?>>
+							<?php foreach($lista as $it => $va):?>
+								<td><?php echo $va;?></td>
+							<?php endforeach; ?>
+						</tr>
+					<?php endforeach;?>
+				</table>
+			<?php endif;?>
+		</div>
+
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-	<script type="text/javascript"></script>
 	<?php
 }
 function page_transacciones_fixcoins(){
@@ -2525,48 +3007,106 @@ function page_transacciones_fixcoins(){
 	";
 	$Query = plugDB($Qstr, "result");
 	?>
-	<div class="wrap">
-		<h2>Transacciones -> Fixcoins</h2>
-		<div div class="alignleft actions bulkactions">
-			<form method='post'>
-				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
-				<input type="submit" value="Buscar" class="button action">
-			</form>
-		</div><br><br>
-		<h4><?php echo Count($Query);?> Registros encontrados</h4>
-		<?php if($Query[0] != null):?>
-			<div div class="alignleft bulkactions">
+
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			jQuery('#la_data_tabla').DataTable();
+			jQuery('#wpfooter').remove();
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		[id="formulario"] *{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Transacciones -> Fixcoins (<?php echo Count($Query);?> Registros)</h1>
+		</div>
+
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
 				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
 					<input type='hidden' name='type' value='transacciones_fixcoins'/>
 					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
-					<input type="submit" class="button action" id="exportar" name="exportar" value="Exportar a excel" />
+					<input type="submit" id="exportar" name="exportar" value="Exportar a excel" class="ui-btn" data-theme="b" />
 				</form>
-			</div><br><br>
-			<table class="wp-list-table widefat" cellspacing="0">
-				<thead>
-					<tr valign="top">
-						<?php foreach($Query[0] as $key => $value):?>
-							<th><?php echo $key; ?></th>
-						<?php endforeach; ?>
-					</tr>
-				</thead>
-				<tbody id="the-list">
-					<?php 
-					$alter = "";
-					foreach ( $Query as $lista ):
-						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-					?>
-					<tr valign="top" <?php echo $alter; ?>>
-						<?php foreach($lista as $it => $va):?>
-							<td><?php echo $va;?></td>
-						<?php endforeach; ?>
-					</tr>
-				<?php endforeach;?>
-			</table>
-		<?php endif;?>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal" style="width:10px">
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
+						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%">
+					</div>
+					<input type="submit" value="Buscar" data-theme="b">
+				</form>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+				</form>
+			</div>
+		</div>
+
+		<div role="content" class="ui-content">
+			<?php if($Query[0] != null):?>
+				<table id="la_data_tabla" cellspacing="0">
+					<thead>
+						<tr valign="top">
+							<?php foreach($Query[0] as $key => $value):?>
+								<th><?php echo $key; ?></th>
+							<?php endforeach; ?>
+						</tr>
+					</thead>
+					<tbody id="the-list">
+						<?php 
+						$alter = "";
+						foreach ( $Query as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<tr valign="top" <?php echo $alter; ?>>
+							<?php foreach($lista as $it => $va):?>
+								<td><?php echo $va;?></td>
+							<?php endforeach; ?>
+						</tr>
+					<?php endforeach;?>
+				</table>
+			<?php endif;?>
+		</div>
+
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-	<script type="text/javascript"></script>
 	<?php
 }
 //
@@ -2592,59 +3132,114 @@ function page_atencion_cliente(){
 	LEFT JOIN status_customer_support st ON cs.status = st.id
 	$WHERE
 	ORDER BY cs.id DESC
-	
 	";
 	$Query = plugDB($Qstr, "result");
 	?>
-	<div class="wrap">
-		<h2>Atencion al Cliente</h2>
-		<div div class="alignleft actions bulkactions">
-			<form method='post'>
-				<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar">
-				<input type="submit" value="Buscar" class="button action">
-			</form>
-		</div><br><br>
-		<h4><?php echo Count($Query);?> Registros encontrados</h4>
-		<?php if($Query[0] != null):?>
-			<div div class="alignleft bulkactions">
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			jQuery('#la_data_tabla').DataTable();
+			jQuery('#wpfooter').remove();
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		[id="formulario"] *{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Atencion al Cliente (<?php echo Count($Query);?> Registros)</h1>
+		</div>
+
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
 				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
-					<input type='hidden' name='type' value='transacciones_fixcoins'/>
+					<input type='hidden' name='type' value='atencion_al_cliente'/>
 					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
-					<input type="submit" class="button action" id="exportar" name="exportar" value="Exportar a excel" />
+					<input type="submit" id="exportar" name="exportar" value="Exportar a excel" class="ui-btn" data-theme="b" />
 				</form>
-			</div><br><br>
-			<table class="wp-list-table widefat" cellspacing="0">
-				<thead>
-					<tr valign="top">
-						<?php foreach($Query[0] as $key => $value):?>
-							<th><?php echo $key; ?></th>
-						<?php endforeach; ?>
-						<th>Editar</th>
-					</tr>
-				</thead>
-				<tbody id="the-list">
-					<?php 
-					$alter = "";
-					foreach ( $Query as $lista ):
-						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-					?>
-					<tr valign="top" <?php echo $alter; ?>>
-						<?php foreach($lista as $it => $va):?>
-							<td><?php echo $va;?></td>
-						<?php endforeach; ?>
-						<td>
-							<form method="post">
-								<input type="hidden" name="id" value="<?php echo $lista->id;?>">
-								<input type="submit" name="editar_atencion" value="Editar" class="button action">
-							</form>
-						</td>
-					</tr>
-				<?php endforeach;?>
-			</table>
-		<?php endif;?>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal" style="width:10px">
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
+						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%">
+					</div>
+					<input type="submit" value="Buscar" data-theme="b">
+				</form>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+				</form>
+			</div>
+		</div>
+
+		<div role="content" class="ui-content">
+			<?php if($Query[0] != null):?>
+				<table id="la_data_tabla" cellspacing="0">
+					<thead>
+						<tr valign="top">
+							<?php foreach($Query[0] as $key => $value):?>
+								<th><?php echo $key; ?></th>
+							<?php endforeach; ?>
+							<th>Editar</th>
+						</tr>
+					</thead>
+					<tbody id="the-list">
+						<?php 
+						$alter = "";
+						foreach ( $Query as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<tr valign="top" <?php echo $alter; ?>>
+							<?php foreach($lista as $it => $va):?>
+								<td><?php echo $va;?></td>
+							<?php endforeach; ?>
+							<td>
+								<form method="post">
+									<input type="hidden" name="id" value="<?php echo $lista->id;?>">
+									<input type="submit" name="editar_atencion" value="Editar" class="button action">
+								</form>
+							</td>
+						</tr>
+					<?php endforeach;?>
+				</table>
+			<?php endif;?>
+		</div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-	<script type="text/javascript"></script>
 	<?php
 }
 function page_atencion_cliente_editar(){
@@ -2838,58 +3433,104 @@ function page_referidos(){
 	}
 	//
 	$Qstr = "SELECT enti.id_expert as experto, enti.email, e_b.coupon, e_b.id as experto_redimio
-	FROM experts e_b
-	INNER JOIN 
-	(
-		SELECT e.id as id_expert, u.email, u.id as id_user, u.code FROM users u INNER JOIN experts e ON u.id = e.user 
-	)enti ON e_b.coupon = concat(enti.code, enti.id_user)
-	WHERE e_b.coupon IS NOT NULL 
-	ORDER BY e_b.coupon
+		FROM experts e_b
+		INNER JOIN 
+		(
+			SELECT e.id as id_expert, u.email, u.id as id_user, u.code FROM users u INNER JOIN experts e ON u.id = e.user 
+		)enti ON e_b.coupon = concat(enti.code, enti.id_user)
+		WHERE e_b.coupon IS NOT NULL 
+		ORDER BY e_b.coupon
 	";
 	$Query = plugDB($Qstr, "result");
 	?>
-	<div class="wrap">
-		<h2>Cupones de Referidos</h2>
-		<h4><?php echo Count($Query);?> Registros encontrados</h4>
-		<?php if($Query[0] != null):?>
-			<div div class="alignleft bulkactions">
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			jQuery('#la_data_tabla').DataTable();
+			jQuery('#wpfooter').remove();
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		[id="formulario"] *{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Cupones de Referidos (<?php echo Count($Query);?> Registros)</h1>
+		</div>
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
 				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
-					<input type='hidden' name='type' value='transacciones_fixcoins'/>
+					<input type='hidden' name='type' value='cupones'/>
 					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
-					<input type="submit" class="button action" id="exportar" name="exportar" value="Exportar a excel" />
+					<input type="submit" id="exportar" name="exportar" value="Exportar a excel" class="ui-btn" data-theme="b" />
 				</form>
-			</div><br><br>
-			<table class="wp-list-table widefat" cellspacing="0">
-				<thead>
-					<tr valign="top">
-						<?php foreach($Query[0] as $key => $value):?>
-							<th><?php echo $key; ?></th>
-						<?php endforeach; ?>
-					</tr>
-				</thead>
-				<tbody id="the-list">
-					<?php 
-					$alter = "";
-					foreach ( $Query as $lista ):
-						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-					?>
-					<tr valign="top" <?php echo $alter; ?>>
-						<?php foreach($lista as $it => $va):?>
-							<?php if($it == "experto_redimio" || $it == "experto"):?>
-								<td><?php echo Gen_Btn_Experto($va);?></td>
-							<?php else:?>
-								<td><?php echo $va;?></td>
-							<?php endif;?>
+			</div>
+		</div>
+		<div role="content" class="ui-content">
+			<?php if($Query[0] != null):?>
+				<table id="la_data_tabla" cellspacing="0">
+					<thead>
+						<tr valign="top">
+							<?php foreach($Query[0] as $key => $value):?>
+								<th><?php echo $key; ?></th>
+							<?php endforeach; ?>
+						</tr>
+					</thead>
+					<tbody id="the-list">
+						<?php 
+						$alter = "";
+						foreach ( $Query as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<tr valign="top" <?php echo $alter; ?>>
+							<?php foreach($lista as $it => $va):?>
+								<?php if($it == "experto_redimio" || $it == "experto"):?>
+									<td><?php echo Gen_Btn_Experto($va);?></td>
+								<?php else:?>
+									<td><?php echo $va;?></td>
+								<?php endif;?>
+								
+							<?php endforeach; ?>
 							
-						<?php endforeach; ?>
-						
-					</tr>
-				<?php endforeach;?>
-			</table>
-		<?php endif;?>
+						</tr>
+					<?php endforeach;?>
+				</table>
+			<?php endif;?>
+		</div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-	<script type="text/javascript"></script>
+
 	<?php
 }
 //
@@ -2915,22 +3556,59 @@ function page_reporte_clientes(){
    inner join users us on( us.id= exp.user)";
 	$Query = plugDB($Qstr, "result");
 	?>
-	<div class="wrap">
-		<h2>Reporte Clientes</h2>
-		<h4><?php echo Count($Query);?> Registros encontrados</h4>
-		<?php if($Query[0] != null):?>
-			<div div class="alignleft bulkactions">
+
+	<script type="text/javascript">
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			jQuery('#la_data_tabla').DataTable();
+			jQuery('#wpfooter').remove();
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Reporte Clientes (<?php echo Count($Query);?> Registros)</h1>
+		</div>
+
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
 				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
-					<input type='hidden' name='type' value='transacciones_fixcoins'/>
+					<input type='hidden' name='type' value='usuarios'/>
 					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
-					<input type="submit" class="button action" id="exportar" name="exportar" value="Exportar a excel" />
+					<input type="submit" id="exportar" name="exportar" value="Exportar a excel" class="ui-btn" data-theme="b" />
 				</form>
-			</div><br><br>
-			<table class="wp-list-table widefat" cellspacing="0">
+			</div>
+		</div>
+
+		<div role="main" class="ui-content">
+			<?php if($Query[0] != null):?>
+			<table class="wp-list-table widefat" id="la_data_tabla" cellspacing="0">
 				<thead>
 					<tr valign="top">
 						<?php foreach($Query[0] as $key => $value):?>
-							<th><?php echo $key; ?></th>
+							<th><?php echo Traductor_Nombre_Columnas($key);?></th>
 						<?php endforeach; ?>
 					</tr>
 				</thead>
@@ -2948,10 +3626,10 @@ function page_reporte_clientes(){
 					</tr>
 				<?php endforeach;?>
 			</table>
-		<?php endif;?>
+			<?php endif;?>
+		</div>
+
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-	<script type="text/javascript"></script>
 	<?php
 }
 //
@@ -2979,82 +3657,116 @@ function page_contenidos(){
 	$exclude_tabla_certificados = array();
 	//
 	?>
-	<div class="wrap">
-		
-		<h2>Contenidos y Ajustes</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<form method="post">
-				<tr>
-					<td>Valor Fixcoin cuando refieres a un amigo</td>
-					<td><input type="number" name="valor" value="<?php echo $Query_Valor_Fixcoin->valor;?>" required></td>
-					<td><?php echo $Query_Valor_Fixcoin->fecha;?></td>
-					<td><input type="submit" name="save_valor_fixcoin" value="Guardar" class="button action"></td>
-				</tr>
-			</form>
-		</table>
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			//jQuery('#la_data_tabla').DataTable();
+			jQuery('#wpfooter').remove();
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
 
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		[id="formulario"] *{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+	</style>
 
-
-		<h2>Certificados</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<?php foreach($Query_Certificados[0] as $key => $value):?>
-					<?php if(!in_array($key, $exclude_tabla_certificados)):?><th><?php echo $key; ?></th><?php endif;?>
-					<?php endforeach; ?>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_Certificados as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<form method="post">
-					<tr valign="top" <?php echo $alter; ?>>
-						<?php foreach($lista as $key => $va):?>
-							<?php if(!in_array($key, $exclude_tabla_certificados)):?>
-								<?php if( $key == "denomination" || $key == "uri" ):?>
-									<td><input type="text" name="<?php echo $key;?>" value="<?php echo $va;?>" required></td>
-								<?php else:?>
-									<td><?php echo $va;?></td>
-								<?php endif;?>
-							<?php endif;?>
-						<?php endforeach; ?>
-						<td>
-							<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
-							<input type="submit" name="update_certificado" value="Actualizar" class="button action">
-							<input type="submit" name="borrar_certificado" value="Borrar" class="button action">
-						</td>
-					</tr>
-				</form>
-				<?php endforeach;?>
-
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Contenidos y Ajustes</h1>
+		</div>
+		<div role="content" class="ui-content">
+			<table class="wp-list-table widefat" cellspacing="0">
 				<form method="post">
 					<tr>
-						<td>Nuevo</td>
-						<td><input type="text" name="denomination" placeholder="Nombre" required></td>
-						<td><input type="text" name="uri" placeholder="Uri" required></td>
-						<td><input type="submit" name="add_certificado" value="Crear" class="button action"></td>
+						<td>Valor Fixcoin cuando refieres a un amigo</td>
+						<td><input type="number" name="valor" value="<?php echo $Query_Valor_Fixcoin->valor;?>" required></td>
+						<td><?php echo $Query_Valor_Fixcoin->fecha;?></td>
+						<td><input type="submit" name="save_valor_fixcoin" value="Guardar" class="button action"></td>
 					</tr>
 				</form>
+			</table>
+
+			<h2>Certificados</h2>
+			<table class="wp-list-table widefat" cellspacing="0">
+				<thead>
+					<tr valign="top">
+						<?php foreach($Query_Certificados[0] as $key => $value):?>
+						<?php if(!in_array($key, $exclude_tabla_certificados)):?><th><?php echo $key; ?></th><?php endif;?>
+						<?php endforeach; ?>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody id="the-list">
+					<?php 
+					$alter = "";
+					foreach ( $Query_Certificados as $lista ):
+						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+					?>
+					<form method="post">
+						<tr valign="top" <?php echo $alter; ?>>
+							<?php foreach($lista as $key => $va):?>
+								<?php if(!in_array($key, $exclude_tabla_certificados)):?>
+									<?php if( $key == "denomination" || $key == "uri" ):?>
+										<td><input type="text" name="<?php echo $key;?>" value="<?php echo $va;?>" required></td>
+									<?php else:?>
+										<td><?php echo $va;?></td>
+									<?php endif;?>
+								<?php endif;?>
+							<?php endforeach; ?>
+							<td>
+								<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
+								<input type="submit" name="update_certificado" value="Actualizar" class="button action">
+								<input type="submit" name="borrar_certificado" value="Borrar" class="button action">
+							</td>
+						</tr>
+					</form>
+					<?php endforeach;?>
+
+					<form method="post">
+						<tr>
+							<td>Nuevo</td>
+							<td><input type="text" name="denomination" placeholder="Nombre" required></td>
+							<td><input type="text" name="uri" placeholder="Uri" required></td>
+							<td><input type="submit" name="add_certificado" value="Crear" class="button action"></td>
+						</tr>
+					</form>
 
 
-			</tbody>
-		</table>
+				</tbody>
+			</table>
 
-
-		
-		
-
+		</div>
 	</div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-
-	<script type="text/javascript">
-	
-	</script>
 	<?php
 }
 //
@@ -3176,6 +3888,32 @@ function func_tabla_form_servicio($q, $excluir_rows, $only_read){
 	return $ret;
 }
 //
+function func_tabla_form_fieldcontainer($q, $excluir_rows, $only_read){
+	$ret = "";
+	$alter = "";
+	foreach($q as $k => $v){
+		if( !in_array($k, $excluir_rows) ){
+			$ret .= "<li class='ui-field-contain'>";
+			$ret .= "<label for='".$k."'>".Traductor_Nombre_Columnas($k)."</label>";
+
+			if( in_array($k, $only_read) ){
+				$ret .= "".$v."";
+			}else{
+				if($k == "gender"){
+					$ret .= "<select name='gender'>".func_select_tabla_id_denomination("gender", $v)."</select>";
+				}else if($k == "birth_date"){
+					$ret .= "<input type='datetime-local' name='".$k."' value='".(new DateTime($v))->format("Y-m-d\\TH:i:s")."' data-clear-btn='true'>";
+				}else{
+					$ret .= "<input type='text' name='".$k."' value='".$v."' data-clear-btn='true'>";
+				}
+			}
+
+			$ret .= "</li>";
+		}
+	}
+	return $ret;
+}
+//
 function Gen_Btn_Experto($id_expert, $show_tipo = false){
 	$Query__Expert = plugDB("SELECT u.name as nombre, u.id as id_user FROM experts e LEFT JOIN users u ON e.user = u.id WHERE e.id = '".$id_expert."'", "row");
 	?>
@@ -3266,5 +4004,14 @@ function Select_ColByExpert($expert, $actual){
 		}
 	}
 	return $ret;
+}
+//
+function Traductor_Nombre_Columnas($key){
+	$datos = array("name" => "Nombre", "date_registry" => "Fecha Registro", "birth_date" => "Fecha Nacimiento", "id_user" => "Id Usuario", "email" => "Correo", "gender" => "Genero", "authentication_date" => "Ultimo Login");
+	if( !$datos[$key] ){
+		return $key;
+	}else{
+		return $datos[$key];
+	}
 }
 ?>
