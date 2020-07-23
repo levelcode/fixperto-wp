@@ -40,6 +40,7 @@ function function_enable_pages(){
 	remove_submenu_page( 'configuracion_db', 'configuracion_db' );
 	
 }
+
 function page_admin(){
 	?>
 	<div class="wrap">
@@ -345,6 +346,25 @@ function page_clientes_editar_cliente(){
 			font:inherit !important;
 			font-size:16px !important;
 		}
+
+		@media(min-width : 80em){
+			.li_form{
+				display : flex !important;
+			}
+
+			.li_form .label_form{
+				width : 20%
+			}
+
+			.li_form .inp_form{
+				width : 80%
+			}
+
+			.btn_form{
+				width : 15%;
+				margin: auto
+			}
+		}
 	</style>
 	
 	<div data-role="page">
@@ -397,14 +417,17 @@ function page_clientes_editar_cliente(){
 									array("id", "date_registry", "authentication_date")
 								);
 							?>
-							<li class="ui-field-contain">
-								<label for="phone">Telefono:</label>
-								<input type="text" name="phone" value="<?php echo $Query_Customer->phone;?>" data-clear-btn="true">
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="phone">Telefono:</label>
+								</div>
+								<div class="inp_form">
+									<input type="text" name="phone" value="<?php echo $Query_Customer->phone;?>" data-clear-btn="true">
+								</div>
 							</li>
 							<li class="ui-body ui-body-b">
-								<fieldset class="ui-grid-a">
-										<div class="ui-block-a"></div>
-										<div class="ui-block-b">
+								<fieldset class="">
+										<div class="btn_form">
 											<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 											<input type="hidden" name="editar_cliente" value="ok">
 											<input type="submit" name="es_usuario" value="Guardar" data-role="button" data-theme="b">
@@ -2150,6 +2173,7 @@ function page_lista_servicios(){
 	</script>
 	<?php
 }
+
 function Mis_Sub_Cates($id){
 	$q_sub = "
 	SELECT c.*, if(req.suma,req.suma,0)as suma
@@ -2630,7 +2654,7 @@ function page_servicios_editar_servicio(){
 								</select>
 							</li>
 							<li class="ui-field-contain">
-								<label for="">Fecha Registro:</label>
+								<label for="">Fecha Registro: </label>
 								<?php echo $Query->registry_date;?>
 							</li>
 							<li class="ui-field-contain">
@@ -3585,6 +3609,24 @@ function page_reporte_clientes(){
 		div.DataTables_sort_wrapper span {
 			right: -10px !important;
 		}
+
+
+		@media(min-width : 80em){
+			.li_form{
+				display : flex
+			}
+
+			.li_form .label_form{
+				width : 20%
+			}
+
+			.li_form .inp_form{
+				width : 80%
+			}
+
+		}
+
+		
 	</style>
 
 	<div data-role="page">
@@ -3893,12 +3935,13 @@ function func_tabla_form_fieldcontainer($q, $excluir_rows, $only_read){
 	$alter = "";
 	foreach($q as $k => $v){
 		if( !in_array($k, $excluir_rows) ){
-			$ret .= "<li class='ui-field-contain'>";
-			$ret .= "<label for='".$k."'>".Traductor_Nombre_Columnas($k)."</label>";
+			$ret .= "<li class='ui-field-contain li_form'>";
+			$ret .= "<div class='label_form'><label for='".$k."'>".Traductor_Nombre_Columnas($k). "</label></div>";
 
 			if( in_array($k, $only_read) ){
 				$ret .= "".$v."";
 			}else{
+				$ret .= "<div class='inp_form'>";
 				if($k == "gender"){
 					$ret .= "<select name='gender'>".func_select_tabla_id_denomination("gender", $v)."</select>";
 				}else if($k == "birth_date"){
@@ -3906,6 +3949,7 @@ function func_tabla_form_fieldcontainer($q, $excluir_rows, $only_read){
 				}else{
 					$ret .= "<input type='text' name='".$k."' value='".$v."' data-clear-btn='true'>";
 				}
+				$ret .= "</div>";
 			}
 
 			$ret .= "</li>";
