@@ -347,6 +347,15 @@ function page_clientes_editar_cliente(){
 			font-size:16px !important;
 		}
 
+		.ui-collapsible-inset .ui-collapsible-content{
+			overflow-y: scroll !important;
+		}
+
+		
+		.dataTables_wrapper{
+			overflow-x : scroll;
+		}
+
 		@media(min-width : 80em){
 			.li_form{
 				display : flex !important;
@@ -985,6 +994,69 @@ function page_profesionales_editar_experto(){
 			font:inherit !important;
 			font-size:16px !important;
 		}
+
+		.btn_form{
+			width : 15%;
+			margin:auto;
+		}
+
+		.ui-collapsible-inset .ui-collapsible-content{
+			overflow-y: scroll !important;
+		}
+
+		@media(min-width : 80em){
+			.li_form{
+				display : flex !important;
+				align-items : center;
+			}
+
+			.li_form .label_form{
+				width : 20%
+			}
+
+			.li_form .label_form label{
+				font-size : 1rem;
+			}
+
+
+			.li_form .inp_form{
+				width : 80%
+			}
+
+			.li_form .img_form{
+				width: 40%;
+				position: relative;
+			}
+
+			.li_form .img_form img{
+				width: 70%;
+				object-fit: cover;
+				margin: auto;
+				position: relative;
+			}
+
+			.li_form .act_form{
+				width: 20%;
+			}
+
+			.li_form .act_form .btn_form{
+				width : 142px;
+				margin:auto;
+			}
+
+			.table_form th{
+				font-size: 1rem;
+    			font-weight: bold;
+			}
+
+			.li_cat .ui-select{
+				width : 90%;
+			}
+
+			.dataTables_wrapper{
+				overflow-x : scroll;
+			}
+		}
 	</style>
 
 	<link rel="stylesheet" href="https://harvesthq.github.io/chosen/chosen.css">
@@ -1059,28 +1131,35 @@ function page_profesionales_editar_experto(){
 
 			<div data-role="collapsible">
 			    <h4>Fixcoins</h4>
-			    <p>
-				<table class="wp-list-table widefat" cellspacing="0">
-					<tbody id="the-list">
-						<tr>
-							<td>Actual</td>
-							<td id="label_actual_fixcoins"><?php echo $Query_expert->fitcoints;?></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
 
-						<tr class="alternate">
-							<td>Dar</td>
-							<td><input type="number" value="0" min="0" id="cant_dar_fixcoins"></td>
-							<td>
-								<input type="button" value="Enviar" class="button action" onClick="Do_Dar_Fixcoins();">
-							</td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
+				<p>
+					<form method="post" name="la_data" class="formulario">
+						<ul data-role="listview" data-inset="true">
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="phone">Actual:</label>
+								</div>
+								<div class="inp_form">
+									<?php echo $Query_expert->fitcoints;?>
+								</div>
+							</li>
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="phone">Dar:</label>
+								</div>
+								<div class="inp_form">
+									<input type="number" value="0" min="0" id="cant_dar_fixcoins">
+								</div>
+							</li>
+							<li class="ui-body ui-body-b">
+								<fieldset class="">
+										<div class="btn_form">
+											<input type="button" value="Enviar" class="button action" onClick="Do_Dar_Fixcoins();">
+										</div>
+								</fieldset>
+							</li>
+						</ul>
+					</form>
 				</p>
 			</div>
 
@@ -1096,16 +1175,17 @@ function page_profesionales_editar_experto(){
 									array("id", "date_registry", "authentication_date")
 								);
 							?>
+
 							<li class="ui-body ui-body-b">
-								<fieldset class="ui-grid-a">
-									<div class="ui-block-a"></div>
-									<div class="ui-block-b">
+								<fieldset class="">
+									<div class="btn_form">
 										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 										<input type="hidden" name="editar_cliente" value="ok">
 										<input type="submit" name="es_usuario" value="Guardar" class="button action">
 									</div>
 								</fieldset>
 							</li>
+
 						</ul>
 					</form>
 				</p>
@@ -1116,16 +1196,28 @@ function page_profesionales_editar_experto(){
 			    <p>
 					<form method="post" name="la_data" class="formulario">
 						<ul data-role="listview" data-inset="true">
-							<li class="ui-field-contain">
-								<label>Tipo:</label>
-								<?php echo ($Query_expert->type == 0)?"Independiente":"Empresa";?>
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label>Tipo:</label>
+								</div>
+
+								<div class="inp_form">
+									<?php echo ($Query_expert->type == 0)?"Independiente":"Empresa";?>
+								</div>
 							</li>
-							<li class="ui-field-contain">
-								<label>identification_type:</label>
-								<select name="identification_type">
-									<?php echo func_select_tabla_id_denomination("identification_type", $Query_expert->identification_type);?>
-								</select>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label>identification_type:</label>
+								</div>
+								
+								<div class="inp_form">
+									<select name="identification_type">
+										<?php echo func_select_tabla_id_denomination("identification_type", $Query_expert->identification_type);?>
+									</select>
+								</div>
 							</li>
+
 							<?php
 							echo func_tabla_form_fieldcontainer(
 								$Query_expert, 
@@ -1133,20 +1225,32 @@ function page_profesionales_editar_experto(){
 								array("id", "user")
 							);
 							?>
-							<li class="ui-field-contain">
-								<label>educational_level:</label>
-								<select name="educational_level">
-									<?php echo func_select_tabla_id_denomination("educational_level", $Query_expert->educational_level);?>
-								</select>
+							<li class="ui-field-contain li_form">
+
+								<div class="label_form">
+									<label>educational_level:</label>
+								</div>
+
+								<div class="inp_form">
+									<select name="educational_level">
+										<?php echo func_select_tabla_id_denomination("educational_level", $Query_expert->educational_level);?>
+									</select>
+								</div>
 							</li>
-							<li class="ui-field-contain">
-								<label>Descripción:</label>
-								<textarea name="profile_description"><?php echo $Query_expert->profile_description;?></textarea>
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label>Descripción:</label>
+								</div>
+
+								<div class="inp_form">
+									<textarea name="profile_description"><?php echo $Query_expert->profile_description;?></textarea>
+								</div>
+								
 							</li>
+
 							<li class="ui-body ui-body-b">
-								<fieldset class="ui-grid-a">
-									<div class="ui-block-a"></div>
-									<div class="ui-block-b">
+								<fieldset class="">
+									<div class="btn_form">
 										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 										<input type="hidden" name="editar_cliente" value="ok">
 										<input type="submit" name="es_experto" value="Guardar" class="button action">
@@ -1161,8 +1265,10 @@ function page_profesionales_editar_experto(){
 			<?php if($Query_expert->type == 0):?>
 			<div data-role="collapsible">
 			    <h4>Seguridad social</h4>
-			    <p>
-					<table class="wp-list-table widefat" cellspacing="0">
+
+				<p>
+
+					<table class="wp-list-table widefat table_form" cellspacing="0">
 						<thead>
 							<tr valign="top">
 								<th>Campo</th>
@@ -1170,82 +1276,158 @@ function page_profesionales_editar_experto(){
 								<th>Accion</th>
 							</tr>
 						</thead>
-					<tbody id="the-list">
-						<form method="post" name="la_data">
-							<tr>
-								<td>Fotocopia documento</td>
-								<td>
-									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" target="_blank" id="link_fotocopy">
-										<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" height="200" id="img_fotocopy">
-									</a>
-								</td>
-								<td>
-									<input type="file" class="form-control-file" id="imagen_fotocopy"><br>
-									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Fotocopy();">
-								</td>
-							</tr>
-
-							<tr valign="top" class="alternate">
-								<td>date_arl</td>
-								<td><input type="datetime-local" name="date_arl" value="<?php echo (new DateTime($Query_expert->date_arl))->format("Y-m-d\\TH:i:s");?>"></td>
-								<td></td>
-							</tr>
-							<tr valign="top">
-								<td>arl</td>
-								<td>
-									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" target="_blank" id="link_arl">
-										<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" height="200" id="img_arl">
-									</a>
-								</td>
-								<td>
-									<input type="file" class="form-control-file" id="imagen_arl"><br>
-									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Arl();">
-								</td>
-							</tr>
-
-							<tr valign="top" class="alternate">
-								<td>date_salud_pension</td>
-								<td><input type="datetime-local" name="date_salud_pension" value="<?php echo (new DateTime($Query_expert->date_salud_pension))->format("Y-m-d\\TH:i:s");?>"></td>
-								<td></td>
-							</tr>
-							<tr valign="top">
-								<td>salud_pension</td>
-								<td>
-									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" target="_blank" id="link_salud">
-										<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" height="200" id="img_salud">
-									</a>
-								</td>
-								<td>
-									<input type="file" class="form-control-file" id="imagen_salud"><br>
-									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Salud();">
-								</td>
-							</tr>
-							<tr valign="top">
-								<td>
-									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-									<input type="hidden" name="editar_cliente" value="ok">
-									<input type="submit" name="es_experto" value="Guardar" class="button action">
-								</td>
-								<td></td>
-							</tr>
-							</form>
-						</tbody>
 					</table>
+
+					<form method="post" name="la_data">
+						<ul data-role="listview" data-inset="true">
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label>Fotocopia documento</label>
+								</div>
+
+								<div class="img_form">
+									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" target="_blank" id="link_fotocopy">
+									<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" height="200" id="img_fotocopy">
+									</a>
+								</div>
+
+								<div class="act_form">
+
+									<fieldset class="">
+										<div class="btn_form">
+											<input type="file" class="form-control-file" id="imagen_fotocopy"><br>
+											<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Fotocopy();">
+										</div>
+									</fieldset>
+
+								</div>
+							</li>
+							
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label>Fotocopia documento</label>
+								</div>
+
+								<div class="img_form">
+									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" target="_blank" id="link_fotocopy">
+									<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" height="200" id="img_fotocopy">
+									</a>
+								</div>
+
+								<div class="act_form">
+
+									<fieldset class="">
+										<div class="btn_form">
+											<input type="file" class="form-control-file" id="imagen_fotocopy"><br>
+											<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Fotocopy();">
+										</div>
+									</fieldset>
+
+								</div>
+							</li>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label>Fecha arl</label>
+								</div>
+
+								<div class="inp_form">
+									<input type="datetime-local" name="date_arl" value="<?php echo (new DateTime($Query_expert->date_arl))->format("Y-m-d\\TH:i:s");?>">
+								</div>
+
+							</li>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label>Arl</label>
+								</div>
+
+								<div class="img_form">
+									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" target="_blank" id="link_arl">
+									<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/arl/<?php echo $Query_expert->arl;?>" height="200" id="img_arl">
+									</a>
+								</div>
+
+								<div class="act_form">
+
+									<fieldset class="">
+										<div class="btn_form">
+											<input type="file" class="form-control-file" id="imagen_arl"><br>
+											<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Arl();">
+										</div>
+									</fieldset>
+
+								</div>
+							</li>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label>Fecha salud y pension</label>
+								</div>
+
+								<div class="inp_form">
+									<input type="datetime-local" name="date_salud_pension" value="<?php echo (new DateTime($Query_expert->date_salud_pension))->format("Y-m-d\\TH:i:s");?>">
+								</div>
+
+							</li>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label>Salud y pension</label>
+								</div>
+
+								<div class="img_form">
+									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" target="_blank" id="link_salud">
+									<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/salud_pension/<?php echo $Query_expert->salud_pension;?>" height="200" id="img_salud">
+									</a>
+								</div>
+
+								<div class="act_form">
+
+									<fieldset class="">
+										<div class="btn_form">
+											<input type="file" class="form-control-file" id="imagen_salud"><br>
+											<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Salud();">
+										</div>
+									</fieldset>
+
+								</div>
+							</li>
+
+							<li class="ui-body ui-body-b">
+								<fieldset class="">
+									<div class="btn_form">
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_cliente" value="ok">
+										<input type="submit" name="es_experto" value="Guardar" class="button action">
+									</div>
+								</fieldset>
+							</li>
+
+						</ul>
+					</form>
 				</p>
+
 			</div>
+
 			<div data-role="collapsible">
 			    <h4>Certificados</h4>
+
 			    <p>
-					<table class="wp-list-table widefat" cellspacing="0">
-					<thead>
-						<tr valign="top" valign="top">
-							<th>Imagen</th>
-							<th>Editar Imagen</th>
-							<th>Tipo certificado</th>
-							<th>Accion</th>
-						</tr>
-					</thead>
-					<tbody id="the-list">
+
+					<table class="wp-list-table widefat table_form" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<th>Imagen</th>
+								<th>Editar Imagen</th>
+								<th>Tipo Certificado</th>
+								<th>Acción</th>
+							</tr>
+						</thead>
+					</table>
+
+					<ul data-role="listview" data-inset="true" id="the-list">
 						<?php 
 						$alter = "";
 						$suma_certificados = 0;
@@ -1253,53 +1435,54 @@ function page_profesionales_editar_experto(){
 							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 						?>
 						<form method="post">
-						<tr <?php echo $alter; ?>>
-							<td>
-								<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" target="_blank" id="link_certificado_<?php echo $suma_certificados;?>">
-									<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" height="150" id="img_certificado_<?php echo $suma_certificados;?>">
-								</a>
-							</td>
-							<td>
-								<input type="file" class="form-control-file" id="imagen_certificado_<?php echo $suma_certificados;?>"><br>
-								<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Certificado('<?php echo $item_certificado->id;?>', '<?php echo $suma_certificados;?>');">
-							</td>
-							<td>
-								<select name="certification_type">
-									<?php echo func_select_tabla_id_denomination("certifications_type", $item_certificado->certification_type);?>
-								</select>
-							</td>
-							<td>
-								<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-								<input type="hidden" name="editar_cliente" value="ok">
-								<input type="hidden" name="id_certi" value="<?php echo $item_certificado->id;?>">
-								<input type="submit" name="update_certificado" value="Actualizar" class="button action">
-								<input type="submit" name="del_certificado" value="Borrar" class="button action">
-							</td>
-						</tr>
+							<li class="ui-field-contain li_form" <?php echo $alter; ?>>
+								<div style="width : 20%">
+									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" target="_blank" id="link_certificado_<?php echo $suma_certificados;?>">
+									<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" height="150" id="img_certificado_<?php echo $suma_certificados;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
+									</a>
+								</div>
+								<div style="width : 25%">
+									<input type="file" class="form-control-file" id="imagen_certificado_<?php echo $suma_certificados;?>"><br>
+									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Certificado('<?php echo $item_certificado->id;?>', '<?php echo $suma_certificados;?>');">
+								</div>
+								<div style="width : 25%; position: relative; top: 17px; margin-left: 40px;">
+									<select name="certification_type">
+										<?php echo func_select_tabla_id_denomination("certifications_type", $item_certificado->certification_type);?>
+									</select>
+								</div>
+								<div style="width : 25%">
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="hidden" name="id_certi" value="<?php echo $item_certificado->id;?>">
+									<input type="submit" name="update_certificado" value="Actualizar" class="button action">
+									<input type="submit" name="del_certificado" value="Borrar" class="button action">
+								</div>
+							</li>
 						</form>
 						<?php 
 						$suma_certificados++;
 						endforeach;
 						?>
+
 						<form method="post">
-							<tr>
-								<td></td>
-								<td></td>
-								<td>
+							<li class="ui-field-contain li_form">
+								<div style="width : 20%"></div>
+								<div style="width : 29%"></div>
+								<div style="width : 25%">
 									<select name="certification_type">
 										<?php echo func_select_tabla_id_denomination("certifications_type", "");?>
 									</select>
-								</td>
-								<td>
+								</div>
+								<div style="width : 25%"> 
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
 									<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
 									<input type="submit" name="add_certificado" value="Crear" class="button action">
-								</td>
-							</tr>
+								</div>
+							</li>
 						</form>
-					</tbody>
-					</table>
+
+					</ul>
 				</p>
 			</div>
 			<?php endif;?>
@@ -1307,7 +1490,7 @@ function page_profesionales_editar_experto(){
 			<div data-role="collapsible">
 			    <h4>Proyectos</h4>
 			    <p>
-					<table class="wp-list-table widefat" cellspacing="0">
+					<table class="wp-list-table widefat table_form" cellspacing="0">
 						<thead>
 							<tr valign="top" valign="top">
 								<th>Imagen</th>
@@ -1316,136 +1499,166 @@ function page_profesionales_editar_experto(){
 								<th>Accion</th>
 							</tr>
 						</thead>
-						<tbody id="the-list">
-							<?php 
-							$alter = "";
-							$suma_proyectos = 0;
-							foreach($Query_Proyectos as $item_proyecto):
-								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-							?>
-							<form method="post">
-							<tr <?php echo $alter; ?>>
-								<td>
-									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
-										<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>">
-									</a>
-								</td>
-								<td>
-									<input type="file" class="form-control-file" id="imagen_proyecto_<?php echo $suma_proyectos;?>"><br>
-									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Proyecto('<?php echo $item_proyecto->id;?>', '<?php echo $suma_proyectos;?>');">
-								</td>
-								<td>
-									<input type="text" name="description" value="<?php echo $item_proyecto->description;?>" required>
-								</td>
-								<td>
+					</table>
+					<ul data-role="listview" data-inset="true" id="the-list">
+						<?php 
+						$alter = "";
+						$suma_proyectos = 0;
+						foreach($Query_Proyectos as $item_proyecto):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<form method="post">
+						<li class="ui-field-contain li_form" <?php echo $alter; ?>>
+							<div style="width : 20%">
+								<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
+								<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
+								</a>
+							</div>
+							<div style="width : 25%">
+								<input type="file" class="form-control-file" id="imagen_proyecto_<?php echo $suma_proyectos;?>"><br>
+								<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Proyecto('<?php echo $item_proyecto->id;?>', '<?php echo $suma_proyectos;?>');">
+							</div>
+							<div style="width : 25%; position: relative; top: 17px; margin-left: 40px;">
+								<input type="text" name="description" value="<?php echo $item_proyecto->description;?>" required>
+							</div>
+
+							<div style="width : 25%">
+								<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+								<input type="hidden" name="editar_cliente" value="ok">
+								<input type="hidden" name="id_proy" value="<?php echo $item_proyecto->id;?>">
+								<input type="submit" name="update_proyecto" value="Actualizar" class="button action">
+								<input type="submit" name="del_proyecto" value="Borrar" class="button action">
+							</div>
+
+						</li>
+						</form>
+						<?php 
+						$suma_proyectos++;
+						endforeach;
+						?>
+
+						<form method="post">
+							<li class="ui-field-contain li_form">
+								<div style="width : 20%"></div>
+								<div style="width : 29%"></div>
+								<div style="width : 25%">
+									<input type="text" name="description" placeholder="Titulo Proyecto" required>
+								</div>
+								<div style="width : 25%"> 
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
-									<input type="hidden" name="id_proy" value="<?php echo $item_proyecto->id;?>">
-									<input type="submit" name="update_proyecto" value="Actualizar" class="button action">
-									<input type="submit" name="del_proyecto" value="Borrar" class="button action">
-								</td>
-							</tr>
-							</form>
-							<?php 
-							$suma_proyectos++;
-							endforeach;
-							?>
-							<form method="post">
-								<tr>
-									<td></td>
-									<td></td>
-									<td>
-										<input type="text" name="description" placeholder="Titulo Proyecto" required>
-									</td>
-									<td>
-										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-										<input type="hidden" name="editar_cliente" value="ok">
-										<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
-										<input type="submit" name="add_proyecto" value="Crear" class="button action">
-									</td>
-								</tr>
-							</form>
-						</tbody>
-					</table>
+									<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
+									<input type="submit" name="add_proyecto" value="Crear" class="button action">
+								</div>
+							</li>
+						</form>
+					</ul>
 				</p>
 			</div>
 
 			<div data-role="collapsible">
 			    <h4>Referidos</h4>
 			    <p>
-					<table class="wp-list-table widefat" cellspacing="0">
-						<tr>
-							<td>Mi Cupon</td>
-							<td><?php echo $Query->code."".$Query->id;?></td>
-						</tr>
-					</table>
-					<table class="wp-list-table widefat" cellspacing="0">
-						<thead>
-							<tr valign="top" valign="top">
-								<th>Referido</th>
-								<th>Fecha registro</th>
-							</tr>
-						</thead>
-						<tbody id="the-list">
+
+					<ul data-role="listview" data-inset="true">
+						<li class="ui-field-contain li_form">
+							<div class="label_form">
+								<label>Mi Cupon </label>
+							</div>
+
+							<div class="inp_form">
+								<?php echo $Query->code."".$Query->id;?>
+							</div>
+						</li>
+
+						<li class="ui-field-contain li_form">
+							<div class="label_form">
+								<label>Referido </label>
+							</div>
+
+							<div class="inp_form">
+								Fecha registro
+							</div>
+						</li>
+
+						<li id="the-list">
 							<?php 
 							$alter = "";
 							foreach($Query_Referidos as $item_referido):
 								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 							?>
-							<tr valign="top" valign="top">
-								<td><?php Gen_Btn_Experto($item_referido->id);?></td>
-								<td><?php echo $item_referido->fecha;?></td>
-							</tr>
+							<div class="label_form">
+								<label><?php Gen_Btn_Experto($item_referido->id);?> </label>
+							</div>
+
+							<div class="inp_form">
+								<?php echo $item_referido->fecha;?>
+							</div>
 							<?php endforeach;?>
-						</tbody>
-					</table>
+						</li>
+
+					</ul>
+
+						
 				</p>
 			</div>
 
 			<div data-role="collapsible">
 			    <h4>Plan</h4>
 			    <p>
-					<table class="wp-list-table widefat" cellspacing="0">
-						<thead>
-							<tr valign="top">
-								<th>Campo</th>
-								<th>Valor</th>
-							</tr>
-						</thead>
-						<tbody id="the-list">
-							<form method="post" name="la_data">
-								<tr valign="top" class="alternate">
-									<td>Plan</td>
-									<td>
-										<select name="plan">
+
+					<form method="post" name="la_data" class="formulario">
+						<ul data-role="listview" data-inset="true">
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="phone">Plan</label>
+								</div>
+								<div class="inp_form">
+									<select name="plan">
 										<?php echo func_select_tabla_id_denomination("plans", $Query_Expert_Plan->plan);?>
-										</select>
-									</td>
-								</tr>
-								<tr valign="top" >
-									<td>start_date</td>
-									<td><input type="datetime-local" name="start_date" value="<?php echo (new DateTime($Query_Expert_Plan->start_date))->format("Y-m-d\\TH:i:s");?>"></td>
-								</tr>
-								<tr valign="top" class="alternate">
-									<td>end_date</td>
-									<td><input type="datetime-local" name="end_date" value="<?php echo (new DateTime($Query_Expert_Plan->end_date))->format("Y-m-d\\TH:i:s");?>"></td>
-								</tr>
-								<tr valign="top" >
-									<td>status</td>
-									<td><?php echo $Query_Expert_Plan->status;?></td>
-								</tr>
-								<tr valign="top" class="alternate">
-									<td>
+									</select>
+								</div>
+							</li>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="phone">Fecha inicio</label>
+								</div>
+								<div class="inp_form">
+									<input type="datetime-local" name="start_date" value="<?php echo (new DateTime($Query_Expert_Plan->start_date))->format("Y-m-d\\TH:i:s");?>">
+								</div>
+							</li>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="phone">Fecha final</label>
+								</div>
+								<div class="inp_form">
+									<input type="datetime-local" name="end_date" value="<?php echo (new DateTime($Query_Expert_Plan->end_date))->format("Y-m-d\\TH:i:s");?>">
+								</div>
+							</li>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="phone">Estado</label>
+								</div>
+								<div class="inp_form">
+									<?php echo $Query_Expert_Plan->status;?>
+								</div>
+							</li>
+
+							<li class="ui-body ui-body-b">
+								<fieldset class="">
+									<div class="btn_form">
 										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 										<input type="hidden" name="id_plan" value="<?php echo $Query_Expert_Plan->id;?>">
 										<input type="hidden" name="editar_cliente" value="ok">
 										<input type="submit" name="es_plan" value="Guardar" class="button action">
-									</td>
-									<td></td>
-								</tr>
-							</form>
-						</tbody>
-					</table>
+									</div>
+								</fieldset>
+							</li>
+						</ul>
+					</form>
 				</p>
 			</div>
 
@@ -1456,22 +1669,31 @@ function page_profesionales_editar_experto(){
 						<thead>
 							<tr valign="top">
 								<?php foreach($Query_Categorias[0] as $key => $value):?>
-								<?php if($key == "Categoria" || $key == "Sub_Categoria"):?><th><?php echo $key; ?></th><?php endif;?>
+									<?php if($key == "Categoria" || $key == "Sub_Categoria"):?>
+										<th>
+											<?php echo $key; ?>
+										</th>
+									<?php endif;?>
 								<?php endforeach; ?>
 								<th>Acciones</th>
 							</tr>
 						</thead>
-						<tbody id="the-list">
+					</table>
+						<ul id="the-list" data-role="listview" data-inset="true">
 							<?php 
 							$alter = "";
 							foreach ( $Query_Categorias as $lista ):
 								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 							?>
-							<tr valign="top" <?php echo $alter; ?>>
+							<li valign="top"  class="ui-body ui-body-b li_form" <?php echo $alter; ?>>
 								<?php foreach($lista as $it => $va):?>
-									<?php if($it == "Categoria" || $it == "Sub_Categoria"):?><td><?php echo $va;?></td><?php endif;?>
+									<?php if($it == "Categoria" || $it == "Sub_Categoria"):?>
+									<div>
+										<?php echo $va;?>
+									</div>
+									<?php endif;?>
 								<?php endforeach; ?>
-								<td>
+								<div>
 									<form method="post">
 										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 										<input type="hidden" name="editar_cliente" value="ok">
@@ -1479,35 +1701,34 @@ function page_profesionales_editar_experto(){
 										<input type="hidden" name="category" value="<?php echo $lista->id_cat;?>">
 										<input type="submit" name="del_categoria" value="Borrar" class="button action">
 									</form>
-								</td>
-							</tr>
+								</div>
+							</li>
 							<?php endforeach;?>
 							
 							<form method="post">
-							<tr valign="top">
-								<td>
-									<select id="select_service" onchange="Do_Select_Category();">
+							<li valign="top"  class=" li_form li_cat">
+								<div style="width : 33%">
+									<select id="select_service" onchange="Do_Select_Category();" >
 										<?php echo func_select_tabla_id_denomination("services", "");?>
 									</select>
-								</td>
+								</div>
 
-								<td>
-									<select name="category" id="select_category">
+								<div style="width : 33%">
+									<select name="category" id="select_category" >
 										<?php echo func_select_sub_categorias("", "");?>
 									</select>
-								</td>
+								</div>
 								
-								<td>
+								<div style="width : 33%">
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
 									<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
-									<input type="submit" name="add_categoria" value="Crear" class="button action">
-								</td>
-							</tr>
+									<input type="submit" name="add_categoria" value="Crear" class="button action" >
+								</div>
+							</li>
 							</form>
 
-						</tbody>
-					</table>
+						</ul>
 				</p>
 			</div>
 
@@ -2036,6 +2257,7 @@ function page_lista_servicios(){
 			jQuery('#wpfooter').remove();
 		} );
 	</script>
+	
 	<style>
 		.controlgroup-textinput{
 		    padding-top:.22em;
@@ -2059,6 +2281,34 @@ function page_lista_servicios(){
 			font:inherit !important;
 			font-size:16px !important;
 		}
+
+		.ui-shadow-inset{
+			box-shadow: none !important;
+			margin-left : 10px;
+		}
+
+		.flex{
+			display : flex !important;
+		}
+
+		.btn_per{
+			border: none;
+			width: 150px;
+			padding: 10px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.3);
+			outline: none;
+			margin-top: 10px;
+			font-weight: bold;
+			border-radius: 6px;
+			font-size : 0.8rem;
+		}
+
+		.btn_form{
+			width : 40%;
+			margin: auto
+		}
+
+
 	</style>
 
 	<div data-role="page">
@@ -2072,7 +2322,7 @@ function page_lista_servicios(){
 					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
 						<input type="text" name="nombre" placeholder="Ingrese Nombre" value="">
 					</div>
-					<input type="submit" name="crear_categoria" value="Crear Categoria" class="ui-btn" data-theme="b">
+					<input type="submit" data-role="none" name="crear_categoria" value="Crear Categoria" class="ui-btn" data-theme="b" style="margin-top: 10px; margin-left: 15px; padding: 8px; background: #5a91c0; border: none; color: white;">
 				</form>
 			</div>
 		</div>
@@ -2085,42 +2335,44 @@ function page_lista_servicios(){
 					<div data-role="collapsible" >
 					    <h4><?php echo $lista->Servicio;?><!-- , Servicios: <?php echo $lista->cant_req;?>, Expertos: <?php echo $lista->cant_exp;?> --></h4>
 					    <p>
-							<div class="ui-grid-b">
-								<div class="ui-block-a">
+							<div style="display:flex">
+
+								<div style="width:20%">
 									<a href="<?php echo URL_BASE;?>/uploads/categories/<?php echo $lista->imagen;?>" target="_blank" id="link_cat_<?php echo $lista->id;?>">
 										<img src="<?php echo URL_BASE;?>/uploads/categories/<?php echo $lista->imagen;?>" height="100" id="img_cat_<?php echo $lista->id;?>">
 									</a><br>
-									<input type="file" class="form-control-file" id="imagen_cat_<?php echo $lista->id;?>"><br>
-									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Categoria('<?php echo $lista->id;?>', '<?php echo $lista->id;?>');">
+
+									<input type="file" class="form-control-file" id="imagen_cat_<?php echo $lista->id;?>" style="width : 80%"><br>
+									<input type="button" data-role="none" class=" upload btn_per" value="Subir" onClick="SubirImagen_Categoria('<?php echo $lista->id;?>', '<?php echo $lista->id;?>');">
 								</div>
-								<div class="ui-block-b">
+
+								<div style="width:20%">
 									<form method="post" onSubmit="return Validar_Nombre(this);">
 										<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
-										<input type="text" name="nombre" value="<?php echo $lista->Servicio;?>">
-										<input type="submit" name="editar_nombre_cat" value="Editar">
+										<input type="text" name="nombre" value="<?php echo $lista->Servicio;?>" style="width : 80%">
+										<input type="submit" data-role="none" class="btn_per" name="editar_nombre_cat" value="Editar">
 									</form>
 									<form method="post" onSubmit="return confirm('Quiere borrar: <?php echo $lista->Servicio;?>?');">
 									<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">	
-									<input type="submit" name="borrar_cat" value="Borrar Categoria">
+									<input type="submit" data-role="none" name="borrar_cat" value="Borrar Categoria" class="btn_per">
 									</form>
 									<?php if($lista->hidden == "0"):?>
 										<form method="post" onSubmit="return confirm('Quiere Suspender: <?php echo $lista->Servicio;?>?');">
 											<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
 											<input type="hidden" name="estado" value="1">	
-											<input type="submit" name="suspender_cat" value="Suspender Categoria">
+											<input type="submit" data-role="none" name="suspender_cat" class="btn_per" value="Suspender Categoria">
 										</form>
 									<?php else:?>
 										<form method="post" onSubmit="return confirm('Quiere Activar: <?php echo $lista->Servicio;?>?');">
 											<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">	
 											<input type="hidden" name="estado" value="0">
-											<input type="submit" name="suspender_cat" value="Activar Categoria">
+											<input type="submit" data-role="none" name="suspender_cat" class="btn_per" value="Activar Categoria">
 										</form>
 									<?php endif;?>
 								</div>
-								<div class="ui-block-c">
-									<table class="wp-list-table widefat" cellspacing="0">
-										<?php Mis_Sub_Cates($lista->id);?>
-									</table>
+
+								<div style="width:55%">
+									<?php Mis_Sub_Cates($lista->id);?>
 								</div>
 							</div>
 						</p>
@@ -2185,41 +2437,56 @@ function Mis_Sub_Cates($id){
 	$Query2 = plugDB($q_sub, "result");
 	foreach ( $Query2 as $lista_sub ):
 	?>
-	<tr>
-		<td>
-			<form method="post" onSubmit="return Validar_Nombre(this);">
-			<input type="hidden" name="id_item" value="<?php echo $lista_sub->id;?>">
-			<input type="text" name="nombre" value="<?php echo $lista_sub->denomination;?>">
-			<input type="submit" name="editar_nombre_subcat" value="Editar">
-			</form>
-		</td>
-		<td><?php echo $lista_sub->suma;?></td>
-		<td>
-			<form method="post">
+	<div style="margin-bottom: 10px;">
+		<div class="flex">
+			<div style="width : 150px">
+				<form method="post" onSubmit="return Validar_Nombre(this);">
 				<input type="hidden" name="id_item" value="<?php echo $lista_sub->id;?>">
-				<input type="number" name="costo_item" value="<?php echo $lista_sub->cost;?>">
-				<input type="submit" name="editar_fixcoin_subcat" value="Editar">
-			</form>
-		</td>
-		<td>
-			<form method="post" onSubmit="return confirm('Quiere borrar: <?php echo $lista_sub->denomination;?>?');">
-				<input type="hidden" name="id_item" value="<?php echo $lista_sub->id;?>">	
-				<input type="submit" name="borrar_subcat" value="Borrar Subcategoria">
-			</form>
-		</td>
-	</tr>
+				<input type="text" name="nombre" value="<?php echo $lista_sub->denomination;?>">
+				<input type="submit" data-role="none"  class="btn_per" name="editar_nombre_subcat" value="Editar">
+				</form>
+			</div>
+			<div style="width : 150px;  margin-left : 15px">
+				<p> <b> Suma : </b> <?php echo $lista_sub->suma;?></p>
+			</div>
+			<div style="width : 150px">
+				<form method="post">
+					<input type="hidden" name="id_item" value="<?php echo $lista_sub->id;?>">
+					<input type="number" name="costo_item" value="<?php echo $lista_sub->cost;?>">
+					<input type="submit" data-role="none" class="btn_per" name="editar_fixcoin_subcat" value="Editar">
+				</form>
+			</div>
+			<div style="width : 150px;  margin-left : 15px">
+				<form method="post" onSubmit="return confirm('Quiere borrar: <?php echo $lista_sub->denomination;?>?');">
+					<input type="hidden" name="id_item" value="<?php echo $lista_sub->id;?>">	
+					<input type="submit" data-role="none" class="btn_per" name="borrar_subcat" value="Borrar Subcategoria">
+				</form>
+			</div>
+		</div>
+		<hr>
+	</div>
+	
 	<?php
 	endforeach;
 	?>
-	<tr>
-		<td>
+	<div>
+		<div>
 			<form method="post" onSubmit="return Validar_Nombre(this);">
-				<input type="hidden" name="id_parent" value="<?php echo $id;?>">
-				<input type="text" name="nombre" placeholder="Ingrese nombre">
-				<input type="submit" name="crear_subcat" value="Crear Subcategoria">
+				<ul data-role="listview" data-inset="true">
+					<li class="ui-body ui-body-b">
+						<fieldset class="">
+							<input type="hidden" name="id_parent" value="<?php echo $id;?>">
+							<input type="text" name="nombre" placeholder="Ingrese nombre">
+							<div class="btn_form">
+								<input type="submit" name="crear_subcat" value="Crear Subcategoria">
+							</div>
+						</fieldset>
+					</li>
+				</ul>
+				
 			</form>
-		</td>
-	</tr>
+		</div>
+	</div>
 	<?php
 }
 //
@@ -2530,6 +2797,36 @@ function page_servicios_editar_servicio(){
 			font:inherit !important;
 			font-size:16px !important;
 		}
+
+		.ui-content{
+			overflow-x : scroll !important;
+		}
+
+		.btn_form{
+			width : 15%;
+			margin: auto
+		}
+
+		@media(min-width : 80em){
+			.li_form{
+				display : flex !important;
+			}
+
+			.li_form .label_form{
+				width : 20%
+			}
+
+			.li_form .inp_form{
+				width : 80%
+			}
+		}
+
+		
+		.dataTables_wrapper{
+			overflow-x : scroll;
+		}
+
+
 	</style>
 
 	<div data-role="page">
@@ -2596,11 +2893,16 @@ function page_servicios_editar_servicio(){
 			    <p>
 					<form method="post" action="admin.php?page=clientes" target="_blank">
 						<ul data-role="listview" data-inset="true">
-							<li class="ui-field-contain">
-								<label for="">Cliente:</label>
-								<input type="hidden" name="id" value="<?php echo $Query_Cus->id;?>">
-								<input type="hidden" name="editar_cliente" value="ok">
-								<input type="submit" value="<?php echo $Query_Cus->name;?>" class="button action">
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">Cliente:</label>
+								</div>
+
+								<div class="inp_form">
+									<input type="hidden" name="id" value="<?php echo $Query_Cus->id;?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="submit" value="<?php echo $Query_Cus->name;?>" class="button action">
+								</div>
 							</li>
 						</ul>			
 					</form>
@@ -2616,61 +2918,110 @@ function page_servicios_editar_servicio(){
 							<li class="ui-field-contain">
 								<label for="">Cliente:</label>
 							</li>
-							<li class="ui-field-contain">
-								<label for="">completed_date:</label>
-								<input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($Query->completed_date))->format("Y-m-d\\TH:i:s");?>">
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">completed_date:</label>
+								</div>
+
+								<div class="inp_form">
+									<input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($Query->completed_date))->format("Y-m-d\\TH:i:s");?>">
+								</div>
 							</li>
-							<li class="ui-field-contain">
-								<label for="">Categoria:</label>
-								<select id="select_service" onchange="Do_Select_Category();">
-									<?php echo func_select_tabla_id_denomination("services", $Query_Cat->id);?>
-								</select>
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">Categoria:</label>
+								</div>
+
+								<div class="inp_form">
+									<select id="select_service" onchange="Do_Select_Category();">
+										<?php echo func_select_tabla_id_denomination("services", $Query_Cat->id);?>
+									</select>
+								</div>
+								
 							</li>
-							<li class="ui-field-contain">
-								<label for="">Sub Categoria:</label>
-								<select name="category" id="select_category">
-									<?php echo func_select_sub_categorias($Query_Cat->id, $Query->category);?>
-								</select>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">Sub Categoria:</label>
+								</div>
+
+								<div class="inp_form">
+									<select name="category" id="select_category">
+										<?php echo func_select_sub_categorias($Query_Cat->id, $Query->category);?>
+									</select>
+								</div>
 							</li>
-							<li class="ui-field-contain">
-								<label for="">Ciudad:</label>
-								<select id="select_ciudad" onchange="Do_Select_Zona();">
-									<?php echo func_select_tabla_id_denomination("cities", $Query_Reg->id);?>	
-								</select>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">Ciudad:</label>
+								</div>
+
+								<div class="inp_form">
+									<select id="select_ciudad" onchange="Do_Select_Zona();">
+										<?php echo func_select_tabla_id_denomination("cities", $Query_Reg->id);?>	
+									</select>
+								</div>
 							</li>
-							<li class="ui-field-contain">
-								<label for="">Zona:</label>
-								<select id="select_zona" name="region">
-									<?php echo func_select_sub_zonas($Query_Reg->id, $Query->region);?>
-								</select>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">Zona:</label>
+								</div>
+
+								<div class="inp_form">
+									<select id="select_zona" name="region">
+										<?php echo func_select_sub_zonas($Query_Reg->id, $Query->region);?>
+									</select>
+								</div>
 							</li>
-							<li class="ui-field-contain">
-								<label for="">Estado:</label>
-								<select name="status">
-									<?php echo func_select_estado_servicio(
-										array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), 
-										$Query->status
-									);?>
-								</select>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">Estado:</label>
+								</div>
+
+								<div class="inp_form">
+									<select name="status">
+										<?php echo func_select_estado_servicio(
+											array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), 
+											$Query->status
+										);?>
+									</select>
+								</div>
 							</li>
-							<li class="ui-field-contain">
-								<label for="">Fecha Registro: </label>
-								<?php echo $Query->registry_date;?>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">Fecha Registro: </label>
+								</div>
+
+								<div class="inp_form">
+									<?php echo $Query->registry_date;?>
+								</div>
 							</li>
-							<li class="ui-field-contain">
-								<label for="">Costo del servicio (Fixcoins):</label>
-								<?php $q_costo = plugDB("SELECT cost FROM categories WHERE id = '".$Query->category."'", "row"); echo $q_costo->cost;?>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">Costo del servicio (Fixcoins):</label>
+								</div>
+
+								<div class="inp_form">
+									<?php $q_costo = plugDB("SELECT cost FROM categories WHERE id = '".$Query->category."'", "row"); echo $q_costo->cost;?>
+								</div>
+								
 							</li>
+
 							<li class="ui-body ui-body-b">
-								<fieldset class="ui-grid-a">
-									<div class="ui-block-a"></div>
-									<div class="ui-block-b">
-										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-										<input type="hidden" name="editar_servicio" value="ok">
-										<input type="submit" name="es_usuario" value="Guardar" class="button action">
-									</div>
+								<fieldset class="">
+										<div class="btn_form">
+											<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+											<input type="hidden" name="editar_servicio" value="ok">
+											<input type="submit" name="es_usuario" value="Guardar" class="button action">
+										</div>
 								</fieldset>
 							</li>
+							
 						</ul>		
 					</form>
 				</p>
@@ -3610,6 +3961,15 @@ function page_reporte_clientes(){
 			right: -10px !important;
 		}
 
+		.ui-collapsible-inset .ui-collapsible-content{
+			overflow-y: scroll !important;
+		}
+
+		
+		.dataTables_wrapper{
+			overflow-x : scroll;
+		}
+
 
 		@media(min-width : 80em){
 			.li_form{
@@ -3739,6 +4099,30 @@ function page_contenidos(){
 			font:inherit !important;
 			font-size:16px !important;
 		}
+
+		.flex{
+			display : flex !important;
+			align-items : center;
+		}
+
+		.btn_per{
+			border: none;
+			width: 150px;
+			padding: 10px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.3);
+			outline: none;
+			margin-top: 10px;
+			font-weight: bold;
+			border-radius: 6px;
+			font-size : 0.8rem;
+		}
+
+		table th{
+			font-weight : bold !important;
+			text-transform: capitalize;
+		}
+
+
 	</style>
 
 	<div data-role="page">
@@ -3746,18 +4130,25 @@ function page_contenidos(){
 			<h1>Contenidos y Ajustes</h1>
 		</div>
 		<div role="content" class="ui-content">
-			<table class="wp-list-table widefat" cellspacing="0">
-				<form method="post">
-					<tr>
-						<td>Valor Fixcoin cuando refieres a un amigo</td>
-						<td><input type="number" name="valor" value="<?php echo $Query_Valor_Fixcoin->valor;?>" required></td>
-						<td><?php echo $Query_Valor_Fixcoin->fecha;?></td>
-						<td><input type="submit" name="save_valor_fixcoin" value="Guardar" class="button action"></td>
-					</tr>
+				<form method="post" >
+					<div class="flex">
+						<div style="width : 15%">
+							 <b>Valor Fixcoin cuando <br> refieres a un amigo</b> 
+						</div>
+						<div  style="width : 25%">
+							<input type="number" name="valor" value="<?php echo $Query_Valor_Fixcoin->valor;?>" required  style="width : 90%">
+						</div>
+						<div  style="width : 15%">
+						 	<b><?php echo $Query_Valor_Fixcoin->fecha;?></b>	
+						</div>
+						<div style="width : 25%">
+							<input data-role="none" type="submit" name="save_valor_fixcoin" value="Guardar" class=" btn_per">
+						</div>
+					</div>
 				</form>
-			</table>
 
 			<h2>Certificados</h2>
+
 			<table class="wp-list-table widefat" cellspacing="0">
 				<thead>
 					<tr valign="top">
@@ -3767,44 +4158,55 @@ function page_contenidos(){
 						<th>Acciones</th>
 					</tr>
 				</thead>
-				<tbody id="the-list">
-					<?php 
-					$alter = "";
-					foreach ( $Query_Certificados as $lista ):
-						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-					?>
-					<form method="post">
-						<tr valign="top" <?php echo $alter; ?>>
-							<?php foreach($lista as $key => $va):?>
-								<?php if(!in_array($key, $exclude_tabla_certificados)):?>
-									<?php if( $key == "denomination" || $key == "uri" ):?>
-										<td><input type="text" name="<?php echo $key;?>" value="<?php echo $va;?>" required></td>
-									<?php else:?>
-										<td><?php echo $va;?></td>
-									<?php endif;?>
-								<?php endif;?>
-							<?php endforeach; ?>
-							<td>
-								<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
-								<input type="submit" name="update_certificado" value="Actualizar" class="button action">
-								<input type="submit" name="borrar_certificado" value="Borrar" class="button action">
-							</td>
-						</tr>
-					</form>
-					<?php endforeach;?>
-
-					<form method="post">
-						<tr>
-							<td>Nuevo</td>
-							<td><input type="text" name="denomination" placeholder="Nombre" required></td>
-							<td><input type="text" name="uri" placeholder="Uri" required></td>
-							<td><input type="submit" name="add_certificado" value="Crear" class="button action"></td>
-						</tr>
-					</form>
-
-
-				</tbody>
 			</table>
+
+			<div id="the-list">
+				<?php 
+				$alter = "";
+				foreach ( $Query_Certificados as $lista ):
+					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+				?>
+				<form method="post">
+					<ul class="flex" valign="top" data-role="listview" data-inset="true" <?php echo $alter; ?>>
+						<?php foreach($lista as $key => $va):?>
+							<?php if(!in_array($key, $exclude_tabla_certificados)):?>
+								<?php if( $key == "denomination" || $key == "uri" ):?>
+									<li style="height: 52px; width: 25%; border: none;">
+										<input type="text" name="<?php echo $key;?>" value="<?php echo $va;?>" required>
+									</li>
+								<?php else:?>
+									<li style="height: 52px; width: 10%; border: none;">
+										<?php echo $va;?>
+									</li>
+								<?php endif;?>
+							<?php endif;?>
+						<?php endforeach; ?>
+						<li style="height: 52px; width: 40%; border: none; display : flex">
+							<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
+							<input type="submit" data-role="none" name="update_certificado" value="Actualizar" class="btn_per">
+							<input type="submit" data-role="none" name="borrar_certificado" value="Borrar" class=" btn_per" style="margin-left : 15px">
+						</li>
+					</ul>
+				</form>
+
+				<?php endforeach;?>
+
+				<form method="post">
+					<ul data-role="listview" data-inset="true" class="flex">
+						<li style="height: 52px; width: 10%; border: none;">
+							<b>Nuevo</b> 
+						</li>
+						<li style="height: 52px; width: 25%; border: none">
+							<input type="text" name="denomination" placeholder="Nombre" required>
+						</li>
+						<li style="height: 52px; width: 25%; border: none">
+							<input type="text" name="uri" placeholder="Uri" required>
+						</li>
+						<li style="height: 52px; width: 40%; border: none">
+							<input data-role="none" type="submit"  name="add_certificado" value="Crear" class="btn_per">
+						</li>
+					</ul>
+				</form>
 
 		</div>
 	</div>
