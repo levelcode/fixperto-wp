@@ -3647,6 +3647,18 @@ function page_atencion_cliente(){
 		table thead th{
 			text-transform : capitalize
 		}
+
+		.btn_per{
+			border: none;
+			width: 150px;
+			padding: 10px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.3);
+			outline: none;
+			margin-top: 10px;
+			font-weight: bold;
+			border-radius: 6px;
+			font-size : 0.8rem;
+		}
 	</style>
 
 	<div data-role="page">
@@ -3703,7 +3715,7 @@ function page_atencion_cliente(){
 							<td>
 								<form method="post">
 									<input type="hidden" name="id" value="<?php echo $lista->id;?>">
-									<input type="submit" name="editar_atencion" value="Editar" class="button action">
+									<input type="submit" name="editar_atencion" value="Editar" class="btn_per" data-role="none" style="background: #3f72a5; color: white; margin-left : 45px">
 								</form>
 							</td>
 						</tr>
