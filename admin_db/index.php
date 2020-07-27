@@ -168,15 +168,22 @@ function page_clientes(){
 						<option value='-1' selected>Edad</option>
 						<?php echo func_select_edad($_POST["edad"]);?>
 					</select>
-					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
-						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%">
+
+					<div data-role="controlgroup" data-type="horizontal">
+						<form method="post" onSubmit="return Validar_Nombre(this);">
+							<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
+								<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%; margin-top: -6px">
+							</div>
+							<input type="submit" data-role="none" name="crear_categoria" value="Buscar" class="ui-btn" data-theme="b" style="margin-top: -5px; margin-left: 15px; padding: 8px; background: #5a91c0; border: none; color: white;">
+						</form>
 					</div>
-					<input type="submit" value="Buscar" data-theme="b">
+
+
 				</form>
 			</div>
 			<div data-role="controlgroup" data-type="horizontal">
 				<form method='post'>
-					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+					<input type="submit" data-role="none" name="todos" value="Limpiar Filtros" style="mmargin-top: -5px; margin-left: 15px; padding: 8px; background: #F5F5F5; border: none; color: #23282d;">
 				</form>
 			</div>
 		</div>
@@ -680,7 +687,7 @@ function page_profesionales(){
 	ORDER BY id_expert DESC
 	";
 	$Query = plugDB($Qstr, "result");
-	$Colum_No_Mostrar = array("id_user", "birth_date", "date_arl", "date_salud_pension", "profile_description");
+	$Colum_No_Mostrar = array("id_user", "birth_date", "date_arl", "date_salud_pension", "profile_description", "genero", "phone", "profesion", "Sena", "education_level", "Region", "Sub_Categorias" );
 	?>
 
 	<script type="text/javascript">
@@ -769,16 +776,20 @@ function page_profesionales(){
 						<option value='-1'>Certification Sena</option>
 						<?php echo func_select_estado_servicio(array("Si"=>"1", "No"=>"0"), $_POST["certification_sena"]);?>
 					</select>
-					<div class="ui-input-text ui-body-inherit ui-corner-all controlgroup-textinput ui-btn ui-shadow-inset">
-						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required  class="ui-btn ui-corner-all">
+
+					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
+						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%; margin-top: 0px">
 					</div>
-					<input type="submit" value="Buscar" data-theme="b">
+					<input type="submit" data-role="none" value="Buscar" class="ui-btn" data-theme="b" style="margin-top: 2px; margin-left: 5px; padding: 8px; background: #5a91c0; border: none; color: white;">
+
 				</form>
 			</div>
 
 			<div data-role="controlgroup" data-type="horizontal">
 				<form method='post'>
-					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+
+					<input type="submit" data-role="none" name="todos" value="Limpiar Filtros" style="mmargin-top: -5px; margin-left: 15px; padding: 8px; background: #F5F5F5; border: none; color: #23282d;">
+
 				</form>
 			</div>
 		</div>
@@ -789,7 +800,9 @@ function page_profesionales(){
 					<thead>
 						<tr valign="top">
 							<?php foreach($Query[0] as $key => $value):?>
-							<?php if( !in_array($key, $Colum_No_Mostrar) ):?><th><?php echo $key; ?></th><?php endif;?>
+								<?php if( !in_array($key, $Colum_No_Mostrar) ):?>
+									<th><?php echo Traductor_Nombre_Columnas($key); ?></th>
+								<?php endif;?>
 							<?php endforeach; ?>
 							<th>Editar</th>
 						</tr>
@@ -1004,6 +1017,18 @@ function page_profesionales_editar_experto(){
 			overflow-y: scroll !important;
 		}
 
+		.btn_per{
+			border: none;
+			width: 150px;
+			padding: 10px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.3);
+			outline: none;
+			margin-top: 10px;
+			font-weight: bold;
+			border-radius: 6px;
+			font-size : 0.8rem;
+		}
+
 		@media(min-width : 80em){
 			.li_form{
 				display : flex !important;
@@ -1056,6 +1081,8 @@ function page_profesionales_editar_experto(){
 			.dataTables_wrapper{
 				overflow-x : scroll;
 			}
+
+
 		}
 	</style>
 
@@ -1443,7 +1470,7 @@ function page_profesionales_editar_experto(){
 								</div>
 								<div style="width : 25%">
 									<input type="file" class="form-control-file" id="imagen_certificado_<?php echo $suma_certificados;?>"><br>
-									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Certificado('<?php echo $item_certificado->id;?>', '<?php echo $suma_certificados;?>');">
+									<input type="button" class="btn_per upload" data-role="none" value="Subir" onClick="SubirImagen_Certificado('<?php echo $item_certificado->id;?>', '<?php echo $suma_certificados;?>');">
 								</div>
 								<div style="width : 25%; position: relative; top: 17px; margin-left: 40px;">
 									<select name="certification_type">
@@ -1454,8 +1481,8 @@ function page_profesionales_editar_experto(){
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
 									<input type="hidden" name="id_certi" value="<?php echo $item_certificado->id;?>">
-									<input type="submit" name="update_certificado" value="Actualizar" class="button action">
-									<input type="submit" name="del_certificado" value="Borrar" class="button action">
+									<input type="submit" name="update_certificado" value="Actualizar" class="btn_per" data-role="none">
+									<input type="submit" name="del_certificado" value="Borrar" class="btn_per" data-role="none">
 								</div>
 							</li>
 						</form>
@@ -1467,7 +1494,7 @@ function page_profesionales_editar_experto(){
 						<form method="post">
 							<li class="ui-field-contain li_form">
 								<div style="width : 20%"></div>
-								<div style="width : 29%"></div>
+								<div style="width : 28%"></div>
 								<div style="width : 25%">
 									<select name="certification_type">
 										<?php echo func_select_tabla_id_denomination("certifications_type", "");?>
@@ -1477,7 +1504,7 @@ function page_profesionales_editar_experto(){
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
 									<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
-									<input type="submit" name="add_certificado" value="Crear" class="button action">
+									<input type="submit" name="add_certificado" value="Crear" class="btn_per" data-role="none" style="background: #3f72a5; color: white;">
 								</div>
 							</li>
 						</form>
@@ -1515,8 +1542,8 @@ function page_profesionales_editar_experto(){
 								</a>
 							</div>
 							<div style="width : 25%">
-								<input type="file" class="form-control-file" id="imagen_proyecto_<?php echo $suma_proyectos;?>"><br>
-								<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Proyecto('<?php echo $item_proyecto->id;?>', '<?php echo $suma_proyectos;?>');">
+								<input type="file" class="form-control-file" id="imagen_proyecto_<?php echo $suma_proyectos;?>"><br> 
+								<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Proyecto('<?php echo $item_proyecto->id;?>', '<?php echo $suma_proyectos;?>');">
 							</div>
 							<div style="width : 25%; position: relative; top: 17px; margin-left: 40px;">
 								<input type="text" name="description" value="<?php echo $item_proyecto->description;?>" required>
@@ -1526,8 +1553,8 @@ function page_profesionales_editar_experto(){
 								<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 								<input type="hidden" name="editar_cliente" value="ok">
 								<input type="hidden" name="id_proy" value="<?php echo $item_proyecto->id;?>">
-								<input type="submit" name="update_proyecto" value="Actualizar" class="button action">
-								<input type="submit" name="del_proyecto" value="Borrar" class="button action">
+								<input type="submit" name="update_proyecto" value="Actualizar" class="btn_per" data-role="none">
+								<input type="submit" name="del_proyecto" value="Borrar" class="btn_per" data-role="none">
 							</div>
 
 						</li>
@@ -1540,7 +1567,7 @@ function page_profesionales_editar_experto(){
 						<form method="post">
 							<li class="ui-field-contain li_form">
 								<div style="width : 20%"></div>
-								<div style="width : 29%"></div>
+								<div style="width : 28%"></div>
 								<div style="width : 25%">
 									<input type="text" name="description" placeholder="Titulo Proyecto" required>
 								</div>
@@ -1548,7 +1575,7 @@ function page_profesionales_editar_experto(){
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
 									<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
-									<input type="submit" name="add_proyecto" value="Crear" class="button action">
+									<input type="submit" name="add_proyecto" value="Crear" class="btn_per" data-role="none"  style="background: #3f72a5; color: white;">
 								</div>
 							</li>
 						</form>
@@ -1686,20 +1713,23 @@ function page_profesionales_editar_experto(){
 								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 							?>
 							<li valign="top"  class="ui-body ui-body-b li_form" <?php echo $alter; ?>>
-								<?php foreach($lista as $it => $va):?>
-									<?php if($it == "Categoria" || $it == "Sub_Categoria"):?>
-									<div>
-										<?php echo $va;?>
-									</div>
-									<?php endif;?>
-								<?php endforeach; ?>
-								<div>
+								<div class="label_form">
+									<?php foreach($lista as $it => $va):?>
+										<?php if($it == "Categoria" || $it == "Sub_Categoria"):?>
+										<div>
+											<?php echo $va;?>
+										</div>
+										<?php endif;?>
+									<?php endforeach; ?>
+								</div>
+								
+								<div class="inp_form">
 									<form method="post">
 										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 										<input type="hidden" name="editar_cliente" value="ok">
 										<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
 										<input type="hidden" name="category" value="<?php echo $lista->id_cat;?>">
-										<input type="submit" name="del_categoria" value="Borrar" class="button action">
+										<input type="submit" name="del_categoria" value="Borrar" data-role="none" class="btn_per" >
 									</form>
 								</div>
 							</li>
@@ -1760,7 +1790,7 @@ function page_profesionales_editar_experto(){
 										<input type="hidden" name="editar_cliente" value="ok">
 										<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
 										<input type="hidden" name="category" value="<?php echo $lista->id_cat;?>">
-										<input type="submit" name="del_region" value="Borrar" class="button action">
+										<input type="submit" name="del_region" value="Borrar" class="btn_per" data-role="none">
 									</form>
 								</td>
 							</tr>
@@ -1784,7 +1814,7 @@ function page_profesionales_editar_experto(){
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
 									<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
-									<input type="submit" name="add_region" value="Crear" class="button action">
+									<input type="submit" name="add_region" value="Crear"  style="background: #3f72a5; color: white;" data-role="none" class="btn_per">
 								</td>
 							</tr>
 							</form>
@@ -2559,7 +2589,7 @@ function page_servicios(){
 	ORDER BY id_req DESC
 	";
 	$Query = plugDB($Qstr, "result");
-	$Colum_No_Mostrar = array("");
+	$Colum_No_Mostrar = array("Descripcion", "Sub_Categoria", "Zona");
 	?>
 
 	<script type="text/javascript" >
@@ -2651,8 +2681,10 @@ function page_servicios(){
 				<table id="la_data_tabla" cellspacing="0">
 					<thead>
 						<tr valign="top">
-							<?php foreach($Query[0] as $key => $value):?>
-							<?php if(!in_array($key, $Colum_No_Mostrar)):?><th><?php echo $key; ?></th><?php endif;?>
+							<?php  foreach($Query[0] as $key => $value):?>
+								<?php if(!in_array($key, $Colum_No_Mostrar)): ?>
+									<th><?php echo Traductor_Nombre_Columnas($key); ?></th>
+								<?php endif;?>
 							<?php endforeach; ?>
 							<th>Editar</th>
 						</tr>
@@ -2819,11 +2851,33 @@ function page_servicios_editar_servicio(){
 			.li_form .inp_form{
 				width : 80%
 			}
+
+
 		}
+
+		.btn_per{
+			border: none;
+			width: 150px;
+			padding: 10px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.3);
+			outline: none;
+			margin-top: 10px;
+			font-weight: bold;
+			border-radius: 6px;
+			font-size : 0.8rem;
+		}
+
 
 		
 		.dataTables_wrapper{
 			overflow-x : scroll;
+		}
+
+		ul.flex li{
+			display: flex !important;
+			justify-content: space-around;
+			width: 105%;
+			align-items: center;
 		}
 
 
@@ -3042,75 +3096,94 @@ function page_servicios_editar_servicio(){
 			    <h4>Ofertas</h4>
 			    <p>
 					<?php if( Count($Query_Offers) > 0 ):?>
+
+					
 					<table class="wp-list-table widefat" cellspacing="0">
 						<thead>
 							<tr valign="top">
 							<th>Experto</th>
 								<?php foreach($Query_Offers[0] as $key => $value):?>
-									<?php if(!in_array($key, $exclude_tabla_offers)):?><th><?php echo $key; ?></th><?php endif;?>
+									<?php if(!in_array($key, $exclude_tabla_offers)):?>
+										<th><?php echo Traductor_Nombre_Columnas($key); ?></th>
+									<?php endif;?>
 								<?php endforeach; ?>
 								<th>Acciones</th>
 							</tr>
 						</thead>
-						<tbody id="the-list">
+					<table>
+
+
+
+						<ul id="the-list" data-role="listview" data-inset="true" class="flex">
 							<?php 
 							$alter = "";
 							foreach ( $Query_Offers as $lista ):
 								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 								$Query_Cancel_Offer = plugDB("SELECT c.texto, c.date, ct.denomination as type FROM cancel_offert c LEFT JOIN cancellation_type ct ON c.type=ct.id WHERE offert = '".$lista->id."'", "result");
 							?>
-							<tr valign="top" <?php echo $alter; ?>>
-								<td>
+							<li valign="top" <?php echo $alter; ?> class="ui-body ui-body-b flex" >
+								<div>
 									<?php Gen_Btn_Experto($lista->expert);?>
-								</td>
+								</div>
 								<form method="post">
 								<?php foreach($lista as $it => $va):?>
 									<?php if(!in_array($it, $exclude_tabla_offers)):?>
 										<?php if($it == "start_date"):?>
-											<td><input type="datetime-local" name="start_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>"></td>
+											<div>
+												<input type="datetime-local" name="start_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>">
+											</div>
 										<?php elseif($it == "completed_date"):?>
-											<td><input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>"></td>
+											<div>
+												<input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>">
+											</div>
 										<?php elseif($it == "status"):?>
-											<td>
+											<div>
 												<select name="status">
 													<?php echo func_select_estado_servicio(
 														array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), 
 														$va
 													);?>
 												</select>
-											</td>
+											</div>
 										<?php elseif($it == "collaborator"):?>
-											<td><select name="collaborator"><?php echo Select_ColByExpert($lista->expert, $lista->collaborator);?></select></td>
+											<div>
+												<select name="collaborator">
+													<?php echo Select_ColByExpert($lista->expert, $lista->collaborator);?>
+												</select>
+											</div>
 										<?php elseif($it == "hour"):?>
-											<td><input type="time" name="hour" value="<?php echo $va;?>"></td>
+											<div>
+												<input type="time" name="hour" value="<?php echo $va;?>">
+											</div>
 										<?php else:?>
-											<td><?php echo $va;?></td>
+											<div>
+												<?php echo $va;?>
+											</div>
 										<?php endif;?>
 									<?php endif;?>
 								<?php endforeach; ?>
-								<td>
+								<div>
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_servicio" value="ok">
 									<input type="hidden" name="id_offer" value="<?php echo $lista->id;?>">
-									<input type="submit" name="update_offer" value="Guardar" class="button action">
-								</td>
+									<input type="submit" name="update_offer" value="Guardar" class="btn_per" data-role="none"  style="background: #3f72a5; color: white;">
+								</div>
 								</form>
-							</tr>
+							</li>
 							<?php if( Count($Query_Cancel_Offer) > 0 ):?>
 								<?php 
 								foreach ( $Query_Cancel_Offer as $lista_cancel ):
 								?>
-							<tr>
-								<td><h3>Cancelado por el Experto</h3></td>
-								<td><?php echo $lista_cancel->texto;?></td>
-								<td><?php echo $lista_cancel->date;?></td>
-								<td><?php echo $lista_cancel->type;?></td>
-							</tr>
+							<li class="ui-body ui-body-b flex">
+								<div><h3>Cancelado por el Experto</h3></div>
+								<div><?php echo $lista_cancel->texto;?></div>
+								<div><?php echo $lista_cancel->date;?></div>
+								<div><?php echo $lista_cancel->type;?></div>
+							</li>
 							<?php endforeach; ?>
 							<?php endif;?>
 							<?php endforeach;?>
-						</tbody>
-					</table>
+						</ul>
 					<?php endif;?>
 				</p>
 			</div>
@@ -3253,6 +3326,7 @@ function page_transacciones_planes(){
 	$WHERE
 	";
 	$Query = plugDB($Qstr, "result");
+	$Colum_No_Mostrar = array("transaction_id", "valor");
 	?>
 
 	<script type="text/javascript" >
@@ -3295,6 +3369,10 @@ function page_transacciones_planes(){
 			font:inherit !important;
 			font-size:16px !important;
 		}
+
+		table thead th{
+			text-transform : capitalize
+		}
 	</style>
 
 	<div data-role="page">
@@ -3314,15 +3392,17 @@ function page_transacciones_planes(){
 			</div>
 			<div data-role="controlgroup" data-type="horizontal">
 				<form method='post'>
+
 					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
-						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%">
+						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%; margin-top: 0px">
 					</div>
-					<input type="submit" value="Buscar" data-theme="b">
+					<input type="submit" data-role="none" value="Buscar" class="ui-btn" data-theme="b" style="margin-top: 0px; margin-left: 15px; padding: 8px; background: #5a91c0; border: none; color: white;">
+
 				</form>
 			</div>
 			<div data-role="controlgroup" data-type="horizontal">
 				<form method='post'>
-					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+					<input type="submit" data-role="none" name="todos" value="Limpiar Filtros" style="mmargin-top: -5px; margin-left: 15px; padding: 8px; background: #F5F5F5; border: none; color: #23282d;">
 				</form>
 			</div>
 		</div>
@@ -3330,24 +3410,33 @@ function page_transacciones_planes(){
 		<div role="content" class="ui-content">
 			<?php if($Query[0] != null):?>
 				<table id="la_data_tabla" cellspacing="0">
+
 					<thead>
 						<tr valign="top">
-							<?php foreach($Query[0] as $key => $value):?>
-								<th><?php echo $key; ?></th>
+							<?php  foreach($Query[0] as $key => $value):?>
+								<?php if(!in_array($key, $Colum_No_Mostrar)): ?>
+									<th><?php echo Traductor_Nombre_Columnas($key); ?></th>
+								<?php endif;?>
 							<?php endforeach; ?>
 						</tr>
 					</thead>
+
+
 					<tbody id="the-list">
 						<?php 
 						$alter = "";
 						foreach ( $Query as $lista ):
 							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 						?>
+
 						<tr valign="top" <?php echo $alter; ?>>
 							<?php foreach($lista as $it => $va):?>
-								<td><?php echo $va;?></td>
+								<?php if(!in_array($it, $Colum_No_Mostrar)):?>
+									<td><?php echo $va;?></td>
+								<?php endif;?>
 							<?php endforeach; ?>
 						</tr>
+
 					<?php endforeach;?>
 				</table>
 			<?php endif;?>
@@ -3423,6 +3512,10 @@ function page_transacciones_fixcoins(){
 			font:inherit !important;
 			font-size:16px !important;
 		}
+
+		table thead th{
+			text-transform : capitalize
+		}
 	</style>
 
 	<div data-role="page">
@@ -3443,14 +3536,14 @@ function page_transacciones_fixcoins(){
 			<div data-role="controlgroup" data-type="horizontal">
 				<form method='post'>
 					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
-						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%">
-					</div>
-					<input type="submit" value="Buscar" data-theme="b">
+					<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%; margin-top: 0">
+				</div>
+				<input type="submit" data-role="none" name="crear_categoria" value="Buscar" class="ui-btn" data-theme="b" style="margin-top: 0px; margin-left: 15px; padding: 8px; background: #5a91c0; border: none; color: white;">
 				</form>
 			</div>
 			<div data-role="controlgroup" data-type="horizontal">
 				<form method='post'>
-					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+					<input type="submit" data-role="none" name="todos" value="Limpiar Filtros" style="mmargin-top: -5px; margin-left: 15px; padding: 8px; background: #F5F5F5; border: none; color: #23282d;">
 				</form>
 			</div>
 		</div>
@@ -3461,7 +3554,7 @@ function page_transacciones_fixcoins(){
 					<thead>
 						<tr valign="top">
 							<?php foreach($Query[0] as $key => $value):?>
-								<th><?php echo $key; ?></th>
+								<th><?php echo Traductor_Nombre_Columnas($key); ?></th>
 							<?php endforeach; ?>
 						</tr>
 					</thead>
@@ -3550,6 +3643,10 @@ function page_atencion_cliente(){
 			font:inherit !important;
 			font-size:16px !important;
 		}
+
+		table thead th{
+			text-transform : capitalize
+		}
 	</style>
 
 	<div data-role="page">
@@ -3570,14 +3667,14 @@ function page_atencion_cliente(){
 			<div data-role="controlgroup" data-type="horizontal">
 				<form method='post'>
 					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
-						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%">
+						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%; margin-top: 0px">
 					</div>
-					<input type="submit" value="Buscar" data-theme="b">
+					<input type="submit" data-role="none" name="crear_categoria" value="Buscar" class="ui-btn" data-theme="b" style="margin-top: 0px; margin-left: 15px; padding: 8px; background: #5a91c0; border: none; color: white;">
 				</form>
 			</div>
 			<div data-role="controlgroup" data-type="horizontal">
 				<form method='post'>
-					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
+					<input type="submit" data-role="none" name="todos" value="Limpiar Filtros" style="mmargin-top: -5px; margin-left: 15px; padding: 8px; background: #F5F5F5; border: none; color: #23282d;">
 				</form>
 			</div>
 		</div>
@@ -3588,7 +3685,7 @@ function page_atencion_cliente(){
 					<thead>
 						<tr valign="top">
 							<?php foreach($Query[0] as $key => $value):?>
-								<th><?php echo $key; ?></th>
+								<th><?php echo Traductor_Nombre_Columnas($key); ?></th>
 							<?php endforeach; ?>
 							<th>Editar</th>
 						</tr>
@@ -4142,7 +4239,7 @@ function page_contenidos(){
 						 	<b><?php echo $Query_Valor_Fixcoin->fecha;?></b>	
 						</div>
 						<div style="width : 25%">
-							<input data-role="none" type="submit" name="save_valor_fixcoin" value="Guardar" class=" btn_per">
+							<input data-role="none" type="submit" name="save_valor_fixcoin" value="Guardar" class=" btn_per"  style="background: #3f72a5; color: white;">
 						</div>
 					</div>
 				</form>
@@ -4153,7 +4250,9 @@ function page_contenidos(){
 				<thead>
 					<tr valign="top">
 						<?php foreach($Query_Certificados[0] as $key => $value):?>
-						<?php if(!in_array($key, $exclude_tabla_certificados)):?><th><?php echo $key; ?></th><?php endif;?>
+							<?php if(!in_array($key, $exclude_tabla_certificados)):?>
+								<th><?php echo Traductor_Nombre_Columnas($key); ?></th>
+							<?php endif;?>
 						<?php endforeach; ?>
 						<th>Acciones</th>
 					</tr>
@@ -4363,10 +4462,24 @@ function func_tabla_form_fieldcontainer($q, $excluir_rows, $only_read){
 function Gen_Btn_Experto($id_expert, $show_tipo = false){
 	$Query__Expert = plugDB("SELECT u.name as nombre, u.id as id_user FROM experts e LEFT JOIN users u ON e.user = u.id WHERE e.id = '".$id_expert."'", "row");
 	?>
+	<style>
+		.btn_per{
+			border: none;
+			width: 150px;
+			padding: 10px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.3);
+			outline: none;
+			margin-top: 10px;
+			font-weight: bold;
+			border-radius: 6px;
+			font-size : 0.8rem;
+		}
+
+	</style>
 	<form method="post" action="admin.php?page=profesionales" target="_blank">
 		<input type="hidden" name="id" value="<?php echo $Query__Expert->id_user;?>">
 		<input type="hidden" name="editar_cliente" value="ok">
-		<input type="submit" value="<?php echo $Query__Expert->nombre;?><?php if($show_tipo == true) echo " (experto)";?>" class="button action">
+		<input type="submit" value="<?php echo $Query__Expert->nombre;?><?php if($show_tipo == true) echo " (experto)";?>" class="btn_per" data-role="none">
 	</form>
 	<?php
 }
@@ -4453,7 +4566,39 @@ function Select_ColByExpert($expert, $actual){
 }
 //
 function Traductor_Nombre_Columnas($key){
-	$datos = array("name" => "Nombre", "date_registry" => "Fecha Registro", "birth_date" => "Fecha Nacimiento", "id_user" => "Id Usuario", "email" => "Correo", "gender" => "Genero", "authentication_date" => "Ultimo Login");
+	$datos = array(
+		"name" 				=> "Nombre", 
+		"date_registry" 	=> "Fecha Registro", 
+		"birth_date" 		=> "Fecha Nacimiento", 
+		"id_user" 			=> "Id Usuario",
+		"email" 			=> "Correo", 
+		"gender" 			=> "Genero", 
+		"id_expert"			=> "ID Experto",
+		"tipo_registro"		=> "Tipo Registro",
+		"fixcoins"			=> "Fixcoin",
+		"education_level" 	=> "Nivel educativo",
+		"Estado_Plan"       => "Estado del Plan",
+		"Status" 			=> "Estado",
+		"status"			=> "Estado",
+		"description"		=> "Descripcion",
+		"id"				=> "ID",
+		"observations"		=> "Observaciones",
+		"collaborator"		=> "Colaborador",
+		"date"				=> "Fecha",
+		"start_date"		=> "Fecha_inicio",
+		"hour"				=> "Hora",
+		"response_time"		=> "Hora Respuesta",
+		"completed_date"	=> "Completar Fecha",
+		"date_response"		=> "Fecha Respuesta",
+		"denomination"		=> "Denominación",
+		"authentication_date" => "Ultimo Login",
+		"trabajos_culminados" => "Trabajos Culminados",
+		"gasto_fixcoin"		  => "Gasto Fixcoin",
+		"ofertas_aceptadas"    => "Ofertas Aceptadas",
+		"ofertas_rechazadas"  => "Ofertas Rechazadas",
+		"perdidas_oportunidades" => "Oportunudades Perdidas",
+		
+	);
 	if( !$datos[$key] ){
 		return $key;
 	}else{
