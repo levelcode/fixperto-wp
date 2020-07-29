@@ -100,6 +100,7 @@ function page_clientes(){
 	ORDER BY id_user DESC
 	";
 	$Query = plugDB($Qstr, "result");
+	$Colum_No_Mostrar = array("birth_date");
 	?>
 	<script type="text/javascript" >
 		jQuery(document).on("mobileinit", function(){
@@ -140,6 +141,18 @@ function page_clientes(){
 		[id="formulario"] *{
 			font:inherit !important;
 			font-size:16px !important;
+		}
+
+		.btn_per{
+			border: none;
+			width: 80px;
+			padding: 10px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.3);
+			outline: none;
+			margin-top: 10px;
+			font-weight: bold;
+			border-radius: 6px;
+			font-size : 0.8rem;
 		}
 	</style>
 
@@ -224,12 +237,16 @@ function page_clientes(){
 
 			<table id="la_data_tabla" class="fix_table" cellspacing="0">
 				<thead>
+
 					<tr valign="top">
-						<?php foreach($Query[0] as $key => $value):?>
-							<th><?php echo Traductor_Nombre_Columnas($key);?></th>
+						<?php  foreach($Query[0] as $key => $value):?>
+							<?php if(!in_array($key, $Colum_No_Mostrar)): ?>
+								<th><?php echo Traductor_Nombre_Columnas($key); ?></th>
+							<?php endif;?>
 						<?php endforeach; ?>
 						<th>Editar</th>
 					</tr>
+
 				</thead>
 				<tbody id="the-list">
 					<?php 
@@ -245,7 +262,7 @@ function page_clientes(){
 							<form method="post" data-role="controlgroup">
 								<input type="hidden" name="id" value="<?php echo $lista->id_user;?>">
 								<input type="hidden" name="editar_cliente" value="ok">
-								<input type="submit" value="Editar" class="ui-btn" data-theme="b">
+								<input type="submit" value="Editar" class="btn_per" data-theme="b" data-role="none" style="background: #3f72a5; color: white;">
 							</form>
 						</td>
 					</tr>
@@ -731,6 +748,18 @@ function page_profesionales(){
 			font:inherit !important;
 			font-size:16px !important;
 		}
+
+		.btn_per{
+    		border: none;
+			width: 80px;
+			padding: 10px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.3);
+			outline: none;
+			margin-top: 10px;
+			font-weight: bold;
+			border-radius: 6px;
+			font-size : 0.8rem;
+		}
 	</style>
 
 	<div data-role="page">
@@ -821,7 +850,7 @@ function page_profesionales(){
 								<form method="post" data-role="controlgroup">
 									<input type="hidden" name="id" value="<?php echo $lista->id_user;?>">
 									<input type="hidden" name="editar_cliente" value="ok">
-									<input type="submit" value="Editar" class="ui-btn" data-theme="b">
+									<input type="submit" value="Editar" class="btn_per" data-theme="b" data-role="none" style="background: #3f72a5; color: white;">
 								</form>
 							</td>
 						</tr>
@@ -1082,6 +1111,19 @@ function page_profesionales_editar_experto(){
 				overflow-x : scroll;
 			}
 
+			.btn_per{
+				border: none;
+				width: 150px;
+				padding: 10px;
+				box-shadow: 0 1px 4px rgba(0,0,0,.3);
+				outline: none;
+				margin-top: 10px;
+				font-weight: bold;
+				border-radius: 6px;
+				font-size : 0.8rem;
+			}
+
+
 
 		}
 	</style>
@@ -1324,7 +1366,7 @@ function page_profesionales_editar_experto(){
 									<fieldset class="">
 										<div class="btn_form">
 											<input type="file" class="form-control-file" id="imagen_fotocopy"><br>
-											<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Fotocopy();">
+											<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Fotocopy();">
 										</div>
 									</fieldset>
 
@@ -1347,7 +1389,8 @@ function page_profesionales_editar_experto(){
 									<fieldset class="">
 										<div class="btn_form">
 											<input type="file" class="form-control-file" id="imagen_fotocopy"><br>
-											<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Fotocopy();">
+
+											<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Fotocopy();">
 										</div>
 									</fieldset>
 
@@ -1381,7 +1424,7 @@ function page_profesionales_editar_experto(){
 									<fieldset class="">
 										<div class="btn_form">
 											<input type="file" class="form-control-file" id="imagen_arl"><br>
-											<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Arl();">
+											<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Arl();">
 										</div>
 									</fieldset>
 
@@ -1415,7 +1458,8 @@ function page_profesionales_editar_experto(){
 									<fieldset class="">
 										<div class="btn_form">
 											<input type="file" class="form-control-file" id="imagen_salud"><br>
-											<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Salud();">
+
+											<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Salud();">
 										</div>
 									</fieldset>
 
@@ -1470,7 +1514,10 @@ function page_profesionales_editar_experto(){
 								</div>
 								<div style="width : 25%">
 									<input type="file" class="form-control-file" id="imagen_certificado_<?php echo $suma_certificados;?>"><br>
-									<input type="button" class="btn_per upload" data-role="none" value="Subir" onClick="SubirImagen_Certificado('<?php echo $item_certificado->id;?>', '<?php echo $suma_certificados;?>');">
+
+									<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Certificado('<?php echo $item_certificado->id;?>', '<?php echo $suma_certificados;?>');">
+
+
 								</div>
 								<div style="width : 25%; position: relative; top: 17px; margin-left: 40px;">
 									<select name="certification_type">
@@ -1753,7 +1800,7 @@ function page_profesionales_editar_experto(){
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
 									<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
-									<input type="submit" name="add_categoria" value="Crear" class="button action" >
+									<input type="submit" name="add_categoria" value="Crear" class="btn_per" data-role="none" style="background: #3f72a5; color: white;">
 								</div>
 							</li>
 							</form>
@@ -2349,7 +2396,7 @@ function page_lista_servicios(){
 		<div data-role="header" data-theme="c">
 			<div data-role="controlgroup" data-type="horizontal">
 				<form method="post" onSubmit="return Validar_Nombre(this);">
-					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
+					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100% ; margin-left : 15px">
 						<input type="text" name="nombre" placeholder="Ingrese Nombre" value="">
 					</div>
 					<input type="submit" data-role="none" name="crear_categoria" value="Crear Categoria" class="ui-btn" data-theme="b" style="margin-top: 10px; margin-left: 15px; padding: 8px; background: #5a91c0; border: none; color: white;">
@@ -2632,6 +2679,18 @@ function page_servicios(){
 			font:inherit !important;
 			font-size:16px !important;
 		}
+
+		.btn_per{
+			border: none;
+			width: 80px;
+			padding: 10px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.3);
+			outline: none;
+			margin-top: 10px;
+			font-weight: bold;
+			border-radius: 6px;
+			font-size : 0.8rem;
+		}
 	</style>
 
 	<div data-role="page">
@@ -2702,7 +2761,7 @@ function page_servicios(){
 							<td>
 								<form method="post" data-role="controlgroup">
 									<input type="hidden" name="id" value="<?php echo $lista->id_req;?>">
-									<input type="submit" name="editar_servicio" value="Editar" class="ui-btn" data-theme="b">
+									<input type="submit" name="editar_servicio" value="Editar" class="btn_per" data-theme="b" data-role="none" style="background: #3f72a5; color: white;">
 								</form>
 							</td>
 						</tr>
@@ -2876,8 +2935,15 @@ function page_servicios_editar_servicio(){
 		ul.flex li{
 			display: flex !important;
 			justify-content: space-around;
-			width: 105%;
+			width: 150%;
 			align-items: center;
+		} 
+
+		form.flex{
+			display: flex !important;
+			justify-content: space-around;
+			align-items: center;
+			width : 140% !important;
 		}
 
 
@@ -3098,92 +3164,90 @@ function page_servicios_editar_servicio(){
 					<?php if( Count($Query_Offers) > 0 ):?>
 
 					
-					<table class="wp-list-table widefat" cellspacing="0">
-						<thead>
-							<tr valign="top">
-							<th>Experto</th>
-								<?php foreach($Query_Offers[0] as $key => $value):?>
-									<?php if(!in_array($key, $exclude_tabla_offers)):?>
-										<th><?php echo Traductor_Nombre_Columnas($key); ?></th>
-									<?php endif;?>
-								<?php endforeach; ?>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-					<table>
-
-
-
-						<ul id="the-list" data-role="listview" data-inset="true" class="flex">
-							<?php 
-							$alter = "";
-							foreach ( $Query_Offers as $lista ):
-								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-								$Query_Cancel_Offer = plugDB("SELECT c.texto, c.date, ct.denomination as type FROM cancel_offert c LEFT JOIN cancellation_type ct ON c.type=ct.id WHERE offert = '".$lista->id."'", "result");
-							?>
-							<li valign="top" <?php echo $alter; ?> class="ui-body ui-body-b flex" >
-								<div>
-									<?php Gen_Btn_Experto($lista->expert);?>
-								</div>
-								<form method="post">
-								<?php foreach($lista as $it => $va):?>
-									<?php if(!in_array($it, $exclude_tabla_offers)):?>
-										<?php if($it == "start_date"):?>
-											<div>
-												<input type="datetime-local" name="start_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>">
-											</div>
-										<?php elseif($it == "completed_date"):?>
-											<div>
-												<input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>">
-											</div>
-										<?php elseif($it == "status"):?>
-											<div>
-												<select name="status">
-													<?php echo func_select_estado_servicio(
-														array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), 
-														$va
-													);?>
-												</select>
-											</div>
-										<?php elseif($it == "collaborator"):?>
-											<div>
-												<select name="collaborator">
-													<?php echo Select_ColByExpert($lista->expert, $lista->collaborator);?>
-												</select>
-											</div>
-										<?php elseif($it == "hour"):?>
-											<div>
-												<input type="time" name="hour" value="<?php echo $va;?>">
-											</div>
-										<?php else:?>
-											<div>
-												<?php echo $va;?>
-											</div>
-										<?php endif;?>
-									<?php endif;?>
-								<?php endforeach; ?>
-								<div>
-									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-									<input type="hidden" name="editar_servicio" value="ok">
-									<input type="hidden" name="id_offer" value="<?php echo $lista->id;?>">
-									<input type="submit" name="update_offer" value="Guardar" class="btn_per" data-role="none"  style="background: #3f72a5; color: white;">
-								</div>
-								</form>
-							</li>
-							<?php if( Count($Query_Cancel_Offer) > 0 ):?>
-								<?php 
-								foreach ( $Query_Cancel_Offer as $lista_cancel ):
-								?>
-							<li class="ui-body ui-body-b flex">
-								<div><h3>Cancelado por el Experto</h3></div>
-								<div><?php echo $lista_cancel->texto;?></div>
-								<div><?php echo $lista_cancel->date;?></div>
-								<div><?php echo $lista_cancel->type;?></div>
-							</li>
+					<ul data-role="listview" data-inset="true" class="flex">
+						<li valign="top" class="ui-body ui-body-b">
+						<div>Experto</div>
+							<?php foreach($Query_Offers[0] as $key => $value):?>
+								<?php if(!in_array($key, $exclude_tabla_offers)):?>
+									<div><?php echo Traductor_Nombre_Columnas($key); ?></div>
+								<?php endif;?>
 							<?php endforeach; ?>
-							<?php endif;?>
-							<?php endforeach;?>
-						</ul>
+							<div>Acciones</div>
+						</li>
+					</ul>
+
+
+
+					<ul id="the-list" data-role="listview" data-inset="true" class="flex">
+						<?php 
+						$alter = "";
+						foreach ( $Query_Offers as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							$Query_Cancel_Offer = plugDB("SELECT c.texto, c.date, ct.denomination as type FROM cancel_offert c LEFT JOIN cancellation_type ct ON c.type=ct.id WHERE offert = '".$lista->id."'", "result");
+						?>
+						<li valign="top" <?php echo $alter; ?> class="ui-body ui-body-b flex" >
+							<div>
+								<?php Gen_Btn_Experto($lista->expert);?>
+							</div>
+							<form method="post" class="flex">
+							<?php foreach($lista as $it => $va):?>
+								<?php if(!in_array($it, $exclude_tabla_offers)):?>
+									<?php if($it == "start_date"):?>
+										<div>
+											<input type="datetime-local" name="start_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>">
+										</div>
+									<?php elseif($it == "completed_date"):?>
+										<div>
+											<input type="datetime-local" name="completed_date" value="<?php echo (new DateTime($va))->format("Y-m-d\\TH:i:s");?>">
+										</div>
+									<?php elseif($it == "status"):?>
+										<div>
+											<select name="status">
+												<?php echo func_select_estado_servicio(
+													array("progress"=>"progress", "acepted"=>"acepted", "scheduled"=>"scheduled", "completed"=>"completed", "rejected"=>"rejected"), 
+													$va
+												);?>
+											</select>
+										</div>
+									<?php elseif($it == "collaborator"):?>
+										<div>
+											<select name="collaborator">
+												<?php echo Select_ColByExpert($lista->expert, $lista->collaborator);?>
+											</select>
+										</div>
+									<?php elseif($it == "hour"):?>
+										<div>
+											<input type="time" name="hour" value="<?php echo $va;?>">
+										</div>
+									<?php else:?>
+										<div>
+											<?php echo $va;?>
+										</div>
+									<?php endif;?>
+								<?php endif;?>
+							<?php endforeach; ?>
+							<div>
+								<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+								<input type="hidden" name="editar_servicio" value="ok">
+								<input type="hidden" name="id_offer" value="<?php echo $lista->id;?>">
+								<input type="submit" name="update_offer" value="Guardar" class="btn_per" data-role="none"  style="background: #3f72a5; color: white;">
+							</div>
+							</form>
+						</li>
+						<?php if( Count($Query_Cancel_Offer) > 0 ):?>
+							<?php 
+							foreach ( $Query_Cancel_Offer as $lista_cancel ):
+							?>
+						<li class="ui-body ui-body-b flex">
+							<div><h3>Cancelado por el Experto</h3></div>
+							<div><?php echo $lista_cancel->texto;?></div>
+							<div><?php echo $lista_cancel->date;?></div>
+							<div><?php echo $lista_cancel->type;?></div>
+						</li>
+						<?php endforeach; ?>
+						<?php endif;?>
+						<?php endforeach;?>
+					</ul>
 					<?php endif;?>
 				</p>
 			</div>
@@ -4589,6 +4653,7 @@ function Traductor_Nombre_Columnas($key){
 		"tipo_registro"		=> "Tipo Registro",
 		"fixcoins"			=> "Fixcoin",
 		"education_level" 	=> "Nivel educativo",
+		"educational_level" 	=> "Nivel educativo",
 		"Estado_Plan"       => "Estado del Plan",
 		"Status" 			=> "Estado",
 		"status"			=> "Estado",
