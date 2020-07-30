@@ -2993,7 +2993,6 @@ function page_servicios_editar_servicio(){
 								<div class="label_form">
 									<label for="">Cliente:</label>
 								</div>
-
 								<div class="inp_form">
 									<input type="hidden" name="id" value="<?php echo $Query_Cus->id;?>">
 									<input type="hidden" name="editar_cliente" value="ok">
@@ -3802,146 +3801,247 @@ function page_atencion_cliente_editar(){
 	$Query_descripcion = plugDB("SELECT * FROM descriptions_customer_support WHERE customer_support = '".$_POST["id"]."'", "result");
 	$Query_respuesta = plugDB("SELECT * FROM response_customer_support WHERE customer_support = '".$_POST["id"]."'", "result");
 	?>
-	<div class="wrap">
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			jQuery('#wpfooter').remove();
+			jQuery.mobile.page.prototype.options.keepNative = "select, input, textarea";
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
 
-	<h2>Detalles</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<th>Campo</th>
-					<th>Valor</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<tr>
-					<td>Cliente</td>
-					<td><?php Gen_Btn_Cliente($Query->user);?></td>
-				<tr>
-				<form method="post">
-					<?php 
-					echo func_tabla_form(
-						$Query, 
-						array("type_customer_support", "status", "hide"),
-						array("id","user","date_registry")
-					);
-					?>
-					<tr class="alternate">
-						<td>type_customer_support</td>
-						<td>
-							<select name="type_customer_support">
-								<?php echo func_select_tabla_id_denomination("type_customer_support", $Query->type_customer_support);?>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>status</td>
-						<td>
-							<select name="status">
-								<?php echo func_select_tabla_id_denomination("status_customer_support", $Query->status);?>
-							</select>
-						</td>
-					</tr>
-					<tr class="alternate">
-						<td>
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_atencion" value="ok">
-							<input type="submit" name="update_atencion" value="Guardar" class="button action">
-						</td>
-						<td></td>
-					</tr>
-				</form>
-			</tbody>
-		</table>
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		.formulario{
+			font:inherit !important;
+			font-size:16px !important;
+		}
 
-		<h2>Descripcion</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<?php foreach($Query_descripcion[0] as $key => $value):?>
-						<th><?php echo $key; ?></th>
-					<?php endforeach; ?>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_descripcion as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<form method="post">
-					<tr valign="top" <?php echo $alter; ?>>
-						<td><?php echo $lista->id;?></td>
-						<td><input type="text" name="description" value="<?php echo $lista->description;?>" required></td>
-						<td><?php echo $lista->customer_support;?></td>
-						<td><?php echo $lista->date_registry;?></td>
-						<td>
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_atencion" value="ok">
-							<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
-							<input type="submit" name="update_descripcion" value="Actualizar" class="button action">
-							<input type="submit" name="del_descripcion" value="Borrar" class="button action">
-						</td>
-					</tr>
-				</form>
-				<?php endforeach;?>
-				<form method="post">
-					<tr>
-						<td><input type="text" name="description" required></td>
-						<td>
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_atencion" value="ok">
-							<input type="submit" name="add_descripcion" value="Crear" class="button action">
-						</td>
-					</tr>
-				</form>
-			</tbody>
-		</table>
+		.ui-collapsible-inset .ui-collapsible-content{
+			overflow-y: scroll !important;
+		}
 
-		<h2>Respuesta</h2>
-		<table class="wp-list-table widefat" cellspacing="0">
-			<thead>
-				<tr valign="top">
-					<?php foreach($Query_respuesta[0] as $key => $value):?>
-						<th><?php echo $key; ?></th>
-					<?php endforeach; ?>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody id="the-list">
-				<?php 
-				$alter = "";
-				foreach ( $Query_respuesta as $lista ):
-					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-				?>
-				<form method="post">
-					<tr valign="top" <?php echo $alter; ?>>
-						<td><?php echo $lista->id;?></td>
-						<td><input type="text" name="response" value="<?php echo $lista->response;?>" required></td>
-						<td><?php echo $lista->customer_support;?></td>
-						<td><?php echo $lista->date_registry;?></td>
-						<td>
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_atencion" value="ok">
-							<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
-							<input type="submit" name="update_respuesta" value="Actualizar" class="button action">
-							<input type="submit" name="del_respuesta" value="Borrar" class="button action">
-						</td>
-					</tr>
-				</form>
-				<?php endforeach;?>
-				<form method="post">
-					<tr>
-						<td><input type="text" name="response" required></td>
-						<td>
-							<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-							<input type="hidden" name="editar_atencion" value="ok">
-							<input type="submit" name="add_respuesta" value="Crear" class="button action">
-						</td>
-					</tr>
-				</form>
-			</tbody>
-		</table>
+		
+		.dataTables_wrapper{
+			overflow-x : scroll;
+		}
+
+		@media(min-width : 80em){
+			.li_form{
+				display : flex !important;
+			}
+
+			.li_form .label_form{
+				width : 20%
+			}
+
+			.li_form .inp_form{
+				width : 80%
+			}
+
+			.btn_form{
+				width : 15%;
+				margin: auto
+			}
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Atencion al Cliente</h1>
+		</div>
+
+		<div role="content" class="ui-content">
+			<div data-role="collapsible">
+			    <h4>Detalles</h4>
+			    <p>
+					<form method="post" action="admin.php?page=clientes" target="_blank">
+						<ul data-role="listview" data-inset="true">
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">Cliente:</label>
+								</div>
+								<div class="inp_form">
+									<?php Gen_Btn_Cliente($Query->user);?>
+								</div>
+							</li>
+						</ul>			
+					</form>
+
+					<form method="post" name="la_data">
+						<ul data-role="listview" data-inset="true">
+							<?php 
+							echo func_tabla_form_fieldcontainer(
+								$Query, 
+								array("type_customer_support", "status", "hide"),
+								array("id","user","date_registry")
+							);
+							?>
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">type_customer_support:</label>
+								</div>
+
+								<div class="inp_form">
+									<select name="type_customer_support">
+										<?php echo func_select_tabla_id_denomination("type_customer_support", $Query->type_customer_support);?>
+									</select>
+								</div>
+							</li>
+
+							<li class="ui-field-contain li_form">
+								<div class="label_form">
+									<label for="">status:</label>
+								</div>
+
+								<div class="inp_form">
+									<select name="status">
+										<?php echo func_select_tabla_id_denomination("status_customer_support", $Query->status);?>
+									</select>
+								</div>
+							</li>
+							<li class="ui-body ui-body-b">
+								<fieldset class="">
+									<div class="btn_form">
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_atencion" value="ok">
+										<input type="submit" name="update_atencion" value="Guardar" class="button action">
+									</div>
+								</fieldset>
+							</li>
+						</ul>
+					</form>
+				</p>
+			</div>
+
+			<div data-role="collapsible">
+			    <h4>Descripcion</h4>
+			    <p>
+					<?php if( Count($Query_descripcion) > 0 ):?>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<?php foreach($Query_descripcion[0] as $key => $value):?>
+									<th><?php echo $key; ?></th>
+								<?php endforeach; ?>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach ( $Query_descripcion as $lista ):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<form method="post">
+								<tr valign="top" <?php echo $alter; ?>>
+									<td><?php echo $lista->id;?></td>
+									<td><input type="text" name="description" value="<?php echo $lista->description;?>" required></td>
+									<td><?php echo $lista->customer_support;?></td>
+									<td><?php echo $lista->date_registry;?></td>
+									<td>
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_atencion" value="ok">
+										<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
+										<input type="submit" name="update_descripcion" value="Actualizar" class="button action">
+										<input type="submit" name="del_descripcion" value="Borrar" class="button action">
+									</td>
+								</tr>
+							</form>
+							<?php endforeach;?>
+							<form method="post">
+								<tr>
+									<td><input type="text" name="description" required></td>
+									<td>
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_atencion" value="ok">
+										<input type="submit" name="add_descripcion" value="Crear" class="button action">
+									</td>
+								</tr>
+							</form>
+						</tbody>
+					</table>
+					<?php endif;?>
+				</p>
+			</div>
+
+			<div data-role="collapsible">
+			    <h4>Respuesta</h4>
+			    <p>
+					<?php if( Count($Query_respuesta) > 0 ):?>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<thead>
+							<tr valign="top">
+								<?php foreach($Query_respuesta[0] as $key => $value):?>
+									<th><?php echo $key; ?></th>
+								<?php endforeach; ?>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody id="the-list">
+							<?php 
+							$alter = "";
+							foreach ( $Query_respuesta as $lista ):
+								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+							?>
+							<form method="post">
+								<tr valign="top" <?php echo $alter; ?>>
+									<td><?php echo $lista->id;?></td>
+									<td><input type="text" name="response" value="<?php echo $lista->response;?>" required></td>
+									<td><?php echo $lista->customer_support;?></td>
+									<td><?php echo $lista->date_registry;?></td>
+									<td>
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_atencion" value="ok">
+										<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
+										<input type="submit" name="update_respuesta" value="Actualizar" class="button action">
+										<input type="submit" name="del_respuesta" value="Borrar" class="button action">
+									</td>
+								</tr>
+							</form>
+							<?php endforeach;?>
+							<form method="post">
+								<tr>
+									<td><input type="text" name="response" required></td>
+									<td>
+										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+										<input type="hidden" name="editar_atencion" value="ok">
+										<input type="submit" name="add_respuesta" value="Crear" class="button action">
+									</td>
+								</tr>
+							</form>
+						</tbody>
+					</table>
+					<?php endif;?>
+				</p>
+			</div>
+
+		</div>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
