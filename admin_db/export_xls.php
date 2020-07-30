@@ -101,5 +101,6 @@ function lugares_visitados($data){
 		}
 	}
 	return $ret;
+	
 }
 ?>
