@@ -4001,19 +4001,19 @@ function page_atencion_cliente_editar(){
 						?>
 						<form method="post">
 							<li valign="top" class="li_form">
-								<div class="label_form">
+								<div class="label_form" style="text-align:center">
 									<?php echo $lista->id;?>
 								</div>
-								<div class="label_form">
+								<div class="label_form" style="text-align:center">
 									<input type="text" name="description" value="<?php echo $lista->description;?>" required>
 								</div>
-								<div class="label_form">
+								<div class="label_form" style="text-align:center">
 									<?php echo $lista->customer_support;?>
 								</div>
-								<div class="label_form">
+								<div class="label_form" style="text-align:center">
 									<?php echo $lista->date_registry;?>
 								</div>
-								<div class="label_form">
+								<div class="label_form" style="text-align:center">
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_atencion" value="ok">
 									<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
@@ -4024,11 +4024,11 @@ function page_atencion_cliente_editar(){
 						</form>
 						<?php endforeach;?>
 						<form method="post">
-							<li class="li_form">
-								<div class="label_form">
+							<li class="li_form" >
+								<div class="label_form" style="text-align:center">
 									<input type="text" name="description" required>
-								</td>
-								<div class="label_form">
+								</div>
+								<div class="label_form" style="text-align:center">
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_atencion" value="ok">
 									<input type="submit" name="add_descripcion" value="Crear" class="btn_per" data-role="none" style="background: #3f72a5; color: white;">
