@@ -3988,7 +3988,7 @@ function page_atencion_cliente_editar(){
 					<ul data-role="listview" data-inset="true">
 						<li valign="top" class="li_form">
 							<?php foreach($Query_descripcion[0] as $key => $value):?>
-								<div class="label_form"><?php echo $key; ?></div>
+								<div class="label_form" style="text-align:center"><?php echo $key; ?></div>
 							<?php endforeach; ?>
 							<th>Acciones</th>
 						</li>
@@ -4026,7 +4026,7 @@ function page_atencion_cliente_editar(){
 						<form method="post">
 							<li class="li_form" >
 								<div class="label_form" style="text-align:center">
-									<input type="text" name="description" required>
+									<input type="text" name="description" required style="margin-left : 10px">
 								</div>
 								<div class="label_form" style="text-align:center">
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
