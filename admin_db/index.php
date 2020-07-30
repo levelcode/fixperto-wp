@@ -3993,7 +3993,7 @@ function page_atencion_cliente_editar(){
 							<th>Acciones</th>
 						</li>
 					</ul>
-					<ul id="the-list">
+					<ul id="the-list" data-role="listview" data-inset="true">
 						<?php 
 						$alter = "";
 						foreach ( $Query_descripcion as $lista ):
