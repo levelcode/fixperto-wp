@@ -40,7 +40,7 @@ if ($data == "") {
 //////////
 $filename = $file . "_" . date("m-d-Y");
 //
-header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=utf-8");
 header("Content-disposition: filename=" . $filename . ".xls");
 header("Pragma: no-cache");
 header("Expires: 0");

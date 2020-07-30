@@ -102,7 +102,7 @@ function page_clientes(){
 	$Query = plugDB($Qstr, "result");
 	$Colum_No_Mostrar = array("birth_date");
 	?>
-	<script type="text/javascript" >
+	<script type="text/javascript">
 		jQuery(document).on("mobileinit", function(){
 			jQuery.mobile.ajaxEnabled = false;
 		});
@@ -203,37 +203,7 @@ function page_clientes(){
 
 		<div role="content" class="ui-content">
 	
-			<!-- <div data-role="controlgroup" data-type="horizontal">
-				<form method='post'>
-					<select name="genero" onchange="this.form.submit()">
-						<option value='-1'>Genero</option>
-						<?php echo func_select_tabla_id_denomination("gender", $_POST["genero"]);?>
-					</select>
-					<select name="edad" onchange="this.form.submit()">
-						<option value='-1' selected>Edad</option>
-						<?php echo func_select_edad($_POST["edad"]);?>
-					</select>
-					<div class="ui-input-text ui-body-inherit ui-corner-all controlgroup-textinput ui-btn ui-shadow-inset">
-						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" class="ui-btn ui-corner-all">
-					</div>
-					
-					<input type="submit" value="Buscar">
-				</form>
-			</div>
-			<div data-role="controlgroup" data-type="horizontal">
-				<form method='post'>
-					<input type="submit" name="todos" value="Limpiar Filtros" class="ui-btn">
-				</form>
-			</div> -->
-		
 			<?php if($Query[0] != null):?>
-			<!-- <div data-role="controlgroup" data-type="horizontal">
-				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
-					<input type='hidden' name='type' value='usuarios'/>
-					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
-					<input type="submit" id="exportar" name="exportar" value="Exportar a excel" class="ui-btn" data-theme="b" />
-				</form>
-			</div> -->
 
 			<table id="la_data_tabla" class="fix_table" cellspacing="0">
 				<thead>
@@ -246,7 +216,6 @@ function page_clientes(){
 						<?php endforeach; ?>
 						<th>Editar</th>
 					</tr>
-
 				</thead>
 				<tbody id="the-list">
 					<?php 
@@ -256,7 +225,7 @@ function page_clientes(){
 					?>
 					<tr valign="top" <?php echo $alter; ?>>
 						<?php foreach($lista as $it => $va):?>
-							<td><?php echo $va;?></td>
+							<?php if(!in_array($it, $Colum_No_Mostrar)): ?><td><?php echo $va;?></td><?php endif;?>
 						<?php endforeach; ?>
 						<td>
 							<form method="post" data-role="controlgroup">
@@ -267,6 +236,7 @@ function page_clientes(){
 						</td>
 					</tr>
 				<?php endforeach;?>
+				</tbody>
 			</table>
 			<?php endif;?>
 		</div>
@@ -318,7 +288,7 @@ function page_clientes_editar_cliente(){
 	$Qsrt_Calificaciones = "SELECT * FROM evaluations_customer WHERE customer='".$_POST["id"]."'";
 	$Query_Calificaciones = plugDB($Qsrt_Calificaciones, "result");
 	//
-	$exclude_tabla_servicios = array("id", "customer", "category", "region", "emergency", "cancellation_type");
+	$exclude_tabla_servicios = array("id", "customer", "category", "region", "emergency", "cancellation_type", "description", "hour", "Sub_Categoria", "Zona");
 	$exclude_tabla_calificaciones = array();
 	$Colum_No_Mostrar = array("Descripcion", "Sub_Categoria", "Zona");
 	//
@@ -555,7 +525,7 @@ function page_clientes_editar_cliente(){
 				data: { id : form.id_user.value, email : form.correo.value }
 			}).done(function(html){
 				//alert(html);
-				//$("#select_zona").html(html);
+				//jQuery("#select_zona").html(html);
 				alert( "Correo enviado con exito!" );
 			}).fail(function() {
 				alert( "error enviando el correo" );
@@ -1243,11 +1213,20 @@ function page_profesionales_editar_experto(){
 					<form method="post" name="la_data" class="formulario">
 						<ul data-role="listview" data-inset="true">
 							<?php 
+							if($Query_expert->type == 0){
 								echo func_tabla_form_fieldcontainer(
 									$Query, 
 									array("photo", "notification", "notification_chat", "token", "code", "password", "code_number", "validate_number"),
 									array("id", "date_registry", "authentication_date")
 								);
+							}else{
+								echo func_tabla_form_fieldcontainer(
+									$Query, 
+									array("photo", "notification", "notification_chat", "token", "code", "password", "code_number", "validate_number", "gender"),
+									array("id", "date_registry", "authentication_date")
+								);
+							}
+								
 							?>
 
 							<li class="ui-body ui-body-b">
@@ -1744,21 +1723,6 @@ function page_profesionales_editar_experto(){
 			<div data-role="collapsible">
 			    <h4>Categorias</h4>
 			    <p>
-					<table class="wp-list-table widefat" cellspacing="0">
-						<thead>
-							<tr valign="top">
-								<?php foreach($Query_Categorias[0] as $key => $value):?>
-									<?php if($key == "Categoria" || $key == "Sub_Categoria"):?>
-										<th>
-											<?php echo $key; ?>
-										</th>
-									<?php endif;?>
-								<?php endforeach; ?>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-					</table>
-
 					<?php if( Count($Query_Categorias) > 0 ):?>
 					<ul id="the-list" data-role="listview" data-inset="true">
 						<?php 
@@ -1824,17 +1788,6 @@ function page_profesionales_editar_experto(){
 			<div data-role="collapsible">
 			    <h4>Regiones</h4>
 			    <p>
-					<table class="wp-list-table widefat" cellspacing="0">
-						<thead>
-							<tr valign="top">
-								<?php foreach($Query_Region[0] as $key => $value):?>
-								<?php if($key == "Categoria" || $key == "Sub_Categoria"):?><th><?php echo $key; ?></th><?php endif;?>
-								<?php endforeach; ?>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-					<table>
-					
 					<?php if( Count($Query_Region) > 0 ):?>
 					<ul id="the-list" data-role="listview" data-inset="true">
 						<?php 
@@ -2098,7 +2051,7 @@ function page_profesionales_editar_experto(){
 					data: { name : form.nombre.value, email : form.correo.value, active:form.active.value }
 				}).done(function(html){
 					//alert(html);
-					//$("#select_zona").html(html);
+					//jQuery("#select_zona").html(html);
 				}).fail(function() {
 					alert( "error enviando el correo" );
 				});
@@ -2114,7 +2067,7 @@ function page_profesionales_editar_experto(){
 					data: { id : form.id_user.value, email : form.correo.value }
 				}).done(function(html){
 					//alert(html);
-					//$("#select_zona").html(html);
+					//jQuery("#select_zona").html(html);
 					alert( "Correo enviado con exito!" );
 				}).fail(function() {
 					alert( "error enviando el correo" );
@@ -2123,15 +2076,15 @@ function page_profesionales_editar_experto(){
 			return false;
 		}
 		function Do_Dar_Fixcoins(){
-			if( $("#cant_dar_fixcoins").val() == 0 )return false;
+			if( jQuery("#cant_dar_fixcoins").val() == 0 )return false;
 			if( confirm("Esta accion enviara un correo de confirmacion, ¿desea continuar?") ){
 				jQuery.ajax({
 					url:"<?php echo URL_BASE;?>/fixperto/fixcoinGift", 
 					method: "POST",
-					data: { user : "<?php echo $_POST["id"];?>", cant : $("#cant_dar_fixcoins").val() }
+					data: { user : "<?php echo $_POST["id"];?>", cant : jQuery("#cant_dar_fixcoins").val() }
 				}).done(function(html){
 					console.log(html);
-					$("#label_actual_fixcoins").html(html);
+					jQuery("#label_actual_fixcoins").html(html);
 					alert( "Correo enviado con exito!" );
 				}).fail(function() {
 					//alert( "error enviando el correo" );
@@ -2142,7 +2095,7 @@ function page_profesionales_editar_experto(){
 		//
 		function SubirImagen_Arl(){
 			var formData = new FormData();
-			var files = $('#imagen_arl')[0].files[0];
+			var files = jQuery('#imagen_arl')[0].files[0];
 			formData.append('archivo', files);
 			formData.append('id', "<?php echo $Query_expert->id;?>");
 			jQuery.ajax({
@@ -2154,8 +2107,8 @@ function page_profesionales_editar_experto(){
 				success: function(response) {
 					console.log(response);
 					if (response != 0) {
-						$("#img_arl").attr("src", response);
-						$("#link_arl").attr("href", response);
+						jQuery("#img_arl").attr("src", response);
+						jQuery("#link_arl").attr("href", response);
 					} else {
 						alert('Formato de imagen incorrecto.');
 					}
@@ -2164,7 +2117,7 @@ function page_profesionales_editar_experto(){
 		}
 		function SubirImagen_Salud(){
 			var formData = new FormData();
-			var files = $('#imagen_salud')[0].files[0];
+			var files = jQuery('#imagen_salud')[0].files[0];
 			formData.append('archivo', files);
 			formData.append('id', "<?php echo $Query_expert->id;?>");
 			jQuery.ajax({
@@ -2176,8 +2129,8 @@ function page_profesionales_editar_experto(){
 				success: function(response) {
 					console.log(response);
 					if (response != 0) {
-						$("#img_salud").attr("src", response);
-						$("#link_salud").attr("href", response);
+						jQuery("#img_salud").attr("src", response);
+						jQuery("#link_salud").attr("href", response);
 					} else {
 						alert('Formato de imagen incorrecto.');
 					}
@@ -2186,7 +2139,7 @@ function page_profesionales_editar_experto(){
 		}
 		function SubirImagen_Fotocopy(){
 			var formData = new FormData();
-			var files = $('#imagen_fotocopy')[0].files[0];
+			var files = jQuery('#imagen_fotocopy')[0].files[0];
 			formData.append('archivo', files);
 			formData.append('id', "<?php echo $Query_expert->id;?>");
 			jQuery.ajax({
@@ -2198,8 +2151,8 @@ function page_profesionales_editar_experto(){
 				success: function(response) {
 					console.log(response);
 					if (response != 0) {
-						$("#img_fotocopy").attr("src", response);
-						$("#link_fotocopy").attr("href", response);
+						jQuery("#img_fotocopy").attr("src", response);
+						jQuery("#link_fotocopy").attr("href", response);
 					} else {
 						alert('Formato de imagen incorrecto.');
 					}
@@ -2209,7 +2162,7 @@ function page_profesionales_editar_experto(){
 		//
 		function SubirImagen_Certificado(_id, _suma){
 			var formData = new FormData();
-			var files = $('#imagen_certificado_' + _suma)[0].files[0];
+			var files = jQuery('#imagen_certificado_' + _suma)[0].files[0];
 			formData.append('archivo', files);
 			formData.append('id', _id);
 			jQuery.ajax({
@@ -2221,8 +2174,8 @@ function page_profesionales_editar_experto(){
 				success: function(response) {
 					console.log(response);
 					if (response != 0) {
-						$("#img_certificado_" + _suma).attr("src", response);
-						$("#link_certificado_"+ _suma).attr("href", response);
+						jQuery("#img_certificado_" + _suma).attr("src", response);
+						jQuery("#link_certificado_"+ _suma).attr("href", response);
 					} else {
 						alert('Formato de imagen incorrecto.');
 					}
@@ -2231,7 +2184,7 @@ function page_profesionales_editar_experto(){
 		}
 		function SubirImagen_Proyecto(_id, _suma){
 			var formData = new FormData();
-			var files = $('#imagen_proyecto_' + _suma)[0].files[0];
+			var files = jQuery('#imagen_proyecto_' + _suma)[0].files[0];
 			formData.append('archivo', files);
 			formData.append('id', _id);
 			jQuery.ajax({
@@ -2243,8 +2196,8 @@ function page_profesionales_editar_experto(){
 				success: function(response) {
 					console.log(response);
 					if (response != 0) {
-						$("#img_proyecto_" + _suma).attr("src", response);
-						$("#link_proyecto_"+ _suma).attr("href", response);
+						jQuery("#img_proyecto_" + _suma).attr("src", response);
+						jQuery("#link_proyecto_"+ _suma).attr("href", response);
 					} else {
 						alert('Formato de imagen incorrecto.');
 					}
@@ -2253,7 +2206,7 @@ function page_profesionales_editar_experto(){
 		}
 		function SubirImagen_Colaborador(_id, _suma){
 			var formData = new FormData();
-			var files = $('#imagen_col_' + _suma)[0].files[0];
+			var files = jQuery('#imagen_col_' + _suma)[0].files[0];
 			formData.append('archivo', files);
 			formData.append('id', _id);
 			jQuery.ajax({
@@ -2265,8 +2218,8 @@ function page_profesionales_editar_experto(){
 				success: function(response) {
 					console.log(response);
 					if (response != 0) {
-						$("#img_col_" + _suma).attr("src", response);
-						$("#link_col_"+ _suma).attr("href", response);
+						jQuery("#img_col_" + _suma).attr("src", response);
+						jQuery("#link_col_"+ _suma).attr("href", response);
 					} else {
 						alert('Formato de imagen incorrecto.');
 					}
@@ -2502,7 +2455,7 @@ function page_lista_servicios(){
 		//
 		function SubirImagen_Categoria(_id, _suma){
 			var formData = new FormData();
-			var files = $('#imagen_cat_' + _suma)[0].files[0];
+			var files = jQuery('#imagen_cat_' + _suma)[0].files[0];
 			formData.append('archivo', files);
 			formData.append('id', _id);
 			jQuery.ajax({
@@ -3359,27 +3312,27 @@ function page_servicios_editar_servicio(){
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
 	<script type="text/javascript">
 	function Do_Select_Category(){
-		//alert( $("#select_service").val() );
+		//alert( jQuery("#select_service").val() );
 		jQuery.ajax({
 			url:"<?php echo home_url('pagina_querys');?>", 
 			method: "POST",
-			data: { select_category : "ok", categoria : $("#select_service").val() }
+			data: { select_category : "ok", categoria : jQuery("#select_service").val() }
 		}).done(function(html){
 			//alert(html);
-			$("#select_category").html(html);
+			jQuery("#select_category").html(html);
 		}).fail(function() {
 			alert( "error" );
 		});
 	}
 	function Do_Select_Zona(){
-		//alert( $("#select_service").val() );
+		//alert( jQuery("#select_service").val() );
 		jQuery.ajax({
 			url:"<?php echo home_url('pagina_querys');?>", 
 			method: "POST",
-			data: { select_zona : "ok", categoria : $("#select_ciudad").val() }
+			data: { select_zona : "ok", categoria : jQuery("#select_ciudad").val() }
 		}).done(function(html){
 			//alert(html);
-			$("#select_zona").html(html);
+			jQuery("#select_zona").html(html);
 		}).fail(function() {
 			alert( "error" );
 		});
@@ -4668,6 +4621,7 @@ function Traductor_Nombre_Columnas($key){
 	$datos = array(
 		"name" 				=> "Nombre", 
 		"date_registry" 	=> "Fecha Registro", 
+		"registry_date" 	=> "Fecha Registro", 
 		"birth_date" 		=> "Fecha Nacimiento", 
 		"id_user" 			=> "Id Usuario",
 		"email" 			=> "Correo", 
@@ -4697,6 +4651,7 @@ function Traductor_Nombre_Columnas($key){
 		"ofertas_aceptadas"    => "Ofertas Aceptadas",
 		"ofertas_rechazadas"  => "Ofertas Rechazadas",
 		"perdidas_oportunidades" => "Oportunudades Perdidas",
+		"address" => "Dirección",
 		
 	);
 	if( !$datos[$key] ){
