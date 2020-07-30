@@ -368,6 +368,18 @@ function page_clientes_editar_cliente(){
 				width : 15%;
 				margin: auto
 			}
+
+			.btn_per{
+				border: none;
+				width: 80px;
+				padding: 10px;
+				box-shadow: 0 1px 4px rgba(0,0,0,.3);
+				outline: none;
+				margin-top: 10px;
+				font-weight: bold;
+				border-radius: 6px;
+				font-size : 0.8rem;
+			}
 		}
 	</style>
 	
@@ -469,7 +481,7 @@ function page_clientes_editar_cliente(){
 								<td>
 									<form method="post" action="admin.php?page=servicios" data-role="controlgroup">
 										<input type="hidden" name="id" value="<?php echo $lista->id;?>">
-										<input type="submit" name="editar_servicio" value="Editar" class="ui-btn" data-theme="b">
+										<input type="submit" name="editar_servicio" value="Editar" class="btn_per" data-role="none" style="background: #3f72a5; color: white;" data-theme="b">
 									</form>
 								</td>
 							</tr>
@@ -1098,6 +1110,15 @@ function page_profesionales_editar_experto(){
 				font-size : 0.8rem;
 			}
 
+			.ul_flex{
+				width: 160%;
+			}
+
+			.li_flex div {
+				margin-right : 10px
+			}
+		}
+
 
 
 		}
@@ -1639,7 +1660,7 @@ function page_profesionales_editar_experto(){
 							</div>
 						</li>
 
-						<li id="the-list">
+						<li id="the-list" class="li_form">
 							<?php 
 							$alter = "";
 							foreach($Query_Referidos as $item_referido):
@@ -1795,15 +1816,15 @@ function page_profesionales_editar_experto(){
 						foreach ( $Query_Region as $lista ):
 							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 						?>
-						<li valign="top" <?php echo $alter; ?> class="ui-body ui-body-b flex" >
+						<li valign="top" class=" li_form" >
 							<?php foreach($lista as $it => $va):?>
 								<?php if($it == "Categoria" || $it == "Sub_Categoria"):?>
-									<div style="width : 20%; margin-right : 10px">
+									<div class="label_form"">
 										<?php echo $va;?>
 									</div>
 								<?php endif;?>
 							<?php endforeach; ?>
-							<div style="width : 20%; margin-right : 10px">
+							<div class="inp_form">
 								<form method="post">
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
@@ -1819,20 +1840,20 @@ function page_profesionales_editar_experto(){
 
 					<ul id="the-list" data-role="listview" data-inset="true">
 						<form method="post">
-							<li valign="top" class="ui-body ui-body-b flex">
-								<div style="width : 20%; margin-right : 10px">
+							<li valign="top"  class=" li_form li_cat">
+								<div style="width : 33%">
 									<select id="select_ciudad" onchange="Do_Select_Zona();">
 										<?php echo func_select_tabla_id_denomination("cities", "");?>	
 									</select>
 								</div>
 
-								<div style="width : 20%; margin-right : 10px">
+								<div style="width : 33%">
 									<select id="select_zona" name="region">
 										<?php echo func_select_sub_zonas("", "");?>
 									</select>
-								</div style="width : 20%">
+								</div>
 								
-								<div>
+								<div style="width : 33%">
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
 									<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
@@ -1850,95 +1871,110 @@ function page_profesionales_editar_experto(){
 			<div data-role="collapsible">
 			    <h4>Colaboradores</h4>
 			    <p>
-					<table class="wp-list-table widefat" cellspacing="0">
-						<thead>
-							<tr valign="top">
-								<th>Nombre</th>
-								<th>Email</th>
-								<th>Tipo identificacion</th>
-								<th>Numero identificacion</th>
-								<th>Telefono</th>
-								<th>Foto</th>
-								<th>Categorias</th>
-								<th>Guardar</th>
-								<th>Borrar</th>
-							</tr>
-						</thead>
-						<tbody id="the-list">
-							<?php 
-							$alter = "";
-							foreach($Query_Colaboradores as $item_colaborador):
-								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-							?>
-							<form method="post">
-								<tr valign="top" <?php echo $alter; ?>>
-									<td><?php //echo $item_colaborador->id;?><input type="text" name="name" value="<?php echo $item_colaborador->name;?>"></td>
-									<td><input type="email" name="email" value="<?php echo $item_colaborador->email;?>"></td>
-									<td>
-										<select name="identification_type">
-											<?php echo func_select_tabla_id_denomination("identification_type", $item_colaborador->identification_type);?>
-										</select>
-									</td>
-									<td><input type="text" name="number" value="<?php echo $item_colaborador->number;?>"></td>
-									<td><input type="text" name="phone" value="<?php echo $item_colaborador->phone;?>"></td>
+					<ul id="the-list" data-role="listview" data-inset="true" class="ul_flex">
+						<li valign="top" class="li_form">
+							<div class="label_form">Nombre</div>
+							<div class="label_form">Email</div>
+							<div class="label_form">Tipo identificacion</div>
+							<div class="label_form">Número identificacion</div>
+							<div class="label_form">Teléfono</div>
+							<div class="label_form">Foto</div>
+							<div class="label_form">Categorias</div>
+							<div class="label_form">Guardar</div>
+							<div class="label_form">Borrar</div>
+						</li>
+					</ul>
 
-									<td>
+					<ul id="the-list" data-role="listview" data-inset="true" class="ul_flex">
+						<?php 
+						$alter = "";
+						foreach($Query_Colaboradores as $item_colaborador):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<form method="post">
+							<li valign="top" class="li_form li_flex">
+								<div class="">
+									<?php //echo $item_colaborador->id;?>
+									<input type="text" name="name" value="<?php echo $item_colaborador->name;?>">
+								</div>
+								<div class="">
+									<input type="email" name="email" value="<?php echo $item_colaborador->email;?>">
+								</div>
+								<div class="">
+									<select name="identification_type">
+										<?php echo func_select_tabla_id_denomination("identification_type", $item_colaborador->identification_type);?>
+									</select>
+								</div>
+								<div class="">
+									<input type="text" name="number" value="<?php echo $item_colaborador->number;?>">
+								</div>
+								<div class="">
+									<input type="text" name="phone" value="<?php echo $item_colaborador->phone;?>">
+								</div>
+
+								<div class="">
 									<a href="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" target="_blank" id="link_col_<?php echo $item_colaborador->id;?>">
 										<img src="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" id="img_col_<?php echo $item_colaborador->id;?>" height="50">
 									</a>
-									
+								
 									<br>
 									<input type="file" class="form-control-file" id="imagen_col_<?php echo $item_colaborador->id;?>"><br>
-									<input type="button" class="btn btn-primary upload" value="Subir" onClick="SubirImagen_Colaborador('<?php echo $item_colaborador->id;?>', '<?php echo $item_colaborador->id;?>');">
-									</td>
-								
-									<td>
+									<input type="button" class="btn_per upload"  data-role="none" value="Subir" onClick="SubirImagen_Colaborador('<?php echo $item_colaborador->id;?>', '<?php echo $item_colaborador->id;?>');">
+								</div>
+							
+								<div class="">
 									<?php echo Select_Categorias_Multi_Colaborador($item_colaborador->id);?>
-									</td>
+								</div>
 
-									<td>
-										<input type="hidden" name="id_col" value="<?php echo $item_colaborador->id;?>">
-										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-										<input type="hidden" name="editar_cliente" value="ok">
-										<input type="submit" name="update_colaborador" value="Guardar" class="button action">
-									</td>
+								<div class="">
+									<input type="hidden" name="id_col" value="<?php echo $item_colaborador->id;?>">
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="submit" name="update_colaborador" value="Guardar" data-role="none" class="btn_per">
+								</div>
 
-									<td>
-										<input type="submit" name="borrar_colaborador" value="Borrar" class="button action">
-									</td>
-								</tr>
-							</form>
-							<?php endforeach;
-							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-							?>
-							<form method="post">
-								<tr valign="top" <?php echo $alter; ?>>
-									<td><input type="text" name="name" placeholder="Nombre" required></td>
-									<td><input type="email" name="email" placeholder="Correo" required></td>
-									<td>
-										<select name="identification_type">
-											<?php echo func_select_tabla_id_denomination("identification_type", "");?>
-										</select>
-									</td>
-									<td><input type="text" name="number" placeholder="Numero Documento"></td>
-									<td><input type="text" name="phone" placeholder="Telefono"></td>
-									<td></td>
-									<td></td>
-									<td>
-										<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
-										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-										<input type="hidden" name="editar_cliente" value="ok">
-										<input type="submit" name="add_colaborador" value="Crear" class="button action">
-									</td>
-									<td></td>
-								</tr>
-							</form>
-						</tbody>
-					</table>
+								<div class="">
+									<input type="submit" name="borrar_colaborador" value="Borrar" class="btn_per" data-role="none">
+								</div>
+							</li>
+						</form>
+						<?php endforeach;
+						if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<form method="post">
+							<li class="li_form li_flex">
+								<div>
+									<input type="text" name="name" placeholder="Nombre" required>
+								</div>
+								<div>
+									<input type="email" name="email" placeholder="Correo" required>
+								</div>
+								<div>
+									<select name="identification_type">
+										<?php echo func_select_tabla_id_denomination("identification_type", "");?>
+									</select>
+								</div>
+								<div>
+									<input type="text" name="number" placeholder="Numero Documento">
+								</div>
+								<div>
+									<input type="text" name="phone" placeholder="Telefono">
+								</div>
+								<div></div>
+								<div></div>
+								<div>
+									<input type="hidden" name="expert" value="<?php echo $Query_expert->id;?>">
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="submit" name="add_colaborador" value="Crear" class="btn_per" data-role="none" style="background: #3f72a5; color: white;" >
+								</div>
+								<div></div>
+							</li>
+						</form>
+					</ul>
 				</p>
 			</div>
 			<?php endif;?>
-
 			
 
 			<div data-role="collapsible">
@@ -1967,7 +2003,7 @@ function page_profesionales_editar_experto(){
 								<td>
 									<form method="post" action="admin.php?page=servicios">
 										<input type="hidden" name="id" value="<?php echo $lista->id_request;?>">
-										<input type="submit" name="editar_servicio" value="Editar" class="button action">
+										<input type="submit" name="editar_servicio" value="Editar" class="btn_per" data-role="none" style="background: #3f72a5; color: white;">
 									</form>
 								</td>
 							</tr>
@@ -3236,37 +3272,37 @@ function page_servicios_editar_servicio(){
 			    <h4>Chats Activos</h4>
 			    <p>
 					<?php if( Count($Query_Chats) > 0 ):?>
-					<table class="wp-list-table widefat" cellspacing="0">
-						<thead>
-							<tr valign="top">
-								<?php foreach($Query_Chats[0] as $key => $value):?>
-								<?php if(!in_array($key, $exclude_tabla_chats)):?><th><?php echo $key; ?></th><?php endif;?>
-								<?php endforeach; ?>
-							</tr>
-						</thead>
-						<tbody id="the-list">
-							<?php 
-							$alter = "";
-							foreach ( $Query_Chats as $lista ):
-								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-							?>
-							<tr valign="top" <?php echo $alter; ?>>
-								<?php foreach($lista as $key => $va):?>
-									<?php if(!in_array($key, $exclude_tabla_chats)):?>
+					<ul data-role="listview" data-inset="true">
+						<li valign="top" class="li_form">
+							<?php foreach($Query_Chats[0] as $key => $value):?>
+								<?php if(!in_array($key, $exclude_tabla_chats)):?>
+									<div class="label_form"><?php echo $key; ?></div>
+								<?php endif;?>
+							<?php endforeach; ?>
+						</li>
+					</ul>
+					<ul id="the-list" data-role="listview" data-inset="true" >
+						<?php 
+						$alter = "";
+						foreach ( $Query_Chats as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<li valign="top" class="li_form" style="justify-content : space-between">
+							<?php foreach($lista as $key => $va):?>
+								<?php if(!in_array($key, $exclude_tabla_chats)):?>
 
-										<?php if($key == "de" || $key == "para"):?>
-											<td><?php Gen_Btn_By_User($va, true);?></td>
-										<?php else:?>
-											<td><?php echo $va;?></td>
-										<?php endif;?>
-									
-									
+									<?php if($key == "de" || $key == "para"):?>
+										<div><?php Gen_Btn_By_User($va, true);?></div>
+									<?php else:?>
+										<div><?php echo $va;?></div>
 									<?php endif;?>
-								<?php endforeach; ?>
-							</tr>
-							<?php endforeach;?>
-						</tbody>
-					</table>
+								
+								
+								<?php endif;?>
+							<?php endforeach; ?>
+						</li>
+						<?php endforeach;?>
+					</ul>
 					<?php endif;?>
 				</p>
 			</div>
@@ -3622,6 +3658,7 @@ function page_transacciones_fixcoins(){
 	<?php
 }
 //
+
 function page_atencion_cliente(){
 	if( isset($_POST["editar_atencion"]) ){
 		page_atencion_cliente_editar();
@@ -3770,6 +3807,8 @@ function page_atencion_cliente(){
 	</div>
 	<?php
 }
+
+
 function page_atencion_cliente_editar(){
 	//
 	if( isset($_POST["update_atencion"]) ){
@@ -4521,7 +4560,7 @@ function Gen_Btn_Experto($id_expert, $show_tipo = false){
 	<style>
 		.btn_per{
 			border: none;
-			width: 150px;
+			width: 190px;
 			padding: 10px;
 			box-shadow: 0 1px 4px rgba(0,0,0,.3);
 			outline: none;
@@ -4530,7 +4569,6 @@ function Gen_Btn_Experto($id_expert, $show_tipo = false){
 			border-radius: 6px;
 			font-size : 0.8rem;
 		}
-
 	</style>
 	<form method="post" action="admin.php?page=profesionales" target="_blank">
 		<input type="hidden" name="id" value="<?php echo $Query__Expert->id_user;?>">
@@ -4542,11 +4580,26 @@ function Gen_Btn_Experto($id_expert, $show_tipo = false){
 function Gen_Btn_Cliente($id_user, $show_tipo = false){
 	$Query_Cus = plugDB("SELECT * FROM users WHERE id = '".$id_user."'", "row");
 	?>
+	<style>
+		.btn_per{
+			border: none;
+			width: 190px;
+			padding: 10px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.3);
+			outline: none;
+			margin-top: 10px;
+			font-weight: bold;
+			border-radius: 6px;
+			font-size : 0.8rem;
+		}
+	</style>
+
 	<form method="post" action="admin.php?page=clientes" target="_blank">
 		<input type="hidden" name="id" value="<?php echo $Query_Cus->id;?>">
 		<input type="hidden" name="editar_cliente" value="ok">
-		<input type="submit" value="<?php echo $Query_Cus->name;?><?php if($show_tipo == true) echo " (cliente)";?>" class="button action">
+		<input type="submit" value="<?php echo $Query_Cus->name;?><?php if($show_tipo == true) echo " (cliente)";?>"  class="btn_per" data-role="none">
 	</form>
+	
 	<?php
 }
 function Gen_Btn_By_User($id_user, $show_tipo = false){
