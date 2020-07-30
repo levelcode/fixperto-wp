@@ -320,6 +320,7 @@ function page_clientes_editar_cliente(){
 	//
 	$exclude_tabla_servicios = array("id", "customer", "category", "region", "emergency", "cancellation_type");
 	$exclude_tabla_calificaciones = array();
+	$Colum_No_Mostrar = array("Descripcion", "Sub_Categoria", "Zona");
 	//
 	?>
 	<script type="text/javascript" >
@@ -704,7 +705,7 @@ function page_profesionales(){
 	ORDER BY id_expert DESC
 	";
 	$Query = plugDB($Qstr, "result");
-	$Colum_No_Mostrar = array("id_user", "birth_date", "date_arl", "date_salud_pension", "profile_description", "genero", "phone", "profesion", "Sena", "education_level", "Region", "Sub_Categorias" );
+	$Colum_No_Mostrar = array("id_user", "birth_date", "date_arl", "date_salud_pension", "profile_description", "genero", "phone", "profesion", "Sena", "education_level", "Region", "Sub_Categorias", "educational_level" );
 	?>
 
 	<script type="text/javascript">
@@ -1056,6 +1057,10 @@ function page_profesionales_editar_experto(){
 			font-weight: bold;
 			border-radius: 6px;
 			font-size : 0.8rem;
+		}
+
+		.flex{
+			display : flex !important
 		}
 
 		@media(min-width : 80em){
@@ -1753,36 +1758,42 @@ function page_profesionales_editar_experto(){
 							</tr>
 						</thead>
 					</table>
-						<ul id="the-list" data-role="listview" data-inset="true">
-							<?php 
-							$alter = "";
-							foreach ( $Query_Categorias as $lista ):
-								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-							?>
-							<li valign="top"  class="ui-body ui-body-b li_form" <?php echo $alter; ?>>
-								<div class="label_form">
-									<?php foreach($lista as $it => $va):?>
-										<?php if($it == "Categoria" || $it == "Sub_Categoria"):?>
-										<div>
-											<?php echo $va;?>
-										</div>
-										<?php endif;?>
-									<?php endforeach; ?>
-								</div>
-								
-								<div class="inp_form">
-									<form method="post">
-										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-										<input type="hidden" name="editar_cliente" value="ok">
-										<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
-										<input type="hidden" name="category" value="<?php echo $lista->id_cat;?>">
-										<input type="submit" name="del_categoria" value="Borrar" data-role="none" class="btn_per" >
-									</form>
-								</div>
-							</li>
-							<?php endforeach;?>
+
+					<?php if( Count($Query_Categorias) > 0 ):?>
+					<ul id="the-list" data-role="listview" data-inset="true">
+						<?php 
+						$alter = "";
+						foreach ( $Query_Categorias as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<li valign="top"  class="ui-body ui-body-b li_form flex" <?php echo $alter; ?>>
+							<div class="label_form">
+								<?php foreach($lista as $it => $va):?>
+									<?php if($it == "Categoria" || $it == "Sub_Categoria"):?>
+									<div>
+										<?php echo $va;?>
+									</div>
+									<?php endif;?>
+								<?php endforeach; ?>
+							</div>
 							
-							<form method="post">
+							<div class="inp_form">
+								<form method="post">
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
+									<input type="hidden" name="category" value="<?php echo $lista->id_cat;?>">
+									<input type="submit" name="del_categoria" value="Borrar" data-role="none" class="btn_per" >
+								</form>
+							</div>
+						</li>
+						<?php endforeach;?>
+					</ul>
+
+					<?php endif;?>
+
+					<ul id="the-list" data-role="listview" data-inset="true">
+						<form method="post">
 							<li valign="top"  class=" li_form li_cat">
 								<div style="width : 33%">
 									<select id="select_service" onchange="Do_Select_Category();" >
@@ -1803,9 +1814,10 @@ function page_profesionales_editar_experto(){
 									<input type="submit" name="add_categoria" value="Crear" class="btn_per" data-role="none" style="background: #3f72a5; color: white;">
 								</div>
 							</li>
-							</form>
+						</form>
+					</ul>
 
-						</ul>
+					
 				</p>
 			</div>
 
@@ -1821,52 +1833,63 @@ function page_profesionales_editar_experto(){
 								<th>Acciones</th>
 							</tr>
 						</thead>
-						<tbody id="the-list">
-							<?php 
-							$alter = "";
-							foreach ( $Query_Region as $lista ):
-								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-							?>
-							<tr valign="top" <?php echo $alter; ?>>
-								<?php foreach($lista as $it => $va):?>
-									<?php if($it == "Categoria" || $it == "Sub_Categoria"):?><td><?php echo $va;?></td><?php endif;?>
-								<?php endforeach; ?>
-								<td>
-									<form method="post">
-										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-										<input type="hidden" name="editar_cliente" value="ok">
-										<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
-										<input type="hidden" name="category" value="<?php echo $lista->id_cat;?>">
-										<input type="submit" name="del_region" value="Borrar" class="btn_per" data-role="none">
-									</form>
-								</td>
-							</tr>
-							<?php endforeach;?>
-							
-							<form method="post">
-							<tr valign="top">
-								<td>
+					<table>
+					
+					<?php if( Count($Query_Region) > 0 ):?>
+					<ul id="the-list" data-role="listview" data-inset="true">
+						<?php 
+						$alter = "";
+						foreach ( $Query_Region as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<li valign="top" <?php echo $alter; ?> class="ui-body ui-body-b flex" >
+							<?php foreach($lista as $it => $va):?>
+								<?php if($it == "Categoria" || $it == "Sub_Categoria"):?>
+									<div style="width : 20%; margin-right : 10px">
+										<?php echo $va;?>
+									</div>
+								<?php endif;?>
+							<?php endforeach; ?>
+							<div style="width : 20%; margin-right : 10px">
+								<form method="post">
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
+									<input type="hidden" name="category" value="<?php echo $lista->id_cat;?>">
+									<input type="submit" name="del_region" value="Borrar" class="btn_per" data-role="none">
+								</form>
+							</div>
+						</li>
+						<?php endforeach;?>
+					</ul>
+					<?php endif;?>
+
+					<ul id="the-list" data-role="listview" data-inset="true">
+						<form method="post">
+							<li valign="top" class="ui-body ui-body-b flex">
+								<div style="width : 20%; margin-right : 10px">
 									<select id="select_ciudad" onchange="Do_Select_Zona();">
 										<?php echo func_select_tabla_id_denomination("cities", "");?>	
 									</select>
-								</td>
+								</div>
 
-								<td>
+								<div style="width : 20%; margin-right : 10px">
 									<select id="select_zona" name="region">
 										<?php echo func_select_sub_zonas("", "");?>
 									</select>
-								</td>
+								</div style="width : 20%">
 								
-								<td>
+								<div>
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
 									<input type="hidden" name="id_experto" value="<?php echo $Query_expert->id;?>">
 									<input type="submit" name="add_region" value="Crear"  style="background: #3f72a5; color: white;" data-role="none" class="btn_per">
-								</td>
-							</tr>
-							</form>
-						</tbody>
-					</table>
+								</div>
+							</li>
+						</form>
+					</ul>
+
+					
 				</p>
 			</div>
 
