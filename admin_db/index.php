@@ -4000,20 +4000,20 @@ function page_atencion_cliente_editar(){
 							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 						?>
 						<form method="post">
-							<li valign="top" <?php echo $alter; ?>>
-								<div>
+							<li valign="top" class="li_form">
+								<div class="label_form">
 									<?php echo $lista->id;?>
 								</div>
-								<div>
+								<div class="label_form">
 									<input type="text" name="description" value="<?php echo $lista->description;?>" required>
 								</div>
-								<div>
+								<div class="label_form">
 									<?php echo $lista->customer_support;?>
 								</div>
-								<div>
+								<div class="label_form">
 									<?php echo $lista->date_registry;?>
 								</div>
-								<div>
+								<div class="label_form">
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_atencion" value="ok">
 									<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
@@ -4024,11 +4024,11 @@ function page_atencion_cliente_editar(){
 						</form>
 						<?php endforeach;?>
 						<form method="post">
-							<li class="form_li">
-								<div>
+							<li class="li_form">
+								<div class="label_form">
 									<input type="text" name="description" required>
 								</td>
-								<div>
+								<div class="label_form">
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_atencion" value="ok">
 									<input type="submit" name="add_descripcion" value="Crear" class="btn_per" data-role="none" style="background: #3f72a5; color: white;">
