@@ -2869,14 +2869,6 @@ function page_servicios_editar_servicio(){
 	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
 	<script type="text/javascript" class="init">
 		jQuery(document).ready(function() {
-			<?php if( Count($Query_Request) > 0 ):?>
-				//jQuery('#tabla_servicios').DataTable();
-			<?php endif;?>
-			
-			<?php if( Count($Query_Calificaciones) > 0 ):?>
-				//jQuery('#tabla_calificaciones').DataTable();
-			<?php endif;?>
-
 			jQuery('#wpfooter').remove();
 			jQuery.mobile.page.prototype.options.keepNative = "select, input, textarea";
 		} );
@@ -3177,8 +3169,6 @@ function page_servicios_editar_servicio(){
 			    <h4>Ofertas</h4>
 			    <p>
 					<?php if( Count($Query_Offers) > 0 ):?>
-
-					
 					<ul data-role="listview" data-inset="true" class="flex">
 						<li valign="top" class="ui-body ui-body-b">
 						<div>Experto</div>
@@ -3190,9 +3180,6 @@ function page_servicios_editar_servicio(){
 							<div>Acciones</div>
 						</li>
 					</ul>
-
-
-
 					<ul id="the-list" data-role="listview" data-inset="true" class="flex">
 						<?php 
 						$alter = "";
