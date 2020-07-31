@@ -3898,6 +3898,18 @@ function page_atencion_cliente_editar(){
 				width : 15%;
 				margin: auto
 			}
+
+			.btn_per{
+				border: none;
+				width: 150px;
+				padding: 10px;
+				box-shadow: 0 1px 4px rgba(0,0,0,.3);
+				outline: none;
+				margin-top: 10px;
+				font-weight: bold;
+				border-radius: 6px;
+				font-size : 0.8rem;
+			}
 		}
 	</style>
 
@@ -3972,51 +3984,59 @@ function page_atencion_cliente_editar(){
 			<div data-role="collapsible">
 			    <h4>Descripcion</h4>
 			    <p>
-					<?php if( Count($Query_descripcion) > 0 ):?>
-					<table class="wp-list-table widefat" cellspacing="0">
-						<thead>
-							<tr valign="top">
-								<?php foreach($Query_descripcion[0] as $key => $value):?>
-									<th><?php echo $key; ?></th>
-								<?php endforeach; ?>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-						<tbody id="the-list">
-							<?php 
-							$alter = "";
-							foreach ( $Query_descripcion as $lista ):
-								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
-							?>
-							<form method="post">
-								<tr valign="top" <?php echo $alter; ?>>
-									<td><?php echo $lista->id;?></td>
-									<td><input type="text" name="description" value="<?php echo $lista->description;?>" required></td>
-									<td><?php echo $lista->customer_support;?></td>
-									<td><?php echo $lista->date_registry;?></td>
-									<td>
-										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-										<input type="hidden" name="editar_atencion" value="ok">
-										<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
-										<input type="submit" name="update_descripcion" value="Actualizar" class="button action">
-										<input type="submit" name="del_descripcion" value="Borrar" class="button action">
-									</td>
-								</tr>
-							</form>
-							<?php endforeach;?>
-							<form method="post">
-								<tr>
-									<td><input type="text" name="description" required></td>
-									<td>
-										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-										<input type="hidden" name="editar_atencion" value="ok">
-										<input type="submit" name="add_descripcion" value="Crear" class="button action">
-									</td>
-								</tr>
-							</form>
-						</tbody>
-					</table>
-					<?php endif;?>
+				<?php if( Count($Query_descripcion) > 0 ):?>
+					<ul data-role="listview" data-inset="true">
+						<li valign="top" class="li_form">
+							<?php foreach($Query_descripcion[0] as $key => $value):?>
+								<div class="label_form" style="text-align:center"><?php echo $key; ?></div>
+							<?php endforeach; ?>
+							<th>Acciones</th>
+						</li>
+					</ul>
+					<ul id="the-list" data-role="listview" data-inset="true">
+						<?php 
+						$alter = "";
+						foreach ( $Query_descripcion as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<form method="post">
+							<li valign="top" class="li_form">
+								<div class="label_form" style="text-align:center">
+									<?php echo $lista->id;?>
+								</div>
+								<div class="label_form" style="text-align:center">
+									<input type="text" name="description" value="<?php echo $lista->description;?>" required>
+								</div>
+								<div class="label_form" style="text-align:center">
+									<?php echo $lista->customer_support;?>
+								</div>
+								<div class="label_form" style="text-align:center">
+									<?php echo $lista->date_registry;?>
+								</div>
+								<div class="label_form" style="text-align:center">
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_atencion" value="ok">
+									<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
+									<input type="submit" name="update_descripcion" value="Actualizar" class="btn_per" data-role="none">
+									<input type="submit" name="del_descripcion" value="Borrar" class="btn_per" data-role="none">
+								</div>
+							</li>
+						</form>
+						<?php endforeach;?>
+						<form method="post">
+							<li class="li_form" >
+								<div class="label_form" style="text-align:center">
+									<input type="text" name="description" required style="margin-left : 10px">
+								</div>
+								<div class="label_form" style="text-align:center">
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_atencion" value="ok">
+									<input type="submit" name="add_descripcion" value="Crear" class="btn_per" data-role="none" style="background: #3f72a5; color: white;">
+								</div>
+							</li>
+						</form>
+					</ul>
+				<?php endif;?>
 				</p>
 			</div>
 
