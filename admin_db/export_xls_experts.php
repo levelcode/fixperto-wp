@@ -45,13 +45,13 @@ $header = "";
 $data = "";
 //
 for ($i = 0; $i < $fields; $i++) {
-	$header .= mysqli_field_name($export, $i) . "\t";
+	$header .= mysqli_field_name($export, $i) . ";";
 }
 while ($row = mysqli_fetch_row($export)) {
 	$line = '';
 	foreach ($row as $i=>$value) {
 		if ( (!isset($value)) ) {
-			$value = "\t";
+			$value = ";";
 		} else {
 			if ($i === 10) {//plan_activo
 				$value = plan_activo($value);
@@ -70,7 +70,7 @@ while ($row = mysqli_fetch_row($export)) {
 			}else{
 				$value = str_replace('"', '""', $value);
 			}
-			$value = '"' . $value . '"' . "\t";
+			$value = '"' . $value . '"' . ";";
 		}
 		$line .= $value;
 	}
@@ -83,10 +83,13 @@ if ($data == "") {
 //////////
 $filename = $file . "_" . date("m-d-Y");
 //
-header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=utf-8");
-header("Content-disposition: filename=" . $filename . ".xls");
+header("Content-type: text/csv");
+header("Content-Disposition: attachment; filename=file.csv");
+//header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=utf-8");
+//header("Content-disposition: filename=" . $filename . ".xls");
 header("Pragma: no-cache");
 header("Expires: 0");
+echo "\xEF\xBB\xBF";
 print "$header\n$data";
 //
 function mysqli_field_name($result, $field_offset){
