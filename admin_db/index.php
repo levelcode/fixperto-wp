@@ -1320,7 +1320,6 @@ function page_profesionales_editar_experto(){
 								<div class="inp_form">
 									<textarea name="profile_description"><?php echo $Query_expert->profile_description;?></textarea>
 								</div>
-								
 							</li>
 
 							<li class="ui-body ui-body-b">
@@ -1342,7 +1341,6 @@ function page_profesionales_editar_experto(){
 			    <h4>Seguridad social</h4>
 
 				<p>
-
 					<table class="wp-list-table widefat table_form" cellspacing="0">
 						<thead>
 							<tr valign="top">
@@ -1355,7 +1353,6 @@ function page_profesionales_editar_experto(){
 
 					<form method="post" name="la_data">
 						<ul data-role="listview" data-inset="true">
-
 							<li class="ui-field-contain li_form">
 								<div class="label_form">
 									<label>Fotocopia documento</label>
@@ -1368,14 +1365,12 @@ function page_profesionales_editar_experto(){
 								</div>
 
 								<div class="act_form">
-
 									<fieldset class="">
 										<div class="btn_form">
 											<input type="file" class="form-control-file" id="imagen_fotocopy"><br>
 											<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Fotocopy();">
 										</div>
 									</fieldset>
-
 								</div>
 							</li>
 							
@@ -1485,14 +1480,12 @@ function page_profesionales_editar_experto(){
 						</ul>
 					</form>
 				</p>
-
 			</div>
 
 			<div data-role="collapsible">
 			    <h4>Certificados</h4>
 
 			    <p>
-
 					<table class="wp-list-table widefat table_form" cellspacing="0">
 						<thead>
 							<tr valign="top">
@@ -1513,6 +1506,7 @@ function page_profesionales_editar_experto(){
 						?>
 						<form method="post">
 							<li class="ui-field-contain li_form" <?php echo $alter; ?>>
+								<?php if($item_certificado->certification ) ?>
 								<div style="width : 20%">
 									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" target="_blank" id="link_certificado_<?php echo $suma_certificados;?>">
 									<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" height="150" id="img_certificado_<?php echo $suma_certificados;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
