@@ -3,6 +3,7 @@
 require_once __DIR__.'/../configuracion.php';
 //
 add_action('admin_menu' , 'function_enable_pages');
+
 function function_enable_pages(){
 	//add_menu_page('Fixperto', 'Fixperto', 'read', 'admin_db', 'page_admin', '', 1);
 	//add_submenu_page( 'admin_db', 'Clientes', 'Clientes', 'administrator', 'clientes', 'page_clientes');//	
@@ -19,9 +20,9 @@ function function_enable_pages(){
 	//remove_submenu_page( 'admin_db', 'admin_db' );
 
 	add_menu_page('Transacciones', 'Transacciones', 'read', 'transaccion_db', 'page_admin', '', 1);
-	add_submenu_page( 'transaccion_db', 'Transacciones_Planes', 'Transacciones_Planes', 'administrator', 'transacciones_planes', 'page_transacciones_planes');//	
-	add_submenu_page( 'transaccion_db', 'Transacciones_Fixcoins', 'Transacciones_Fixcoins', 'administrator', 'transacciones_fixcoins', 'page_transacciones_fixcoins');//
-	add_submenu_page( 'transaccion_db', 'Cupones_Referidos', 'Cupones_Referidos', 'administrator', 'cupones_referidos', 'page_referidos');//	
+	add_submenu_page( 'transaccion_db', 'Planes', 'Planes', 'administrator', 'transacciones_planes', 'page_transacciones_planes');//	
+	add_submenu_page( 'transaccion_db', 'Fixcoins', 'Fixcoins', 'administrator', 'transacciones_fixcoins', 'page_transacciones_fixcoins');//
+	add_submenu_page( 'transaccion_db', 'Cupones', 'Cupones', 'administrator', 'cupones_referidos', 'page_referidos');//	
 	remove_submenu_page( 'transaccion_db', 'transaccion_db' );
 
 	add_menu_page('General', 'General', 'read', 'general_db', 'page_admin', '', 0);
