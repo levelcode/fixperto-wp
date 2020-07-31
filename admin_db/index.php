@@ -82,7 +82,7 @@ function page_clientes(){
 		}
 		$WHERE .= "TIMESTAMPDIFF(YEAR,u.birth_date,CURDATE()) = '".$_POST["edad"]."'";
 	}
-	if(isset($_POST["buscador"])){
+	if(isset($_POST["buscador"]) && $_POST["buscador"] != ""){
 		if($WHERE == ""){
 			$WHERE .= "WHERE ";
 		}else{
@@ -203,9 +203,7 @@ function page_clientes(){
 		</div>
 
 		<div role="content" class="ui-content">
-	
 			<?php if($Query[0] != null):?>
-
 			<table id="la_data_tabla" class="fix_table" cellspacing="0">
 				<thead>
 
@@ -236,7 +234,7 @@ function page_clientes(){
 							</form>
 						</td>
 					</tr>
-				<?php endforeach;?>
+					<?php endforeach;?>
 				</tbody>
 			</table>
 			<?php endif;?>
@@ -621,7 +619,7 @@ function page_profesionales(){
 		}
 		$WHERE .= "e.certification_sena = '".$_POST["certification_sena"]."'";
 	}
-	if(isset($_POST["buscador"])){
+	if(isset($_POST["buscador"]) && $_POST["buscador"] != ""){
 		if($WHERE == ""){
 			$WHERE .= "WHERE ";
 		}else{
@@ -971,7 +969,6 @@ function page_profesionales_editar_experto(){
 	$Query_Referidos = plugDB("SELECT e.id as id, u.date_registry as fecha FROM experts e LEFT JOIN users u ON e.user=u.id WHERE coupon='".$Query->code.$Query->id."'", "result");
 	//
 	?>
-
 	<script type="text/javascript" >
 		jQuery(document).on("mobileinit", function(){
 			jQuery.mobile.ajaxEnabled = false;
@@ -1339,7 +1336,6 @@ function page_profesionales_editar_experto(){
 			<?php if($Query_expert->type == 0):?>
 			<div data-role="collapsible">
 			    <h4>Seguridad social</h4>
-
 				<p>
 					<table class="wp-list-table widefat table_form" cellspacing="0">
 						<thead>
@@ -1350,7 +1346,6 @@ function page_profesionales_editar_experto(){
 							</tr>
 						</thead>
 					</table>
-
 					<form method="post" name="la_data">
 						<ul data-role="listview" data-inset="true">
 							<li class="ui-field-contain li_form">
@@ -1360,7 +1355,7 @@ function page_profesionales_editar_experto(){
 
 								<div class="img_form">
 									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" target="_blank" id="link_fotocopy">
-									<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" height="200" id="img_fotocopy">
+										<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" height="200" id="img_fotocopy">
 									</a>
 								</div>
 
@@ -1374,29 +1369,6 @@ function page_profesionales_editar_experto(){
 								</div>
 							</li>
 							
-							<li class="ui-field-contain li_form">
-								<div class="label_form">
-									<label>Fotocopia documento</label>
-								</div>
-
-								<div class="img_form">
-									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" target="_blank" id="link_fotocopy">
-									<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->fotocopy;?>" height="200" id="img_fotocopy">
-									</a>
-								</div>
-
-								<div class="act_form">
-
-									<fieldset class="">
-										<div class="btn_form">
-											<input type="file" class="form-control-file" id="imagen_fotocopy"><br>
-
-											<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Fotocopy();">
-										</div>
-									</fieldset>
-
-								</div>
-							</li>
 
 							<li class="ui-field-contain li_form">
 								<div class="label_form">
@@ -1508,16 +1480,26 @@ function page_profesionales_editar_experto(){
 							<li class="ui-field-contain li_form" <?php echo $alter; ?>>
 								<?php if($item_certificado->certification ) ?>
 								<div style="width : 20%">
-									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" target="_blank" id="link_certificado_<?php echo $suma_certificados;?>">
-									<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" height="150" id="img_certificado_<?php echo $suma_certificados;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
-									</a>
+									<?php if( $item_certificado->certification != "" ):?>
+										<?php if(pathinfo($item_certificado->certification)['extension'] == "pdf"):?>
+											<a href="https://api.fixperto.com/img/icon_pdf.jpeg" target="_blank" id="link_certificado_<?php echo $suma_certificados;?>">
+												<img src="https://api.fixperto.com/img/icon_pdf.jpeg" height="150" id="img_certificado_<?php echo $suma_certificados;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
+											</a>
+										<?php else:?>
+											<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" target="_blank" id="link_certificado_<?php echo $suma_certificados;?>">
+												<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/certifications/<?php echo $item_certificado->certification;?>" height="150" id="img_certificado_<?php echo $suma_certificados;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
+											</a>
+										<?php endif;?>
+									<?php else:?>
+										<a href="https://api.fixperto.com/img/icon.png" target="_blank" id="link_certificado_<?php echo $suma_certificados;?>">
+											<img src="https://api.fixperto.com/img/icon.png" height="150" id="img_certificado_<?php echo $suma_certificados;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
+										</a>
+									<?php endif;?>
 								</div>
+
 								<div style="width : 25%">
 									<input type="file" class="form-control-file" id="imagen_certificado_<?php echo $suma_certificados;?>"><br>
-
 									<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Certificado('<?php echo $item_certificado->id;?>', '<?php echo $suma_certificados;?>');">
-
-
 								</div>
 								<div style="width : 25%; position: relative; top: 17px; margin-left: 40px;">
 									<select name="certification_type">
@@ -1581,36 +1563,41 @@ function page_profesionales_editar_experto(){
 						foreach($Query_Proyectos as $item_proyecto):
 							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 						?>
-						<form method="post">
-						<li class="ui-field-contain li_form" <?php echo $alter; ?>>
-							<div style="width : 20%">
-								<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
-								<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
-								</a>
-							</div>
-							<div style="width : 25%">
-								<input type="file" class="form-control-file" id="imagen_proyecto_<?php echo $suma_proyectos;?>"><br> 
-								<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Proyecto('<?php echo $item_proyecto->id;?>', '<?php echo $suma_proyectos;?>');">
-							</div>
-							<div style="width : 25%; position: relative; top: 17px; margin-left: 40px;">
-								<input type="text" name="description" value="<?php echo $item_proyecto->description;?>" required>
-							</div>
+							<form method="post">
+							<li class="ui-field-contain li_form" <?php echo $alter; ?>>
+								<div style="width : 20%">
+									<?php if( $item_proyecto->job != "" ):?>
+									<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
+										<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/jobs/<?php echo $item_proyecto->job;?>" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
+									</a>
+									<?php else:?>
+										<a href="https://api.fixperto.com/img/icon.png" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
+											<img src="https://api.fixperto.com/img/icon.png" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
+										</a>
+									<?php endif;?>
+								</div>
+								<div style="width : 25%">
+									<input type="file" class="form-control-file" id="imagen_proyecto_<?php echo $suma_proyectos;?>"><br> 
+									<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Proyecto('<?php echo $item_proyecto->id;?>', '<?php echo $suma_proyectos;?>');">
+								</div>
+								<div style="width : 25%; position: relative; top: 17px; margin-left: 40px;">
+									<input type="text" name="description" value="<?php echo $item_proyecto->description;?>" required>
+								</div>
 
-							<div style="width : 25%">
-								<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-								<input type="hidden" name="editar_cliente" value="ok">
-								<input type="hidden" name="id_proy" value="<?php echo $item_proyecto->id;?>">
-								<input type="submit" name="update_proyecto" value="Actualizar" class="btn_per" data-role="none">
-								<input type="submit" name="del_proyecto" value="Borrar" class="btn_per" data-role="none">
-							</div>
+								<div style="width : 25%">
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_cliente" value="ok">
+									<input type="hidden" name="id_proy" value="<?php echo $item_proyecto->id;?>">
+									<input type="submit" name="update_proyecto" value="Actualizar" class="btn_per" data-role="none">
+									<input type="submit" name="del_proyecto" value="Borrar" class="btn_per" data-role="none">
+								</div>
 
-						</li>
-						</form>
+							</li>
+							</form>
 						<?php 
 						$suma_proyectos++;
 						endforeach;
 						?>
-
 						<form method="post">
 							<li class="ui-field-contain li_form">
 								<div style="width : 20%"></div>
@@ -1834,10 +1821,11 @@ function page_profesionales_editar_experto(){
 					<?php endif;?>
 
 					<ul id="the-list" data-role="listview" data-inset="true">
-						<form method="post">
+						<form method="post" onSubmit="return Validar_Zona_Nueva();">
 							<li valign="top"  class=" li_form li_cat">
 								<div style="width : 33%">
 									<select id="select_ciudad" onchange="Do_Select_Zona();">
+										<option value="-1">Escoja Ciudad</option>
 										<?php echo func_select_tabla_id_denomination("cities", "");?>	
 									</select>
 								</div>
@@ -1908,10 +1896,15 @@ function page_profesionales_editar_experto(){
 								</div>
 
 								<div class="">
+									<?php if( $item_colaborador->photo != "" ):?>
 									<a href="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" target="_blank" id="link_col_<?php echo $item_colaborador->id;?>">
 										<img src="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" id="img_col_<?php echo $item_colaborador->id;?>" height="50">
 									</a>
-								
+									<?php else:?>
+										<a href="https://api.fixperto.com/img/icon.png" target="_blank" id="link_col_<?php echo $item_colaborador->id;?>">
+											<img src="https://api.fixperto.com/img/icon.png" id="img_col_<?php echo $item_colaborador->id;?>" height="50">
+										</a>
+									<?php endif;?>
 									<br>
 									<input type="file" class="form-control-file" id="imagen_col_<?php echo $item_colaborador->id;?>"><br>
 									<input type="button" class="btn_per upload"  data-role="none" value="Subir" onClick="SubirImagen_Colaborador('<?php echo $item_colaborador->id;?>', '<?php echo $item_colaborador->id;?>');">
@@ -1970,7 +1963,6 @@ function page_profesionales_editar_experto(){
 				</p>
 			</div>
 			<?php endif;?>
-			
 
 			<div data-role="collapsible">
 			    <h4>Servicios</h4>
@@ -2008,8 +2000,6 @@ function page_profesionales_editar_experto(){
 					<?php endif;?>
 				</p>
 			</div>
-
-			
 
 			<div data-role="collapsible">
 			    <h4>Calificaciones</h4>
@@ -2076,6 +2066,17 @@ function page_profesionales_editar_experto(){
 			}).fail(function() {
 				alert( "error" );
 			});
+		}
+		function Validar_Zona_Nueva(){
+			if(jQuery("#select_ciudad").val() == -1){
+				alert("Seleccione una ciudad");
+				return false;
+			}
+			if(jQuery("#select_zona").val() == -1){
+				alert("Seleccione una zona");
+				return false;
+			}
+			return true;
 		}
 		function Do_Activar_Experto(form){
 			//alert(form.active.value);
@@ -2209,8 +2210,13 @@ function page_profesionales_editar_experto(){
 				success: function(response) {
 					console.log(response);
 					if (response != 0) {
-						jQuery("#img_certificado_" + _suma).attr("src", response);
-						jQuery("#link_certificado_"+ _suma).attr("href", response);
+						if(response.split('.').pop() == "pdf"){
+							jQuery("#img_certificado_" + _suma).attr("src", "https://api.fixperto.com/img/icon_pdf.jpeg");
+							jQuery("#link_certificado_"+ _suma).attr("href", "https://api.fixperto.com/img/icon_pdf.jpeg");
+						}else{
+							jQuery("#img_certificado_" + _suma).attr("src", response);
+							jQuery("#link_certificado_"+ _suma).attr("href", response);
+						}
 					} else {
 						alert('Formato de imagen incorrecto.');
 					}
@@ -2626,7 +2632,7 @@ function page_servicios(){
 		}
 		$WHERE .= "reg.reg1id = '".$_POST["zona"]."'";
 	}
-	if(isset($_POST["buscador"])){
+	if(isset($_POST["buscador"]) && $_POST["buscador"] != ""){
 		if($WHERE == ""){
 			$WHERE .= "WHERE ";
 		}else{
@@ -4018,7 +4024,7 @@ function page_atencion_cliente_editar(){
 							</li>
 						</form>
 						<?php endforeach;?>
-						<form method="post">
+						<!-- <form method="post">
 							<li class="li_form" >
 								<div class="label_form" style="text-align:center">
 									<input type="text" name="description" required style="margin-left : 10px">
@@ -4029,7 +4035,7 @@ function page_atencion_cliente_editar(){
 									<input type="submit" name="add_descripcion" value="Crear" class="btn_per" data-role="none" style="background: #3f72a5; color: white;">
 								</div>
 							</li>
-						</form>
+						</form> -->
 					</ul>
 				<?php endif;?>
 				</p>
@@ -4070,7 +4076,12 @@ function page_atencion_cliente_editar(){
 								</tr>
 							</form>
 							<?php endforeach;?>
-							<form method="post">
+						</tbody>
+					</table>
+					<?php endif;?>
+					<table class="wp-list-table widefat" cellspacing="0">
+						<tbody id="the-list">
+						<form method="post">
 								<tr>
 									<td><input type="text" name="response" required></td>
 									<td>
@@ -4082,7 +4093,6 @@ function page_atencion_cliente_editar(){
 							</form>
 						</tbody>
 					</table>
-					<?php endif;?>
 				</p>
 			</div>
 
