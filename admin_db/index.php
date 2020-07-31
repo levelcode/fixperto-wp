@@ -284,7 +284,7 @@ function page_clientes_editar_cliente(){
 	WHERE r.customer = '".$Query_Customer->id."'";
 	$Query_Request = plugDB($Qsrt_Request, "result");
 	//
-	$Qsrt_Calificaciones = "SELECT * FROM evaluations_customer WHERE customer='".$_POST["id"]."'";
+	$Qsrt_Calificaciones = "SELECT * FROM evaluations_customer WHERE customer='".$Query_Customer->id."'";
 	$Query_Calificaciones = plugDB($Qsrt_Calificaciones, "result");
 	//
 	$exclude_tabla_servicios = array("id", "customer", "category", "region", "emergency", "cancellation_type", "description", "hour", "Sub_Categoria", "Zona");
@@ -3645,7 +3645,6 @@ function page_transacciones_fixcoins(){
 	<?php
 }
 //
-
 function page_atencion_cliente(){
 	if( isset($_POST["editar_atencion"]) ){
 		page_atencion_cliente_editar();
@@ -3794,8 +3793,6 @@ function page_atencion_cliente(){
 	</div>
 	<?php
 }
-
-
 function page_atencion_cliente_editar(){
 	//
 	if( isset($_POST["update_atencion"]) ){
