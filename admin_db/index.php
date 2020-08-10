@@ -21,14 +21,14 @@ function function_enable_pages(){
 
 	add_menu_page('Transacciones', 'Transacciones', 'read', 'transaccion_db', 'page_admin', '', 1);
 	add_submenu_page( 'transaccion_db', 'Planes', 'Planes', 'administrator', 'transacciones_planes', 'page_transacciones_planes');//	
-	add_submenu_page( 'transaccion_db', 'Fixcoins', 'Fixcoins', 'administrator', 'transacciones_fixcoins', 'page_transacciones_fixcoins');//
+	add_submenu_page( 'transaccion_db', 'fixcoin', 'fixcoin', 'administrator', 'transacciones_fixcoins', 'page_transacciones_fixcoins');//
 	add_submenu_page( 'transaccion_db', 'Cupones', 'Cupones', 'administrator', 'cupones_referidos', 'page_referidos');//	
 	remove_submenu_page( 'transaccion_db', 'transaccion_db' );
 
 	add_menu_page('General', 'General', 'read', 'general_db', 'page_admin', '', 0);
 	add_submenu_page( 'general_db', 'Reporte_Grafico', 'Reporte_Grafico', 'administrator', 'graficos', 'page_graficos');//
 	add_submenu_page( 'general_db', 'Clientes', 'Clientes', 'administrator', 'clientes', 'page_clientes');
-	add_submenu_page( 'general_db', 'Reporte_Clientes', 'Reporte_Clientes', 'administrator', 'reporte_clientes', 'page_reporte_clientes');//	
+	add_submenu_page( 'general_db', 'Reporte Profesionales', 'Reporte Profesionales', 'administrator', 'reporte_clientes', 'page_reporte_clientes');//	
 	add_submenu_page( 'general_db', 'Profesionales', 'Profesionales', 'administrator', 'profesionales', 'page_profesionales');//	
 	add_submenu_page( 'general_db', 'Servicios', 'Servicios', 'administrator', 'servicios', 'page_servicios');//
 	remove_submenu_page( 'general_db', 'general_db' );
@@ -1193,7 +1193,7 @@ function page_profesionales_editar_experto(){
 			</div> -->
 
 			<div data-role="collapsible">
-			    <h4>Fixcoins</h4>
+			    <h4>fixcoin</h4>
 
 				<p>
 					<form method="post" name="la_data" class="formulario">
@@ -3131,7 +3131,7 @@ function page_servicios_editar_servicio(){
 
 							<li class="ui-field-contain li_form">
 								<div class="label_form">
-									<label for="">Costo del servicio (Fixcoins):</label>
+									<label for="">Costo del servicio (fixcoin):</label>
 								</div>
 
 								<div class="inp_form">
@@ -3587,7 +3587,7 @@ function page_transacciones_fixcoins(){
 
 	<div data-role="page">
 		<div data-role="header" data-theme="b">
-			<h1>Transacciones -> Fixcoins (<?php echo Count($Query);?> Registros)</h1>
+			<h1>Transacciones -> fixcoin (<?php echo Count($Query);?> Registros)</h1>
 		</div>
 
 		<div data-role="header" data-theme="c">
@@ -4292,7 +4292,7 @@ function page_reporte_clientes(){
 
 	<div data-role="page">
 		<div data-role="header" data-theme="b">
-			<h1>Reporte Clientes (<?php echo Count($Query);?> Registros)</h1>
+			<h1>Reporte Profesionales (<?php echo Count($Query);?> Registros)</h1>
 		</div>
 
 		<div data-role="header" data-theme="c">
@@ -4434,7 +4434,7 @@ function page_contenidos(){
 				<form method="post" >
 					<div class="flex">
 						<div style="width : 15%">
-							 <b>Valor Fixcoin cuando <br> refieres a un amigo</b> 
+							 <b>Valor fixcoin cuando <br> refieres a un amigo</b> 
 						</div>
 						<div  style="width : 25%">
 							<input type="number" name="valor" value="<?php echo $Query_Valor_Fixcoin->valor;?>" required  style="width : 90%">
@@ -4794,7 +4794,7 @@ function Traductor_Nombre_Columnas($key){
 		"gender" 			=> "Genero", 
 		"id_expert"			=> "ID Experto",
 		"tipo_registro"		=> "Tipo Registro",
-		"fixcoins"			=> "Fixcoin",
+		"fixcoins"			=> "fixcoin",
 		"education_level" 	=> "Nivel educativo",
 		"educational_level" 	=> "Nivel educativo",
 		"Estado_Plan"       => "Estado del Plan",
@@ -4813,7 +4813,7 @@ function Traductor_Nombre_Columnas($key){
 		"denomination"		=> "Denominación",
 		"authentication_date" => "Ultimo Login",
 		"trabajos_culminados" => "Trabajos Culminados",
-		"gasto_fixcoin"		  => "Gasto Fixcoin",
+		"gasto_fixcoin"		  => "Gasto fixcoin",
 		"ofertas_aceptadas"    => "Ofertas Aceptadas",
 		"ofertas_rechazadas"  => "Ofertas Rechazadas",
 		"perdidas_oportunidades" => "Oportunudades Perdidas",
