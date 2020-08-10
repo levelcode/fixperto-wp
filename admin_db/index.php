@@ -1857,15 +1857,15 @@ function page_profesionales_editar_experto(){
 			    <p>
 					<ul id="the-list" data-role="listview" data-inset="true" class="ul_flex">
 						<li valign="top" class="li_form">
-							<div class="label_form">Nombre</div>
-							<div class="label_form">Email</div>
-							<div class="label_form">Tipo identificación</div>
-							<div class="label_form">Número identificación</div>
-							<div class="label_form">Teléfono</div>
-							<div class="label_form">Foto</div>
-							<div class="label_form">Categorias</div>
-							<div class="label_form">Guardar</div>
-							<div class="label_form">Borrar</div>
+							<div class="label_form" style="text-align : center">Nombre</div>
+							<div class="label_form" style="text-align : center">Email</div>
+							<div class="label_form" style="text-align : center">Tipo identificación</div>
+							<div class="label_form" style="text-align : center">Número identificación</div>
+							<div class="label_form" style="text-align : center">Teléfono</div>
+							<div class="label_form" style="text-align : center">Foto</div>
+							<div class="label_form" style="text-align : center">Categorias</div>
+							<div class="label_form" style="text-align : center">Guardar</div>
+							<div class="label_form" style="text-align : center">Borrar</div>
 						</li>
 					</ul>
 
@@ -1877,26 +1877,26 @@ function page_profesionales_editar_experto(){
 						?>
 						<form method="post">
 							<li valign="top" class="li_form li_flex">
-								<div class="">
+								<div class="label_form">
 									<?php //echo $item_colaborador->id;?>
 									<input type="text" name="name" value="<?php echo $item_colaborador->name;?>" style="">
 								</div>
-								<div class="">
+								<div class="label_form">
 									<input type="email" name="email" value="<?php echo $item_colaborador->email;?>">
 								</div>
-								<div class="">
+								<div class="label_form">
 									<select name="identification_type">
 										<?php echo func_select_tabla_id_denomination("identification_type", $item_colaborador->identification_type);?>
 									</select>
 								</div>
-								<div class="">
+								<div class="label_form">
 									<input type="text" name="number" value="<?php echo $item_colaborador->number;?>">
 								</div>
-								<div class="">
+								<div class="label_form">
 									<input type="text" name="phone" value="<?php echo $item_colaborador->phone;?>">
 								</div>
 
-								<div class="">
+								<div class="label_form">
 									<?php if( $item_colaborador->photo != "" ):?>
 									<a href="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" target="_blank" id="link_col_<?php echo $item_colaborador->id;?>">
 										<img src="<?php echo URL_BASE;?>/uploads/registros/empresa/collaborators/<?php echo $item_colaborador->photo;?>" id="img_col_<?php echo $item_colaborador->id;?>" height="50">
@@ -1907,22 +1907,22 @@ function page_profesionales_editar_experto(){
 										</a>
 									<?php endif;?>
 									<br>
-									<input type="file" class="form-control-file" id="imagen_col_<?php echo $item_colaborador->id;?>"><br>
+									<input type="file" class="form-control-file" id="imagen_col_<?php echo $item_colaborador->id;?>" style="width : 100%" /><br>
 									<input type="button" class="btn_per upload"  data-role="none" value="Subir" onClick="SubirImagen_Colaborador('<?php echo $item_colaborador->id;?>', '<?php echo $item_colaborador->id;?>');">
 								</div>
 							
-								<div class="">
+								<div class="label_form">
 									<?php echo Select_Categorias_Multi_Colaborador($item_colaborador->id);?>
 								</div>
 
-								<div class="">
+								<div class="label_form">
 									<input type="hidden" name="id_col" value="<?php echo $item_colaborador->id;?>">
 									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 									<input type="hidden" name="editar_cliente" value="ok">
 									<input type="submit" name="update_colaborador" value="Guardar" data-role="none" class="btn_per">
 								</div>
 
-								<div class="">
+								<div class="label_form">
 									<input type="submit" name="borrar_colaborador" value="Borrar" class="btn_per" data-role="none">
 								</div>
 							</li>
@@ -4044,53 +4044,58 @@ function page_atencion_cliente_editar(){
 			    <p>
 					<?php if( Count($Query_respuesta) > 0 ):?>
 					<table class="wp-list-table widefat" cellspacing="0">
-						<thead>
-							<tr valign="top">
+						<ul id="the-list" data-role="listview" data-inset="true">
+							<li valign="top" class="li_form">
 								<?php foreach($Query_respuesta[0] as $key => $value):?>
-									<th><?php echo $key; ?></th>
+									<div class="label_form" style="text-align : center"><?php echo $key; ?></div>
 								<?php endforeach; ?>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-						<tbody id="the-list">
+								<div class="label_form" style="text-align : center">Acciones</div>
+							</li>
+						</ul>
+						<ul id="the-list" data-role="listview" data-inset="true">
 							<?php 
 							$alter = "";
 							foreach ( $Query_respuesta as $lista ):
 								if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 							?>
 							<form method="post">
-								<tr valign="top" <?php echo $alter; ?>>
-									<td><?php echo $lista->id;?></td>
-									<td><input type="text" name="response" value="<?php echo $lista->response;?>" required></td>
-									<td><?php echo $lista->customer_support;?></td>
-									<td><?php echo $lista->date_registry;?></td>
-									<td>
+								<li valign="top" class="li_form">
+									<div class="label_form" style="text-align : center">
+										<?php echo $lista->id;?>
+									</div>
+									<div class="label_form" style="text-align : center">
+										<input type="text" name="response" value="<?php echo $lista->response;?>" required>
+									</div>
+									<div class="label_form" style="text-align : center">
+										<?php echo $lista->customer_support;?>
+									</div>
+									<div class="label_form" style="text-align : center">
+										<?php echo $lista->date_registry;?>
+									</div>
+									<div class="label_form" style="text-align : center">
 										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
 										<input type="hidden" name="editar_atencion" value="ok">
 										<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
-										<input type="submit" name="update_respuesta" value="Actualizar" class="button action">
-										<input type="submit" name="del_respuesta" value="Borrar" class="button action">
-									</td>
-								</tr>
+										<input type="submit" name="update_respuesta" value="Actualizar" class="btn_per" data-role="none">
+										<input type="submit" name="del_respuesta" value="Borrar" class="btn_per" data-role="none">
+									</div>
+								</li>
 							</form>
 							<?php endforeach;?>
-						</tbody>
-					</table>
+						</ul>
 					<?php endif;?>
-					<table class="wp-list-table widefat" cellspacing="0">
-						<tbody id="the-list">
+					<ul id="the-list" data-role="listview" data-inset="true">
 						<form method="post">
-								<tr>
-									<td><input type="text" name="response" required></td>
-									<td>
-										<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
-										<input type="hidden" name="editar_atencion" value="ok">
-										<input type="submit" name="add_respuesta" value="Crear" class="button action">
-									</td>
-								</tr>
-							</form>
-						</tbody>
-					</table>
+							<li valign="top" class="li_form">
+								<div  class="label_form"><input type="text" name="response" required></div>
+								<div class="label_fom">
+									<input type="hidden" name="id" value="<?php echo $_POST["id"];?>">
+									<input type="hidden" name="editar_atencion" value="ok">
+									<input type="submit" name="add_respuesta" value="Crear" class="btn_per" data-role="none" style="background: #3f72a5; color: white; margin-left : 20px">
+								</div>
+							</li>
+						</form>
+					</ul>
 				</p>
 			</div>
 
