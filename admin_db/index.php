@@ -4428,6 +4428,18 @@ function page_contenidos(){
 			font-size : 0.8rem;
 		}
 
+		.li_form{
+			display : flex !important;
+		}
+
+		.li_form .label_form{
+			width : 20%
+		}
+
+		.li_form .inp_form{
+			width : 80%
+		}
+
 		table th{
 			font-weight : bold !important;
 			text-transform: capitalize;
@@ -4459,18 +4471,16 @@ function page_contenidos(){
 			</form>
 
 			<h2>Certificados</h2>
-			<table class="wp-list-table widefat" cellspacing="0">
-				<thead>
-					<tr valign="top">
-						<?php foreach($Query_Certificados[0] as $key => $value):?>
-							<?php if(!in_array($key, $exclude_tabla_certificados)):?>
-								<th><?php echo Traductor_Nombre_Columnas($key); ?></th>
-							<?php endif;?>
-						<?php endforeach; ?>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-			</table>
+			<ul id="the-list" data-role="listview" data-inset="true">
+				<li valign="top" class="li_form">
+					<?php foreach($Query_Certificados[0] as $key => $value):?>
+						<?php if(!in_array($key, $exclude_tabla_certificados)):?>
+							<div class="label_form" style="text-align : center"><?php echo Traductor_Nombre_Columnas($key); ?></div>
+						<?php endif;?>
+					<?php endforeach; ?>
+					<div class="label_form" style="text-align : center">Acciones</div>
+				</li>
+			</ul>
 
 			<div id="the-list">
 				<?php 
@@ -4479,65 +4489,68 @@ function page_contenidos(){
 				foreach ( $Query_Certificados as $lista ):
 					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 				?>
+				<ul id="the-list" data-role="listview" data-inset="true">
 				<form method="post">
-					<ul class="flex" valign="top" data-role="listview" data-inset="true" <?php echo $alter; ?>>
+					<li valign="top" class="li_form">
 						<?php foreach($lista as $key => $va):?>
 							<?php if(!in_array($key, $exclude_tabla_certificados)):?>
 								<?php if( $key == "denomination" || $key == "uri" ):?>
-									<li style="height: 52px; width: 25%; border: none;">
-										<input type="text" name="<?php echo $key;?>" value="<?php echo $va;?>" required>
-									</li>
+									<div class="label_form" style="text-align : center">
+										<input type="text" name="<?php echo $key;?>" value="<?php echo $va;?>" style="width : 95%; margin: auto" required>
+									</div>
 								<?php elseif($key == "imagen"):?>
-									<li style="height: 52px; width: 25%; border: none;">
-									<?php if( $va != "" ):?>
-									<a href="https://api.fixperto.com/img/certificados/<?php echo $va;?>" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
-										<img src="https://api.fixperto.com/img/certificados/<?php echo $va;?>" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
-									</a>
-									<?php else:?>
-										<a href="https://api.fixperto.com/img/icon.png" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
-											<img src="https://api.fixperto.com/img/icon.png" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
+									<div class="label_form">
+										<?php if( $va != "" ):?>
+										<a href="https://api.fixperto.com/img/certificados/<?php echo $va;?>" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
+											<img src="https://api.fixperto.com/img/certificados/<?php echo $va;?>" height="50" id="img_proyecto_<?php echo $suma_proyectos;?>" style=" position: relative; left : 5%; margin-top : 10px">
 										</a>
-									<?php endif;?>
-									<input type="file" class="form-control-file" id="imagen_proyecto_<?php echo $suma_proyectos;?>"><br> 
-									<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Proyecto('<?php echo $lista->id;?>', '<?php echo $suma_proyectos;?>');">
-									</li>
+										<?php else:?>
+											<a href="https://api.fixperto.com/img/icon.png" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
+												<img src="https://api.fixperto.com/img/icon.png" height="50" id="img_proyecto_<?php echo $suma_proyectos;?>" style=" position: relative; left : 5%; margin-top : 10px">
+											</a>
+										<?php endif;?>
+										<input type="file" class="form-control-file" id="imagen_proyecto_<?php echo $suma_proyectos;?>" style="width : 100%"><br> 
+										<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Proyecto('<?php echo $lista->id;?>', '<?php echo $suma_proyectos;?>');">
+									</div>
 								<?php else:?>
-									<li style="height: 52px; width: 10%; border: none;">
+									<div class="label_form" style="text-align : center">
 										<?php echo $va;?>
-									</li>
+									</div>
 								<?php endif;?>
 							<?php endif;?>
 						<?php
 						 $suma_proyectos++;
 					endforeach; 
 					?>
-						<li style="height: 52px; width: 40%; border: none; display : flex">
+						<div class="label_form" style="text-align : center">
 							<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
 							<input type="submit" data-role="none" name="update_certificado" value="Actualizar" class="btn_per">
-							<input type="submit" data-role="none" name="borrar_certificado" value="Borrar" class=" btn_per" style="margin-left : 15px">
-						</li>
-					</ul>
+							<input type="submit" data-role="none" name="borrar_certificado" value="Borrar" class=" btn_per">
+						</div>
+					</li>
 				</form>
+				</ul>
 
 				<?php endforeach;?>
 
-				<form method="post">
-					<ul data-role="listview" data-inset="true" class="flex">
-						<li style="height: 52px; width: 10%; border: none;">
-							<b>Nuevo</b> 
+				<ul id="the-list" data-role="listview" data-inset="true">
+					<form method="post">
+						<li valign="top" class="li_form">
+							<div class="label_form" style="text-align : center">
+								<b>Nuevo</b> 
+							</div>
+							<div class="label_form" style="text-align : center">
+								<input type="text" name="denomination" placeholder="Nombre" required style="width : 95%; margin : auto">
+							</div>
+							<div class="label_form" style="text-align : center">
+								<input type="text" name="uri" placeholder="Uri" required style="width : 95%; margin : auto">
+							</div>
+							<div class="label_form" style="text-align : center">
+								<input data-role="none" type="submit"  name="add_certificado" value="Crear" class="btn_per" style="background: #3f72a5; color: white;">
+							</div>
 						</li>
-						<li style="height: 52px; width: 25%; border: none">
-							<input type="text" name="denomination" placeholder="Nombre" required>
-						</li>
-						<li style="height: 52px; width: 25%; border: none">
-							<input type="text" name="uri" placeholder="Uri" required>
-						</li>
-						<li style="height: 52px; width: 40%; border: none">
-							<input data-role="none" type="submit"  name="add_certificado" value="Crear" class="btn_per">
-						</li>
-					</ul>
-				</form>
-
+					</form>
+				</ul>
 		</div>
 	</div>
 	<script type="text/javascript">
