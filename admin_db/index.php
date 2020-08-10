@@ -1164,9 +1164,15 @@ function page_profesionales_editar_experto(){
 		</div>
 
 		<div role="content" class="ui-content">
+			<?php if($Query_expert->type == 0):?>
 			<a href="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->avatar;?>" target="_blank">
 				<img src="<?php echo URL_BASE;?>/uploads/registros/profesional/<?php echo $Query_expert->avatar;?>" height="200">
 			</a>
+			<?php else:?>
+			<a href="<?php echo URL_BASE;?>/uploads/registros/empresa/<?php echo $Query_expert->avatar;?>" target="_blank">
+				<img src="<?php echo URL_BASE;?>/uploads/registros/empresa/<?php echo $Query_expert->avatar;?>" height="200">
+			</a>
+			<?php endif;?>
 
 			<!-- <div data-role="collapsible">
 			    <h4>template</h4>
@@ -1457,7 +1463,6 @@ function page_profesionales_editar_experto(){
 
 			<div data-role="collapsible">
 			    <h4>Certificados</h4>
-
 			    <p>
 					<table class="wp-list-table widefat table_form" cellspacing="0">
 						<thead>
@@ -1497,7 +1502,6 @@ function page_profesionales_editar_experto(){
 										</a>
 									<?php endif;?>
 								</div>
-
 								<div style="width : 25%">
 									<input type="file" class="form-control-file" id="imagen_certificado_<?php echo $suma_certificados;?>"><br>
 									<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Certificado('<?php echo $item_certificado->id;?>', '<?php echo $suma_certificados;?>');">
@@ -4437,8 +4441,8 @@ function page_contenidos(){
 			<h1>Contenidos y Ajustes</h1>
 		</div>
 		<div role="content" class="ui-content">
-				<form method="post" >
-					<div class="flex">
+			<form method="post" >
+				<div class="flex">
 						<div style="width : 15%">
 							 <b>Valor fixcoin cuando <br> refieres a un amigo</b> 
 						</div>
@@ -4451,11 +4455,10 @@ function page_contenidos(){
 						<div style="width : 25%">
 							<input data-role="none" type="submit" name="save_valor_fixcoin" value="Guardar" class=" btn_per"  style="background: #3f72a5; color: white;">
 						</div>
-					</div>
-				</form>
+				</div>
+			</form>
 
 			<h2>Certificados</h2>
-
 			<table class="wp-list-table widefat" cellspacing="0">
 				<thead>
 					<tr valign="top">
@@ -4472,6 +4475,7 @@ function page_contenidos(){
 			<div id="the-list">
 				<?php 
 				$alter = "";
+				$suma_proyectos = 0;
 				foreach ( $Query_Certificados as $lista ):
 					if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
 				?>
@@ -4483,13 +4487,30 @@ function page_contenidos(){
 									<li style="height: 52px; width: 25%; border: none;">
 										<input type="text" name="<?php echo $key;?>" value="<?php echo $va;?>" required>
 									</li>
+								<?php elseif($key == "imagen"):?>
+									<li style="height: 52px; width: 25%; border: none;">
+									<?php if( $va != "" ):?>
+									<a href="https://api.fixperto.com/img/certificados/<?php echo $va;?>" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
+										<img src="https://api.fixperto.com/img/certificados/<?php echo $va;?>" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
+									</a>
+									<?php else:?>
+										<a href="https://api.fixperto.com/img/icon.png" target="_blank" id="link_proyecto_<?php echo $suma_proyectos;?>">
+											<img src="https://api.fixperto.com/img/icon.png" height="150" id="img_proyecto_<?php echo $suma_proyectos;?>" style="width : 90%; position: relative; left : 5%; margin-top : 10px">
+										</a>
+									<?php endif;?>
+									<input type="file" class="form-control-file" id="imagen_proyecto_<?php echo $suma_proyectos;?>"><br> 
+									<input type="button" class="btn_per upload" value="Subir" data-role="none" onClick="SubirImagen_Proyecto('<?php echo $lista->id;?>', '<?php echo $suma_proyectos;?>');">
+									</li>
 								<?php else:?>
 									<li style="height: 52px; width: 10%; border: none;">
 										<?php echo $va;?>
 									</li>
 								<?php endif;?>
 							<?php endif;?>
-						<?php endforeach; ?>
+						<?php
+						 $suma_proyectos++;
+					endforeach; 
+					?>
 						<li style="height: 52px; width: 40%; border: none; display : flex">
 							<input type="hidden" name="id_item" value="<?php echo $lista->id;?>">
 							<input type="submit" data-role="none" name="update_certificado" value="Actualizar" class="btn_per">
@@ -4519,7 +4540,30 @@ function page_contenidos(){
 
 		</div>
 	</div>
-
+	<script type="text/javascript">
+	function SubirImagen_Proyecto(_id, _suma){
+			var formData = new FormData();
+			var files = jQuery('#imagen_proyecto_' + _suma)[0].files[0];
+			formData.append('archivo', files);
+			formData.append('id', _id);
+			jQuery.ajax({
+				url: 'https://api.fixperto.com/fixperto/modCertificationsType',
+				type: 'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function(response) {
+					console.log(response);
+					if (response != 0) {
+						jQuery("#img_proyecto_" + _suma).attr("src", response);
+						jQuery("#link_proyecto_"+ _suma).attr("href", response);
+					} else {
+						alert('Formato de imagen incorrecto.');
+					}
+				}
+			});
+		}
+	</script>
 	<?php
 }
 //
