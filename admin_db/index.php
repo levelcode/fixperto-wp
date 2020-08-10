@@ -972,6 +972,7 @@ function page_profesionales_editar_experto(){
 	<script type="text/javascript" >
 		jQuery(document).on("mobileinit", function(){
 			jQuery.mobile.ajaxEnabled = false;
+			jQuery.mobile.page.prototype.options.keepNative = "[name='categorias[]']";
 		});
 	</script>
 	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
@@ -2035,9 +2036,9 @@ function page_profesionales_editar_experto(){
 		
 	</div>
 
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  -->
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  
 	<script src="https://harvesthq.github.io/chosen/chosen.jquery.js" type="text/javascript"></script>
-	<script src="https://harvesthq.github.io/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="https://harvesthq.github.io/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script> -->
 	<script src="https://harvesthq.github.io/chosen/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script type="text/javascript">
@@ -4744,7 +4745,7 @@ function Select_Categorias_Multi_Colaborador($cola){
 	//print_r($pepe);
 
 	$Query_servicios = plugDB("SELECT * FROM services", "result");
-	$ret = "<select name='categorias[]' data-placeholder='Categorias' class='chosen-select' multiple tabindex='6'>";
+	$ret = "<select name='categorias[]' data-placeholder='Categorias' class='chosen-select-width' multiple tabindex='6'>";
 	foreach($Query_servicios as $item_servicio){
 		$Query_cats = plugDB("SELECT * FROM categories WHERE service = '".$item_servicio->id."'", "result");
 		$ret .= "<optgroup label='".$item_servicio->denomination."'>";
