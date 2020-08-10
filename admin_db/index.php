@@ -1858,8 +1858,8 @@ function page_profesionales_editar_experto(){
 						<li valign="top" class="li_form">
 							<div class="label_form">Nombre</div>
 							<div class="label_form">Email</div>
-							<div class="label_form">Tipo identificacion</div>
-							<div class="label_form">Número identificacion</div>
+							<div class="label_form">Tipo identificación</div>
+							<div class="label_form">Número identificación</div>
 							<div class="label_form">Teléfono</div>
 							<div class="label_form">Foto</div>
 							<div class="label_form">Categorias</div>
@@ -1878,7 +1878,7 @@ function page_profesionales_editar_experto(){
 							<li valign="top" class="li_form li_flex">
 								<div class="">
 									<?php //echo $item_colaborador->id;?>
-									<input type="text" name="name" value="<?php echo $item_colaborador->name;?>">
+									<input type="text" name="name" value="<?php echo $item_colaborador->name;?>" style="">
 								</div>
 								<div class="">
 									<input type="email" name="email" value="<?php echo $item_colaborador->email;?>">
