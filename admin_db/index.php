@@ -35,6 +35,8 @@ function function_enable_pages(){
 
 	add_menu_page('Atencion_Cliente', 'Atencion_Cliente', 'read', 'atencion_cliente', 'page_atencion_cliente', '', 1);
 
+	add_menu_page('Categorias sugeridas', 'Categorias sugeridas', 'read', 'categorias_sugeridas', 'page_categorias_sugeridas', '', 1);
+
 	add_menu_page('Configuracion', 'Configuracion', 'read', 'configuracion_db', 'page_admin', '', 0);
 	add_submenu_page( 'configuracion_db', 'Contenidos', 'Contenidos', 'administrator', 'contenidos', 'page_contenidos');//
 	add_submenu_page( 'configuracion_db', 'Categorias', 'Categorias', 'administrator', 'lista_servicios', 'page_lista_servicios');//	
@@ -619,6 +621,14 @@ function page_profesionales(){
 		}
 		$WHERE .= "e.certification_sena = '".$_POST["certification_sena"]."'";
 	}
+	if(isset($_POST["active"]) &&  $_POST["active"]!="-1"){
+		if($WHERE == ""){
+			$WHERE .= "WHERE ";
+		}else{
+			$WHERE .= " AND ";
+		}
+		$WHERE .= "e.active = '".$_POST["active"]."'";
+	}
 	if(isset($_POST["buscador"]) && $_POST["buscador"] != ""){
 		if($WHERE == ""){
 			$WHERE .= "WHERE ";
@@ -787,7 +797,10 @@ function page_profesionales(){
 						<option value='-1'>Certification Sena</option>
 						<?php echo func_select_estado_servicio(array("Si"=>"1", "No"=>"0"), $_POST["certification_sena"]);?>
 					</select>
-
+					<select name="active" onchange="this.form.submit()">
+						<option value='-1'>Activado</option>
+						<?php echo func_select_estado_servicio(array("Si"=>"1", "No"=>"0"), $_POST["active"]);?>
+					</select>
 					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
 						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%; margin-top: 0px">
 					</div>
@@ -4109,6 +4122,142 @@ function page_atencion_cliente_editar(){
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
 	<script type="text/javascript">
 	</script>
+	<?php
+}
+//
+function page_categorias_sugeridas(){
+	$WHERE = "";
+	if(isset($_POST["buscador"])){
+		if($WHERE == ""){
+			$WHERE .= "WHERE ";
+		}else{
+			$WHERE .= " AND ";
+		}
+		$WHERE .= "sc.denomination LIKE '%".$_POST["buscador"]."%' OR u.email LIKE '%".$_POST["buscador"]."%'";
+	}
+	//
+	$Qstr = "SELECT sc.id, sc.denomination, u.name, u.email
+	FROM suggested_category sc
+	LEFT JOIN users u ON sc.user = u.id	
+	$WHERE
+	ORDER BY sc.id DESC
+	";
+	$Query = plugDB($Qstr, "result");
+	?>
+	<script type="text/javascript" >
+		jQuery(document).on("mobileinit", function(){
+			jQuery.mobile.ajaxEnabled = false;
+		});
+	</script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css"/>
+	<script src="https://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" class="init">
+		jQuery(document).ready(function() {
+			jQuery('#la_data_tabla').DataTable();
+			jQuery('#wpfooter').remove();
+		} );
+	</script>
+	<style>
+		.controlgroup-textinput{
+		    padding-top:.22em;
+		    padding-bottom:.22em;
+		}
+		.ui-title{
+			color:white;
+		}
+		div.DataTables_sort_wrapper span {
+			right: -10px !important;
+		}
+
+		.fix_table .ui-btn-inner{
+			padding: .55em 11px;
+		}
+		.ui-select .ui-icon{
+			background-image: url(https://code.jquery.com/mobile/1.2.1/images/icons-18-white.png) !important;
+			background-position: -217px 50% !important;
+		}
+		[id="formulario"] *{
+			font:inherit !important;
+			font-size:16px !important;
+		}
+
+		table thead th{
+			text-transform : capitalize
+		}
+
+		.btn_per{
+			border: none;
+			width: 150px;
+			padding: 10px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.3);
+			outline: none;
+			margin-top: 10px;
+			font-weight: bold;
+			border-radius: 6px;
+			font-size : 0.8rem;
+		}
+	</style>
+
+	<div data-role="page">
+		<div data-role="header" data-theme="b">
+			<h1>Categorías sugeridas (<?php echo Count($Query);?> Registros)</h1>
+		</div>
+
+		<div data-role="header" data-theme="c">
+			<div data-role="controlgroup" data-type="horizontal">
+				<form action='<?php bloginfo('template_url'); ?>/admin_db/export_xls.php' target='_blank' method='post'>
+					<input type='hidden' name='type' value='categorias_sugeridas'/>
+					<input type='hidden' name='xhr' value='<?php echo base64_encode($Qstr); ?>'/>
+					<input type="submit" id="exportar" name="exportar" value="Exportar a excel" class="ui-btn" data-theme="b" />
+				</form>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal" style="width:10px">
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
+						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%; margin-top: 0px">
+					</div>
+					<input type="submit" data-role="none" name="buscar_categoria_sugerida" value="Buscar" class="ui-btn" data-theme="b" style="margin-top: 0px; margin-left: 15px; padding: 8px; background: #5a91c0; border: none; color: white;">
+				</form>
+			</div>
+			<div data-role="controlgroup" data-type="horizontal">
+				<form method='post'>
+					<input type="submit" data-role="none" name="todos" value="Limpiar Filtros" style="mmargin-top: -5px; margin-left: 15px; padding: 8px; background: #F5F5F5; border: none; color: #23282d;">
+				</form>
+			</div>
+		</div>
+
+		<div role="content" class="ui-content">
+			<?php if($Query[0] != null):?>
+				<table id="la_data_tabla" cellspacing="0">
+					<thead>
+						<tr valign="top">
+							<?php foreach($Query[0] as $key => $value):?>
+								<th><?php echo Traductor_Nombre_Columnas($key); ?></th>
+							<?php endforeach; ?>
+						</tr>
+					</thead>
+					<tbody id="the-list">
+						<?php 
+						$alter = "";
+						foreach ( $Query as $lista ):
+							if($alter == ""){$alter = "class='alternate'";}else{$alter = "";}
+						?>
+						<tr valign="top" <?php echo $alter; ?>>
+							<?php foreach($lista as $it => $va):?>
+								<td><?php echo $va;?></td>
+							<?php endforeach; ?>
+						</tr>
+					<?php endforeach;?>
+				</table>
+			<?php endif;?>
+		</div>
+	</div>
 	<?php
 }
 //
