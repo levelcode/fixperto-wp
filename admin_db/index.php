@@ -798,8 +798,8 @@ function page_profesionales(){
 						<?php echo func_select_estado_servicio(array("Si"=>"1", "No"=>"0"), $_POST["certification_sena"]);?>
 					</select>
 					<select name="active" onchange="this.form.submit()">
-						<option value='-1'>Activado</option>
-						<?php echo func_select_estado_servicio(array("Si"=>"1", "No"=>"0"), $_POST["active"]);?>
+						<option value='-1'>Activacion</option>
+						<?php echo func_select_estado_servicio(array("Activos"=>"1", "Desactivados"=>"0"), $_POST["active"]);?>
 					</select>
 					<div class="ui-input-text ui-body-inherit controlgroup-textinput ui-btn ui-shadow-inset" style="height:100%">
 						<input type="text" name="buscador" value="<?php echo $_POST['buscador'];?>" placeholder="Buscar" required class="ui-btn " style="height:100%; margin-top: 0px">
